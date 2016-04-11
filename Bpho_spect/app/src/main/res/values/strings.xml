@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bpho_spect</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Nom</string>
+    <string name="email">Adresse email</string>
+    <string name="message">Votre message</string>
+    <string name="send">Envoyer</string>
+</resources>
