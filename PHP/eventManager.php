@@ -14,11 +14,16 @@ class EventManager {
 
         $tabEvent = $resultats->fetchAll(PDO::FETCH_ASSOC);
 		foreach($tabEvent as $row){
-			if $row['endDate'] = null or !isset($row['endDate']) {
+			if ($row['endDate'] == null or !isset($row['endDate'])) {
 				$row['endDate'] = "";
 			}
 		}
+		
 		return $tabEvent;
+	}
+	
+	public function test() {
+		return "test";
 	}
 }
 ?>

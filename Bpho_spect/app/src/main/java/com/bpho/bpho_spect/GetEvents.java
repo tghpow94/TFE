@@ -10,11 +10,18 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +42,7 @@ public class GetEvents  extends AsyncTask<String,Void,String>{
     @Override
     protected String doInBackground(String... arg0) {
         try{
-            String link = "http://91.121.151.137/scripts_android/getAllEvents.php";
+            /*String link = "http://91.121.151.137/scripts_android/getAllEvents.php";
 
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
@@ -43,15 +50,20 @@ public class GetEvents  extends AsyncTask<String,Void,String>{
             HttpResponse response = client.execute(request);
             BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             StringBuffer sb = new StringBuffer("");
-            String line="";
+            String line="";*/
 
-            while ((line = in.readLine()) != null) {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://91.121.151.137/scripts_android/getAllEvents.php");
+            ResponseHandler<String> responseHandler = new BasicResponseHandler();
+            final String response = httpclient.execute(httppost, responseHandler);
+            JSONObject jObj = new JSONObject(response);
+
+            /*while ((line = in.readLine()) != null) {
                 sb.append(line);
-                break;
             }
-            in.close();
+            in.close();*/
 
-            return sb.toString();
+            return response;
         } catch(Exception e){
             return new String("Exception: " + e.getMessage());
         }
@@ -67,14 +79,14 @@ public class GetEvents  extends AsyncTask<String,Void,String>{
     @Override
     protected void onPostExecute(String result){
         try {
-            JSONObject jsonObject = new JSONObject(result);
+            //JSONObject jsonObject = new JSONObject(result);
 
           //  id = jsonObject.getString("id");
           //  title = jsonObject.getString("title");
           //  description = jsonObject.getString("description");
           //  startDate = jsonObject.getString("startDate");
            // endDate = jsonObject.getString("startDate");
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
