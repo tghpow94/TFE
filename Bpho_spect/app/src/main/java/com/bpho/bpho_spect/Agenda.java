@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import org.json.JSONObject;
+
 public class Agenda extends AppCompatActivity {
 
     @Override
@@ -37,6 +39,14 @@ public class Agenda extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        getEvents();
+
+    }
+
+    public void getEvents() {
+        GetEvents test = new GetEvents(this);
+        test.execute();
     }
 
     @Override
