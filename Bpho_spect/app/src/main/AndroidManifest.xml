@@ -16,19 +16,26 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".InfosGenerales"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Agenda">
         </activity>
         <activity
             android:name=".Contact"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Agenda">
+        </activity>
+        <activity
+            android:name=".AfficherEvent"
+            android:label="@string/event"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Agenda">
         </activity>
     </application>
 

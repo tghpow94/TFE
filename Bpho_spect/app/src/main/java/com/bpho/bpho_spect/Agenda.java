@@ -138,7 +138,7 @@ public class Agenda extends AppCompatActivity {
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             System.out.println("avant execute");
             final String response = httpclient.execute(httppost, responseHandler);
-            System.out.println("apres execute");
+            System.out.println("apres execute" + response);
             test = response;
             //jsonArray = new JSONArray(response);
 
