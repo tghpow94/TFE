@@ -10,25 +10,12 @@
     tools:context=".Agenda"
     tools:showIn="@layout/layout_agenda">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/tv1"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agenda"
-        android:layout_below="@id/tv1"
-        android:layout_marginTop="70dp"
-        android:id="@+id/tv2"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="infos générales"
-        android:id="@+id/btn1"
-        android:layout_below="@id/tv2"/>
+        android:divider="@color/list_divider"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_row_selector" />
 
 </RelativeLayout>

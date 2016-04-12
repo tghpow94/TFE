@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Agenda">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_generalInfos"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/generalInfos"
         app:showAsAction="never" />
 </menu>

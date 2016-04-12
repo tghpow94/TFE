@@ -5,4 +5,5 @@
     <string name="email">Adresse email</string>
     <string name="message">Votre message</string>
     <string name="send">Envoyer</string>
+    <string name="generalInfos">Infos générales</string>
 </resources>
