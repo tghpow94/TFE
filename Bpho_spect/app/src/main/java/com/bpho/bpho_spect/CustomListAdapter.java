@@ -59,17 +59,13 @@ public class CustomListAdapter extends BaseAdapter {
         // getting event data for the row
         Event e = eventItems.get(position);
 
-        // thumbnail image
         //thumbNail.setImageUrl(e.getThumbnailUrl(), imageLoader);
 
-        // title
         title.setText(e.getTitle());
 
-        // date
         date.setText(e.getDate().toString());
 
-        // address
-        address.setText(e.getAddress());
+        address.setText(e.getFullAddress());
 
         return convertView;
     }

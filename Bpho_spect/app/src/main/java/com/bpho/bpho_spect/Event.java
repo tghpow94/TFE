@@ -9,7 +9,11 @@ import java.util.Date;
 public class Event {
     private String title, thumbnailUrl;
     private String date;
-    private String address;
+    private String description;
+    private String startDate, endDate;
+    private String city, cityCode, address, addressInfos, fullAddress;
+    private String price;
+    private String reservationLink;
 
     public Event() {
     }
@@ -24,7 +28,6 @@ public class Event {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String name) {
         this.title = name;
     }
@@ -32,15 +35,34 @@ public class Event {
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
-
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStartDate() {
+        return this.startDate;
+    }
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return this.endDate;
+    }
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getDate() {
         return date;
     }
-
     public void setDate(String startDate, String endDate) {
         String[] startTemp = startDate.split(" ");
         String[] start = startTemp[0].split("-");
@@ -54,12 +76,52 @@ public class Event {
             this.date = "Le " + startDate;
     }
 
+    public String getCity() {
+        return this.city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCityCode() {
+        return this.cityCode;
+    }
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
     public String getAddress() {
-        return address;
+        return  this.address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setAddress(String addressInfos, String address, String city) {
-        this.address = addressInfos + " - " + city + " - " + address;
+    public String getAddressInfos() {
+        return this.addressInfos;
+    }
+    public void setAddressInfos(String addressInfos) {
+        this.addressInfos = addressInfos;
     }
 
+    public String getFullAddress() {
+        return fullAddress;
+    }
+    public void setFullAddress(String addressInfos, String address, String city, String cityCode) {
+        this.fullAddress = addressInfos + " - " + address + " - " + city + " " + cityCode;
+    }
+
+    public String getPrice() {
+        return this.price;
+    }
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getReservationLink() {
+        return this.reservationLink;
+    }
+    public void setReservationLink(String reservationLink) {
+        this.reservationLink = reservationLink;
+    }
 }

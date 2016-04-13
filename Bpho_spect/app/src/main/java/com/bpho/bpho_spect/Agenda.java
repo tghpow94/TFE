@@ -65,15 +65,13 @@ public class Agenda extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);
-        // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        String test = getEvents();
         JSONArray response = null;
         try {
-            response = new JSONArray(test);
-        } catch (JSONException e) {
+            response = new JSONArray(getEvents());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -84,8 +82,16 @@ public class Agenda extends AppCompatActivity {
                 Event event = new Event();
                 event.setTitle(obj.getString("title"));
                 //event.setThumbnailUrl(obj.getString("image"));
-                event.setDate(obj.getString("startDate"), obj.getString("endDate"));
-                event.setAddress(obj.getString("addressInfos"), obj.getString("address"), obj.getString("city"));
+                event.setStartDate(obj.getString("startDate"));
+                event.setEndDate(obj.getString("endDate"));
+                event.setDate(event.getStartDate(), event.getEndDate());
+                event.setCity(obj.getString("city"));
+                event.setCityCode(obj.getString("cityCode"));
+                event.setAddress(obj.getString("address"));
+                event.setAddressInfos(obj.getString("addressInfos"));
+                event.setFullAddress(event.getAddressInfos(), event.getAddress(), event.getCity(), event.getCityCode());
+                event.setPrice(obj.getString("price"));
+                event.setReservationLink(obj.getString("reservation"));
 
                 // adding event to events array
                 eventList.add(event);
@@ -100,14 +106,10 @@ public class Agenda extends AppCompatActivity {
         // so that it renders the list view with updated data
         adapter.notifyDataSetChanged();
 
-        // Adding request to request queue
-        //AppController.getInstance().addToRequestQueue(eventReq);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 Intent intent = new Intent(Agenda.this, Contact.class);
                 startActivity(intent);
             }
@@ -128,10 +130,6 @@ public class Agenda extends AppCompatActivity {
     }
 
     public String getEvents() {
-        //GetEvents test = new GetEvents(this);
-        //test.execute();
-        JSONArray jsonArray = new JSONArray();
-        String test ="";
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://91.121.151.137/scripts_android/getAllEvents.php");
@@ -139,14 +137,13 @@ public class Agenda extends AppCompatActivity {
             System.out.println("avant execute");
             final String response = httpclient.execute(httppost, responseHandler);
             System.out.println("apres execute" + response);
-            test = response;
-            //jsonArray = new JSONArray(response);
-
+            hidePDialog();
+            return response;
         } catch (Exception e) {
             e.printStackTrace();
         }
         hidePDialog();
-        return test;
+        return "echec";
     }
 
     @Override

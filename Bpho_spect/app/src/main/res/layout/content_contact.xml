@@ -6,16 +6,24 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".contact"
+    tools:context=".Contact"
     tools:showIn="@layout/layout_contact"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:id="@+id/parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vous avez une questionééééé, une suggestion ? veuillez nous envoyer un message ci dessous."
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tvContact"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollviewFormContact">
+        android:id="@+id/scrollviewFormContact"
+        android:layout_below="@id/tvContact">
 
         <RelativeLayout
             android:layout_width="wrap_content"
