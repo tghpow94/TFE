@@ -95,7 +95,6 @@ public class Contact extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("message", message));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 final String response = httpclient.execute(httppost, responseHandler);
-                System.out.println("reponse : " + response);
                 hideSoftKeyboard(Contact.this);
             }
 
@@ -149,10 +148,10 @@ public class Contact extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                break;
             case R.id.action_generalInfos:
                 startActivity(new Intent(Contact.this, InfosGenerales.class));
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

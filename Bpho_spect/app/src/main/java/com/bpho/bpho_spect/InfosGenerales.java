@@ -34,7 +34,7 @@ public class InfosGenerales extends AppCompatActivity {
         });
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -45,8 +45,8 @@ public class InfosGenerales extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
         }
-    }*/
+        return super.onOptionsItemSelected(item);
+    }
 }

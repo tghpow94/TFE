@@ -3,10 +3,15 @@ package com.bpho.bpho_spect;
 /**
  * Created by Thomas on 12-04-16.
  */
+import android.os.Parcelable;
+
+import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Event {
+public class Event implements Serializable{
     private String title, thumbnailUrl;
     private String date;
     private String description;
@@ -15,7 +20,23 @@ public class Event {
     private String price;
     private String reservationLink;
 
-    public Event() {
+    public Event(JSONObject obj) {
+        try {
+            setTitle(obj.getString("title"));
+            setThumbnailUrl("http://91.121.151.137/TFE/images/e" + obj.getString("id") + ".jpg");
+            setStartDate(obj.getString("startDate"));
+            setEndDate(obj.getString("endDate"));
+            setDate(getStartDate(), getEndDate());
+            setCity(obj.getString("city"));
+            setCityCode(obj.getString("cityCode"));
+            setAddress(obj.getString("address"));
+            setAddressInfos(obj.getString("addressInfos"));
+            setFullAddress(getAddressInfos(), getAddress(), getCity(), getCityCode());
+            setPrice(obj.getString("price"));
+            setReservationLink(obj.getString("reservation"));
+        } catch (Exception e) {
+
+        }
     }
 
     public Event(String name, String thumbnailUrl, String date, String address) {
@@ -108,7 +129,7 @@ public class Event {
         return fullAddress;
     }
     public void setFullAddress(String addressInfos, String address, String city, String cityCode) {
-        this.fullAddress = addressInfos + " - " + address + " - " + city + " " + cityCode;
+        this.fullAddress = addressInfos + " - " + address + " - " + cityCode + " " + city;
     }
 
     public String getPrice() {

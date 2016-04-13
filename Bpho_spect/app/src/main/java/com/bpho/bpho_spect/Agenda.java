@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -79,32 +80,15 @@ public class Agenda extends AppCompatActivity {
         for (int i = 0; i < response.length(); i++) {
             try {
                 JSONObject obj = response.getJSONObject(i);
-                Event event = new Event();
-                event.setTitle(obj.getString("title"));
-                //event.setThumbnailUrl(obj.getString("image"));
-                event.setStartDate(obj.getString("startDate"));
-                event.setEndDate(obj.getString("endDate"));
-                event.setDate(event.getStartDate(), event.getEndDate());
-                event.setCity(obj.getString("city"));
-                event.setCityCode(obj.getString("cityCode"));
-                event.setAddress(obj.getString("address"));
-                event.setAddressInfos(obj.getString("addressInfos"));
-                event.setFullAddress(event.getAddressInfos(), event.getAddress(), event.getCity(), event.getCityCode());
-                event.setPrice(obj.getString("price"));
-                event.setReservationLink(obj.getString("reservation"));
-
-                // adding event to events array
+                Event event = new Event(obj);
                 eventList.add(event);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
-
-        // notifying list adapter about data changes
-        // so that it renders the list view with updated data
         adapter.notifyDataSetChanged();
+        addOptionOnClick(eventList);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +98,22 @@ public class Agenda extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void addOptionOnClick(final List<Event> list) {
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                afficherEvent(position, list);
+            }
+        });
+    }
+
+    public void afficherEvent(int position, List<Event> list){
+        Intent intent = new Intent(this, AfficherEvent.class);
+        intent.putExtra("event", list.get(position));
+        startActivity(intent);
     }
 
     @Override
@@ -134,9 +134,7 @@ public class Agenda extends AppCompatActivity {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://91.121.151.137/scripts_android/getAllEvents.php");
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            System.out.println("avant execute");
             final String response = httpclient.execute(httppost, responseHandler);
-            System.out.println("apres execute" + response);
             hidePDialog();
             return response;
         } catch (Exception e) {
@@ -157,10 +155,10 @@ public class Agenda extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                break;
             case R.id.action_generalInfos:
                 startActivity(new Intent(Agenda.this, InfosGenerales.class));
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

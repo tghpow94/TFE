@@ -13,10 +13,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="150dp"
+                android:layout_height="212dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date"
+                android:layout_toRightOf="@id/thumbnail"
+                android:text="date"
+                android:textSize="@dimen/title"
+                android:textStyle="bold"
+                android:textColor="@color/pourpre"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:text="titre"
+                android:textSize="@dimen/title"
+                android:layout_toRightOf="@id/thumbnail"
+                android:layout_below="@id/date"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/address"
+                android:text="address"
+                android:textSize="@dimen/address"
+                android:layout_below="@id/title"
+                android:layout_toRightOf="@id/thumbnail"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/thumbnail"
+                android:id="@+id/description"
+                android:textSize="@dimen/address"
+                android:text="description"/>
+
+        </RelativeLayout>
 
     </ScrollView>
 
