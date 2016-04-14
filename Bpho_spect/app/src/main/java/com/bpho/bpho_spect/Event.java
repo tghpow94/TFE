@@ -23,6 +23,7 @@ public class Event implements Serializable{
     public Event(JSONObject obj) {
         try {
             setTitle(obj.getString("title"));
+            setDescription(obj.getString("description"));
             setThumbnailUrl("http://91.121.151.137/TFE/images/e" + obj.getString("id") + ".jpg");
             setStartDate(obj.getString("startDate"));
             setEndDate(obj.getString("endDate"));

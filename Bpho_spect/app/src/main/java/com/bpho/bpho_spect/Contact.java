@@ -87,9 +87,9 @@ public class Contact extends AppCompatActivity {
                 Snackbar.make(v, "Veuillez remplir tous les champs.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             } else {
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://91.121.151.137/scripts_android/sendMessage.php");
+                HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/sendMessage.php");
                 ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
                 nameValuePairs.add(new BasicNameValuePair("name", name));
                 nameValuePairs.add(new BasicNameValuePair("mail", mail));
                 nameValuePairs.add(new BasicNameValuePair("message", message));

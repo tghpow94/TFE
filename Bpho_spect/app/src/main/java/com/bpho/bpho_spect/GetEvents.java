@@ -42,18 +42,9 @@ public class GetEvents  extends AsyncTask<String,Void,String>{
     @Override
     protected String doInBackground(String... arg0) {
         try{
-            /*String link = "http://91.121.151.137/scripts_android/getAllEvents.php";
-
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet();
-            request.setURI(new URI(link));
-            HttpResponse response = client.execute(request);
-            BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            StringBuffer sb = new StringBuffer("");
-            String line="";*/
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://91.121.151.137/scripts_android/getAllEvents.php");
+            HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             final String response = httpclient.execute(httppost, responseHandler);
             JSONObject jObj = new JSONObject(response);

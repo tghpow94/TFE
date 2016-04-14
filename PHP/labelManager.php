@@ -1,20 +1,27 @@
 <?php
 
-class EventManager {
+class labelManager {
     private $db;
 
     public function __construct(PDO $database) {
         $this->db = $database;
     }
 	
-	public function getLabelById(int $id, string $lang) {
-		$resultats = $this->db->query("SELECT id, :lang FROM Labels where id = :id");
+	public function getLabelById($id, $lang) {
+		$resultats = $this->db->prepare("SELECT id, ".$lang." FROM Labels where id = :id");
         $resultats->execute(array(
-			":lang" => $lang,
             ":id" => $id
         ));
-		$retour = $resultats->fetch(PDO::FETCH_ASSOC);
-		return $retour;
+		if ($retour = $resultats->fetch(PDO::FETCH_ASSOC)) {
+			return $retour;
+		} else {
+			$resultat = $this->db->prepare("SELECT id, fr FROM Labels where id = :id");
+			$resultat->execute(array(
+				":id" => $id
+			));
+			$retour = $resultat->fetch(PDO::FETCH_ASSOC);
+			return $retour;
+		}
 	}
 }
 ?>
