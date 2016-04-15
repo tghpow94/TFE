@@ -60,7 +60,11 @@ public class CustomListAdapter extends BaseAdapter {
 
         thumbNail.setImageUrl(e.getThumbnailUrl(), imageLoader);
 
-        title.setText(e.getTitle());
+        if (e.getTitle().length() > 44) {
+            title.setText(e.getTitle().substring(0, 45) + "...");
+        } else {
+            title.setText(e.getTitle());
+        }
 
         date.setText(e.getDate());
 

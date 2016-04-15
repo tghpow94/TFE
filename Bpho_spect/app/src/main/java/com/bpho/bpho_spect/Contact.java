@@ -45,7 +45,7 @@ public class Contact extends AppCompatActivity {
         setContentView(R.layout.layout_contact);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Contactez-nous !");
+        getSupportActionBar().setTitle(getString(R.string.contact_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupUI(findViewById(R.id.parent));
@@ -70,7 +70,7 @@ public class Contact extends AppCompatActivity {
                     ETMessage.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
                 } else {
                     if (ETMessage.getText().toString().equals("")) {
-                        ETMessage.setHint("Votre message");
+                        ETMessage.setHint(getString(R.string.message));
                         ETMessage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     }
                 }
@@ -84,7 +84,7 @@ public class Contact extends AppCompatActivity {
         message = ETMessage.getText().toString().trim();
         try {
             if (name.equals("") || mail.equals("") || message.equals("")) {
-                Snackbar.make(v, "Veuillez remplir tous les champs.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(v, getString(R.string.missingData), Snackbar.LENGTH_LONG).setAction("Action", null).show();
             } else {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/sendMessage.php");
@@ -111,10 +111,7 @@ public class Contact extends AppCompatActivity {
     }
 
     public void setupUI(View view) {
-
-        //Set up touch listener for non-text box views to hide keyboard.
         if(!(view instanceof EditText || view instanceof Button)) {
-
             view.setOnTouchListener(new View.OnTouchListener() {
 
                 public boolean onTouch(View v, MotionEvent event) {
@@ -124,14 +121,9 @@ public class Contact extends AppCompatActivity {
 
             });
         }
-
-        //If a layout container, iterate over children and seed recursion.
         if (view instanceof ViewGroup) {
-
             for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-
                 View innerView = ((ViewGroup) view).getChildAt(i);
-
                 setupUI(innerView);
             }
         }

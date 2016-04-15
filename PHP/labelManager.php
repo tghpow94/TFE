@@ -13,15 +13,18 @@ class labelManager {
             ":id" => $id
         ));
 		if ($retour = $resultats->fetch(PDO::FETCH_ASSOC)) {
-			return $retour;
+			if ($retour[$lang] == null) {
+				$resultat = $this->db->prepare("SELECT id, fr as ".$lang." FROM Labels where id = :id");
+				$resultat->execute(array(
+					":id" => $id
+				));
+				$retour = $resultat->fetch(PDO::FETCH_ASSOC);
+			}
 		} else {
-			$resultat = $this->db->prepare("SELECT id, fr FROM Labels where id = :id");
-			$resultat->execute(array(
-				":id" => $id
-			));
-			$retour = $resultat->fetch(PDO::FETCH_ASSOC);
-			return $retour;
+			$retour['id'] = $id;
+			$retour[$lang] = "aucune valeur trouvée.";
 		}
+		return $retour;
 	}
 }
 ?>

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Event implements Serializable{
+    private String id;
     private String title, thumbnailUrl;
     private String date;
     private String description;
@@ -22,6 +23,7 @@ public class Event implements Serializable{
 
     public Event(JSONObject obj) {
         try {
+            setId(obj.getString("id"));
             setTitle(obj.getString("title"));
             setDescription(obj.getString("description"));
             setThumbnailUrl("http://91.121.151.137/TFE/images/e" + obj.getString("id") + ".jpg");
@@ -45,6 +47,14 @@ public class Event implements Serializable{
         this.thumbnailUrl = thumbnailUrl;
         this.date = date;
         this.address = address;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

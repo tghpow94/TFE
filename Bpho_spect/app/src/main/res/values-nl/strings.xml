@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bpho_spect</string>
+    <string name="email">E-mailadres</string>
+    <string name="event">Evenement</string>
+    <string name="generalInfos"> Algemene informatie</string>
+    <string name="message">Uw bericht</string>
+    <string name="name">Naam</string>
+    <string name="noMoreEvent">Geen oudste event</string>
+    <string name="send">Sturen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="agenda_title">Agenda of BPHO</string>
+    <string name="loading">Lading...</string>
+    <string name="contact_title">Neem contact op !</string>
+    <string name="missingData">Vul alle velden in.</string>
+    <string name="contact_text">Heeft u een vraag of een suggestie? stuur ons een bericht hieronder.</string>
+    <string name="reservation">Online boeking</string>
+</resources>

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -64,7 +65,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         setContentView(R.layout.layout_agenda);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Agenda du BPHO");
+        getSupportActionBar().setTitle(getString(R.string.agenda_title));
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -77,7 +78,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage(getString(R.string.loading));
         pDialog.show();
 
         onRefresh();
@@ -96,6 +97,10 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
+        String id = "-1";
+        if (offSet > 0) {
+            id = eventList.get(0).getId();
+        }
         eventList.clear();
         JSONArray response = null;
         try {
@@ -114,7 +119,14 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                 e.printStackTrace();
             }
         }
-        adapter.notifyDataSetChanged();
+
+        if (id.equals(eventList.get(0).getId()) && offSet < 60) {
+            onRefresh();
+        } else if (offSet >= 60) {
+            Snackbar.make(swipeRefreshLayout,getString(R.string.noMoreEvent), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void addOptionOnClick(final List<Event> list) {

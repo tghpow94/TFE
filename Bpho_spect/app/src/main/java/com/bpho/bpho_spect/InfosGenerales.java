@@ -21,7 +21,7 @@ public class InfosGenerales extends AppCompatActivity {
         setContentView(R.layout.layout_general_info);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("A propos...");
+        getSupportActionBar().setTitle(getString(R.string.generalInfos));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

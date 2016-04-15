@@ -73,7 +73,7 @@
                     android:id="@+id/reservation"
                     android:layout_toRightOf="@id/thumbnail"
                     android:layout_below="@id/prix"
-                    android:text="Réservation online"
+                    android:text="@string/reservation"
                     android:layout_marginTop="5dp"
                     android:linksClickable="true"
                     android:onClick="launchReservation"

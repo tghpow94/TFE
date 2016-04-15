@@ -20,14 +20,16 @@ class EventManager {
 		$lm = new labelManager(connexionDb());
 		foreach($tabEvent as $row){
 			$event = $row;
+			$id = $event['id'];
+			$cityCode = $event['cityCode'];
 			foreach($event as &$elem) {
 				if(is_numeric($elem)) {
 					$label = $lm->getLabelById($elem, $lang);
 					$elem = $label[$lang];
 				}
 			}
-			//$label = $lm->getLabelById($event['title'], $lang);
-			//$event['title'] = $label[$lang];
+			$event['id'] = $id;
+			$event['cityCode'] = $cityCode;
 			$tab[] = $event;
 		}
 		return $tab;
