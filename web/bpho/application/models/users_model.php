@@ -10,9 +10,9 @@ class Users_model extends CI_Model {
     */
 	function validate($user_name, $password)
 	{
-		$this->db->where('user_name', $user_name);
-		$this->db->where('pass_word', $password);
-		$query = $this->db->get('membership');
+		$this->db->where('userName', $user_name);
+		$this->db->where('password', $password);
+		$query = $this->db->get('Users');
 		
 		if($query->num_rows == 1)
 		{
@@ -46,8 +46,8 @@ class Users_model extends CI_Model {
 	function create_member()
 	{
 
-		$this->db->where('user_name', $this->input->post('username'));
-		$query = $this->db->get('membership');
+		$this->db->where('userName', $this->input->post('username'));
+		$query = $this->db->get('Users');
 
         if($query->num_rows > 0){
         	echo '<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>';
@@ -55,14 +55,11 @@ class Users_model extends CI_Model {
 			echo '</strong></div>';
 		}else{
 
-			$new_member_insert_data = array(
-				'first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name'),
-				'email_addres' => $this->input->post('email_address'),			
-				'user_name' => $this->input->post('username'),
-				'pass_word' => md5($this->input->post('password'))						
+			$new_member_insert_data = array(			
+				'userName' => $this->input->post('username'),
+				'password' => md5($this->input->post('password'))						
 			);
-			$insert = $this->db->insert('membership', $new_member_insert_data);
+			$insert = $this->db->insert('Users', $new_member_insert_data);
 		    return $insert;
 		}
 	      
