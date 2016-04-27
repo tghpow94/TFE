@@ -26,7 +26,7 @@
 
     <?php
     //form data
-    $attributes = array('class' => 'form-horizontal', 'id' => '');
+    $attributes = array('class' => 'form-horizontal', 'id' => 'formAddUser');
 
     //form validation
     echo validation_errors();
@@ -88,10 +88,27 @@
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Téléphone</label>
+            <label for="inputError" class="control-label">Téléphone : </label>
             <div class="controls">
                 <input type="tel" name="phone" value="<?php echo set_value('phone'); ?>">
                 <!--<span class="help-inline">OOps</span>-->
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="inputError" class="control-label">Instrument : </label>
+            <div class="controls">
+                <select name="instrument" >
+                    <?php
+                    $instrument1 = array("id" => 0, "name" => "violon");
+                    $instrument2 = array("id" => 1, "name" => "piano");
+                    $instrument3 = array("id" => 2, "name" => "guitare");
+
+                    $instruments = array($instrument1, $instrument2, $instrument3);
+                    foreach($instruments as $instrument) {
+                        echo '<option value=$instrument["id"]>'.$instrument["name"].'</option>';
+                    }
+                    ?>
+                </select>
             </div>
         </div>
         <div class="form-actions">
