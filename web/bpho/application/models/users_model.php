@@ -13,7 +13,7 @@ class Users_model extends CI_Model {
 		$this->db->where('userName', $user_name);
 		$this->db->where('password', $password);
 		$query = $this->db->get('Users');
-		
+		var_dump($this->db);
 		if($query->num_rows == 1)
 		{
 			return true;

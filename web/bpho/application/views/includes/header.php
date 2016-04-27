@@ -12,16 +12,16 @@
 	      <a class="brand">Project Name</a>
 	      <ul class="nav">
 	        <li <?php if($this->uri->segment(2) == 'products'){echo 'class="active"';}?>>
-	          <a href="<?php echo base_url(); ?>admin/products">Products</a>
+	          <a href="<?php echo base_url(); ?>admin/products">Utilisateurs</a>
 	        </li>
 	        <li <?php if($this->uri->segment(2) == 'manufacturers'){echo 'class="active"';}?>>
-	          <a href="<?php echo base_url(); ?>admin/manufacturers">Manufacturers</a>
+	          <a href="<?php echo base_url(); ?>admin/manufacturers">Evenements</a>
 	        </li>
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
 	          <ul class="dropdown-menu">
 	            <li>
-	              <a href="<?php echo base_url(); ?>admin/logout">Logout</a>
+	              <a href="<?php echo base_url(); ?>admin/logout">Déconnexion</a>
 	            </li>
 	          </ul>
 	        </li>
