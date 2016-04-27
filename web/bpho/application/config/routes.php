@@ -62,6 +62,12 @@ $route['admin/manufacturers/update/(:any)'] = 'admin_manufacturers/update/$1';
 $route['admin/manufacturers/delete/(:any)'] = 'admin_manufacturers/delete/$1';
 $route['admin/manufacturers/(:any)'] = 'admin_manufacturers/index/$1'; //$1 = page number
 
+$route['admin/users'] = 'admin_users/index';
+$route['admin/users/add'] = 'admin_users/add';
+$route['admin/users/update'] = 'admin_users/update';
+$route['admin/users/update/(:any)'] = 'admin_users/update/$1';
+$route['admin/users/delete/(:any)'] = 'admin_users/delete/$1';
+$route['admin/users/(:any)'] = 'admin_users/index/$1';
 
 
 /* End of file routes.php */

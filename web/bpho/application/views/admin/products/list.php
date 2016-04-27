@@ -4,7 +4,7 @@
         <li>
           <a href="<?php echo site_url("admin"); ?>">
             <?php echo ucfirst($this->uri->segment(1));?>
-          </a> 
+          </a>
           <span class="divider">/</span>
         </li>
         <li class="active">
@@ -26,14 +26,14 @@
             <?php
            
             $attributes = array('class' => 'form-inline reset-margin', 'id' => 'myform');
-           
+
             $options_manufacture = array(0 => "all");
             foreach ($manufactures as $row)
             {
               $options_manufacture[$row['id']] = $row['name'];
             }
-            //save the columns names in a array that we will use as filter         
-            $options_products = array();    
+            //save the columns names in a array that we will use as filter
+            $options_products = array();
             foreach ($products as $array) {
               foreach ($array as $key => $value) {
                 $options_products[$key] = $key;

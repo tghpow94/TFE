@@ -10,7 +10,7 @@ class User extends CI_Controller {
 	function index()
 	{
 		if($this->session->userdata('is_logged_in')){
-			redirect('admin/products');
+			redirect('admin/users');
         }else{
         	$this->load->view('admin/login');	
         }
@@ -20,8 +20,8 @@ class User extends CI_Controller {
     * encript the password 
     * @return mixed
     */	
-    function __encrip_password($password) {
-        return md5($password);
+    function __encrip_password($password, $salt) {
+        return hash('sha256', $password.$salt);
     }	
 
     /**
@@ -34,7 +34,9 @@ class User extends CI_Controller {
 		$this->load->model('Users_model');
 
 		$user_name = $this->input->post('user_name');
-		$password = $this->__encrip_password($this->input->post('password'));
+		$user = $this->Users_model->getUserByName($user_name);
+		var_dump($user);
+		$password = $this->__encrip_password($this->input->post('password'), $user[0]['salt']);
 
 		$is_valid = $this->Users_model->validate($user_name, $password);
 		var_dump($is_valid);
@@ -45,7 +47,7 @@ class User extends CI_Controller {
 				'is_logged_in' => true
 			);
 			$this->session->set_userdata($data);
-			redirect('admin/products');
+			redirect('admin/users');
 		}
 		else // incorrect username or password
 		{

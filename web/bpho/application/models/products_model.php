@@ -11,7 +11,7 @@ class Products_model extends CI_Model {
     }
 
     /**
-    * Get product by his is
+    * Get product by his id
     * @param int $product_id 
     * @return array
     */

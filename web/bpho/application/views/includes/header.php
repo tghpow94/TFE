@@ -12,7 +12,7 @@
 	      <a class="brand">Project Name</a>
 	      <ul class="nav">
 	        <li <?php if($this->uri->segment(2) == 'products'){echo 'class="active"';}?>>
-	          <a href="<?php echo base_url(); ?>admin/products">Utilisateurs</a>
+	          <a href="<?php echo base_url(); ?>admin/users">Utilisateurs</a>
 	        </li>
 	        <li <?php if($this->uri->segment(2) == 'manufacturers'){echo 'class="active"';}?>>
 	          <a href="<?php echo base_url(); ?>admin/manufacturers">Evenements</a>

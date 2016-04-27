@@ -2,12 +2,6 @@
       
       <ul class="breadcrumb">
         <li>
-          <a href="<?php echo site_url("admin"); ?>">
-            <?php echo ucfirst($this->uri->segment(1));?>
-          </a> 
-          <span class="divider">/</span>
-        </li>
-        <li>
           <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">
             <?php echo ucfirst($this->uri->segment(2));?>
           </a> 

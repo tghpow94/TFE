@@ -11,8 +11,8 @@
       $attributes = array('class' => 'form-signin');
       echo form_open('admin/login/validate_credentials', $attributes);
       echo '<h2 class="form-signin-heading">Login</h2>';
-      echo form_input('user_name', '', 'placeholder="Username"');
-      echo form_password('password', '', 'placeholder="Password"');
+      echo form_input('user_name', '', 'placeholder="Adresse e-mail"');
+      echo form_password('password', '', 'placeholder="Mot de passe"');
       if(isset($message_error) && $message_error){
           echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
