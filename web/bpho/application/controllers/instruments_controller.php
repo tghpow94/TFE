@@ -1,5 +1,5 @@
 <?php
-class Admin_users extends CI_Controller {
+class Instruments_controller extends CI_Controller {
 
     /**
      * Responsable for auto load the model
@@ -8,7 +8,6 @@ class Admin_users extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('users_model');
         $this->load->model('instruments_model');
 
         if(!$this->session->userdata('is_logged_in')){
@@ -28,7 +27,7 @@ class Admin_users extends CI_Controller {
 
         //pagination settings
         $config['per_page'] = 5;
-        $config['base_url'] = base_url().'admin/users';
+        $config['base_url'] = base_url().'admin/instruments';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 20;
         $config['full_tag_open'] = '<ul>';
@@ -73,14 +72,14 @@ class Admin_users extends CI_Controller {
             //save session data into the session
             $this->session->set_userdata($filter_session_data);
 
-            $data['count_users']= $this->users_model->countUsers($search_string);
-            $config['total_rows'] = $data['count_users'];
+            $data['count_instruments']= $this->instruments_model->countInstruments($search_string);
+            $config['total_rows'] = $data['count_instruments'];
 
             //fetch sql data into arrays
             if($search_string){
-                $data['users'] = $this->users_model->getUsers($search_string, $config['per_page'], $limit_end);
+                $data['instruments'] = $this->instruments_model->getInstruments($search_string, $config['per_page'], $limit_end);
             }else{
-                $data['users'] = $this->users_model->getUsers('', $config['per_page'],$limit_end);
+                $data['instruments'] = $this->instruments_model->getInstruments('', $config['per_page'],$limit_end);
             }
 
         }else{
@@ -93,9 +92,9 @@ class Admin_users extends CI_Controller {
             $data['search_string_selected'] = '';
 
             //fetch sql data into arrays
-            $data['count_users']= $this->users_model->countUsers();
-            $data['users'] = $this->users_model->getUsers('', $config['per_page'],$limit_end);
-            $config['total_rows'] = $data['count_users'];
+            $data['count_instruments']= $this->instruments_model->countInstruments();
+            $data['instruments'] = $this->instruments_model->getInstruments('', $config['per_page'],$limit_end);
+            $config['total_rows'] = $data['count_instruments'];
 
         }
 
@@ -103,7 +102,7 @@ class Admin_users extends CI_Controller {
         $this->pagination->initialize($config);
 
         //load the view
-        $data['main_content'] = 'admin/users/list';
+        $data['main_content'] = 'admin/instruments/list';
         $this->load->view('includes/template', $data);
 
     }//index
@@ -196,9 +195,11 @@ class Admin_users extends CI_Controller {
         //the code below wel reload the current data
 
         //product data 
-        $data['user'] = $this->users_model->getUserByID($id);
+        $data['product'] = $this->products_model->get_product_by_id($id);
+        //fetch manufactures data to populate the select field
+        $data['manufactures'] = $this->manufacturers_model->get_manufacturers();
         //load the view
-        $data['main_content'] = 'admin/users/edit';
+        $data['main_content'] = 'admin/products/edit';
         $this->load->view('includes/template', $data);
 
     }//update
@@ -211,8 +212,8 @@ class Admin_users extends CI_Controller {
     {
         //product id 
         $id = $this->uri->segment(4);
-        $this->users_model->delete_user($id);
-        redirect('admin/users');
+        $this->instruments_model->delete_instruments($id);
+        redirect('admin/instruments');
     }//edit
 
 }

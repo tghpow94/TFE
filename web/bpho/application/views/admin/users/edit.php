@@ -33,9 +33,9 @@
     ?>
     <fieldset>
         <div class="control-group">
-            <label for="inputError" class="control-label">Description</label>
+            <label for="inputError" class="control-label">Adresse e-mail : </label>
             <div class="controls">
-                <input type="text" id="" name="description" value="<?php echo $user[0]['description']; ?>" >
+                <input type="email" id="" name="email" value="<?php echo $user['email']; ?>" >
                 <!--<span class="help-inline">Woohoo!</span>-->
             </div>
         </div>

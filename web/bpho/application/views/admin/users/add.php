@@ -38,6 +38,11 @@
             function myFunction() {
                 var pass1 = document.getElementById("password").value;
                 var pass2 = document.getElementById("password2").value;
+                if (pass1.length < 8) {
+                    document.getElementById("passwordLength").style.visibility = "visible"
+                } else {
+                    document.getElementById("passwordLength").style.visibility = "collapse"
+                }
                 if (pass1 != pass2 && pass2 != "") {
                     document.getElementById("password").style.borderColor = "#E34234";
                     document.getElementById("btnSubmit").disabled = true;
@@ -63,14 +68,14 @@
             <label for="inputError" class="control-label">Mot de passe* : </label>
             <div class="controls">
                 <input type="password" onkeyup="myFunction()" id="password" name="password" value="<?php echo set_value('password'); ?>" required minlength=8>
-                <span id="passwordMatch" style="color:red; visibility: collapse">Les deux mots de passe saisis ne sont pas identiques.</span>
+                <span id="passwordLength" style="color:red; visibility: collapse">Minimum 8 caractères.</span>
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Confirmation mot de passe* : </label>
             <div class="controls">
                 <input type="password" onkeyup="myFunction()" id="password2" name="password2" value="<?php echo set_value('password2'); ?>" required minlength=8>
-                <!--<span class="help-inline">Cost Price</span>-->
+                <span id="passwordMatch" style="color:red; visibility: collapse">Les deux mots de passe saisis ne sont pas identiques.</span>
             </div>
         </div>
         <div class="control-group">
@@ -88,27 +93,35 @@
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Téléphone : </label>
+            <label for="inputError" class="control-label">Droit : </label>
             <div class="controls">
-                <input type="tel" name="phone" value="<?php echo set_value('phone'); ?>">
+                <input type="text" list="rights" name="right" value="<?php echo set_value('right'); ?>">
+                <datalist id="rights">
+                    <?php
+                    foreach($rights as $right)
+                    ?>
+                </datalist>
                 <!--<span class="help-inline">OOps</span>-->
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <select name="instrument" >
+                <input type="text" list="instruments" name="instrument" value="<?php echo set_value('instrument'); ?>">
+                <datalist id="instruments" >
                     <?php
-                    $instrument1 = array("id" => 0, "name" => "violon");
-                    $instrument2 = array("id" => 1, "name" => "piano");
-                    $instrument3 = array("id" => 2, "name" => "guitare");
-
-                    $instruments = array($instrument1, $instrument2, $instrument3);
                     foreach($instruments as $instrument) {
-                        echo '<option value=$instrument["id"]>'.$instrument["name"].'</option>';
+                        echo '<option value="'.$instrument["name"].'">';
                     }
                     ?>
-                </select>
+                </datalist>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="inputError" class="control-label">Téléphone : </label>
+            <div class="controls">
+                <input type="tel" name="phone" value="<?php echo set_value('phone'); ?>">
+                <!--<span class="help-inline">OOps</span>-->
             </div>
         </div>
         <div class="form-actions">

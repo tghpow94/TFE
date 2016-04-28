@@ -26,6 +26,14 @@ class Users_model extends CI_Model {
 			return $query->result_array();
 		}
 	}
+	
+	function getUserByID($id) {
+		$this->db->where('id', $id);
+		$query = $this->db->get('Users');
+		if ($query->num_rows == 1) {
+			return $query->result();
+		}
+	}
 
 
     /**
