@@ -5,8 +5,7 @@ class Instruments_model extends CI_Model {
     function validateByName($name) {
         $this->db->where('name', $name);
         $query = $this->db->get('Instruments');
-        if($query->num_rows == 1)
-        {
+        if($query->num_rows == 1) {
             return true;
         }
     }
@@ -14,8 +13,7 @@ class Instruments_model extends CI_Model {
     function validateByID($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('Instruments');
-        if($query->num_rows == 1)
-        {
+        if($query->num_rows == 1) {
             return true;
         }
     }
@@ -28,6 +26,11 @@ class Instruments_model extends CI_Model {
         }
     }
 
+    /**
+     * return all the instruments of a user
+     * @param $id : id of the user
+     * @return array : retour[0] = 'id' => 1, 'name' => aaaaa
+     */
     function getInstrumentByUser($id) {
         $this->db->where('idUser', $id);
         $query = $this->db->get('User_instrument');
@@ -37,7 +40,8 @@ class Instruments_model extends CI_Model {
         foreach ($result as $link) {
             $this->db->where('id', $link['idInstrument']);
             $query = $this->db->get('Instruments');
-            $retour[$i] = $query->result();
+            $instrument = $query->result_array();
+            $retour[$i] = $instrument[0];
             $i++;
         }
         return $retour;

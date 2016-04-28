@@ -18,7 +18,7 @@
         }else{
             echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo '<strong>Oh snap!</strong> change a few things up and try submitting again.';
+            echo '<strong>Adresse email déjà utilisée !</strong> Veuillez en choisir une autre.';
             echo '</div>';
         }
     }
@@ -60,7 +60,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Adresse e-mail* : </label>
             <div class="controls">
-                <input type="email" id="" name="email" value="<?php echo set_value('email'); ?>" required>
+                <input type="email" id="emailInput" name="email" value="<?php echo set_value('email'); ?>" required>
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
@@ -81,21 +81,21 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Nom* : </label>
             <div class="controls">
-                <input type="text" id="" name="name" value="<?php echo set_value('name'); ?>" required>
+                <input type="text" id="nameInput" name="name" value="<?php echo set_value('name'); ?>" required>
                 <!--<span class="help-inline">Woohoo!</span>-->
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Prénom* : </label>
             <div class="controls">
-                <input type="text" id="" name="firstName" value="<?php echo set_value('firstName'); ?>" required>
+                <input type="text" id="firstNameInput" name="firstName" value="<?php echo set_value('firstName'); ?>" required>
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Droit* : </label>
             <div class="controls">
-                <select id="rights" name="right">
+                <select id="rights" name="right" value="<?php echo set_value('right'); ?>">
                     <?php
                     foreach($rights as $right) {
                         echo '<option value="'.$right["id"].'">'.$right["name"].'</option>';
@@ -108,7 +108,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <input type="text" list="instruments" name="instrument" value="<?php echo set_value('instrument'); ?>">
+                <input type="text" id="instrumentInput" list="instruments" name="instrument" value="<?php echo set_value('instrument'); ?>">
                 <datalist id="instruments" >
                     <?php
                     foreach($instruments as $instrument) {
@@ -121,13 +121,12 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Téléphone : </label>
             <div class="controls">
-                <input type="tel" name="phone" value="<?php echo set_value('phone'); ?>">
+                <input type="tel" id="phoneInput" name="phone" value="<?php echo set_value('phone'); ?>">
                 <!--<span class="help-inline">OOps</span>-->
             </div>
         </div>
         <div class="form-actions">
             <button class="btn btn-primary" id="btnSubmit" type="submit">Sauvegarder</button>
-            <button class="btn" type="reset">Remise à zéro</button>
         </div>
     </fieldset>
 

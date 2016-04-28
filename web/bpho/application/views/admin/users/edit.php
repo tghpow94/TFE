@@ -66,15 +66,11 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <input type="text" list="instruments" name="instrument" value="<?php echo set_value('instrument'); ?>">
+                <input type="text" list="instruments" name="instrument" value="<?php echo $userInstrument[0]['name']; ?>">
                 <datalist id="instruments" >
                     <?php
                     foreach($instruments as $instrument) {
-                        echo '<option value="'.$instrument["name"].'" ';
-                        if ($instrument['id'] == $user[0]['idInstrument']) {
-                            echo 'selected="selected"';
-                        }
-                        echo ' >';
+                        echo '<option value="'.$instrument["name"].'" >';
                     }
                     ?>
                 </datalist>
@@ -89,7 +85,7 @@
         </div>
         <div class="form-actions">
             <button class="btn btn-primary" type="submit">Sauvegarder</button>
-            <button class="btn" type="reset">Remise à zéro</button>
+            <button class="btn" type="reset">Annuler</button>
         </div>
     </fieldset>
 

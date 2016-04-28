@@ -200,14 +200,19 @@ class Admin_users extends CI_Controller {
 
         }
 
-        //if we are updating, and the data did not pass trough the validation
-        //the code below wel reload the current data
+        //rights
+        $data['rights'] = $this->rights_model->getRights();
 
-        //product data
+        //user data
         $user = $this->users_model->getUserByID($id);
         $user[0]['idRight'] = $this->users_model->getUserDroit($id);
         $user[0]['idInstrument'] = $this->users_model->getUserInstrument($id);
         $data['user'] = $user;
+
+        //instruments
+        $data['instruments'] = $this->instruments_model->getInstruments();
+        $data['userInstrument'] = $this->instruments_model->getInstrumentByUser($user[0]['id']);
+
         //load the view
         $data['main_content'] = 'admin/users/edit';
         $this->load->view('includes/template', $data);
