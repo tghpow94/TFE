@@ -13,7 +13,7 @@
         {
             echo '<div class="alert alert-success">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo '<strong>Well done!</strong> User updated with success.';
+            echo 'Données de l\'utilisateur mises à jour avec succès !';
             echo '</div>';
         }else{
             echo '<div class="alert alert-error">';
@@ -33,47 +33,63 @@
     ?>
     <fieldset>
         <div class="control-group">
-            <label for="inputError" class="control-label">Adresse e-mail : </label>
+            <label for="inputError" class="control-label">Nom : </label>
             <div class="controls">
-                <input type="email" id="" name="email" value="<?php echo $user['email']; ?>" >
+                <input type="text" id="" name="name" value="<?php echo $user[0]['name']; ?>" >
                 <!--<span class="help-inline">Woohoo!</span>-->
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Stock</label>
+            <label for="inputError" class="control-label">Prénom : </label>
             <div class="controls">
-                <input type="text" id="" name="stock" value="<?php echo $user[0]['stock']; ?>">
+                <input type="text" id="" name="firstName" value="<?php echo $user[0]['firstName']; ?>">
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Cost Price</label>
+            <label for="inputError" class="control-label">Droit : </label>
             <div class="controls">
-                <input type="text" id="" name="cost_price" value="<?php echo $product[0]['cost_price'];?>">
-                <!--<span class="help-inline">Cost Price</span>-->
-            </div>
-        </div>
-        <div class="control-group">
-            <label for="inputError" class="control-label">Sell Price</label>
-            <div class="controls">
-                <input type="text" name="sell_price" value="<?php echo $product[0]['sell_price']; ?>">
+                <select id="rights" name="right">
+                    <?php
+                    foreach($rights as $right) {
+                        echo '<option value="'.$right["id"].'" ';
+                        if ($right['id'] == $user[0]['idRight']) {
+                            echo 'selected="selected"';
+                        }
+                        echo ' >'.$right["name"].'</option>';
+                    }
+                    ?>
+                </select>
                 <!--<span class="help-inline">OOps</span>-->
             </div>
         </div>
-        <?php
-        echo '<div class="control-group">';
-        echo '<label for="manufacture_id" class="control-label">Manufacture</label>';
-        echo '<div class="controls">';
-        //echo form_dropdown('manufacture_id', $options_manufacture, '', 'class="span2"');
-
-        echo form_dropdown('manufacture_id', $options_manufacture, $product[0]['manufacture_id'], 'class="span2"');
-
-        echo '</div>';
-        echo '</div">';
-        ?>
+        <div class="control-group">
+            <label for="inputError" class="control-label">Instrument : </label>
+            <div class="controls">
+                <input type="text" list="instruments" name="instrument" value="<?php echo set_value('instrument'); ?>">
+                <datalist id="instruments" >
+                    <?php
+                    foreach($instruments as $instrument) {
+                        echo '<option value="'.$instrument["name"].'" ';
+                        if ($instrument['id'] == $user[0]['idInstrument']) {
+                            echo 'selected="selected"';
+                        }
+                        echo ' >';
+                    }
+                    ?>
+                </datalist>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="inputError" class="control-label">Téléphone : </label>
+            <div class="controls">
+                <input type="text" id="" name="phone" value="<?php echo $user[0]['phone']; ?>">
+                <!--<span class="help-inline">Cost Price</span>-->
+            </div>
+        </div>
         <div class="form-actions">
-            <button class="btn btn-primary" type="submit">Save changes</button>
-            <button class="btn" type="reset">Cancel</button>
+            <button class="btn btn-primary" type="submit">Sauvegarder</button>
+            <button class="btn" type="reset">Remise à zéro</button>
         </div>
     </fieldset>
 

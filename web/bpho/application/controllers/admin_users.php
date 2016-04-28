@@ -10,6 +10,7 @@ class Admin_users extends CI_Controller {
         parent::__construct();
         $this->load->model('users_model');
         $this->load->model('instruments_model');
+        $this->load->model('rights_model');
 
         if(!$this->session->userdata('is_logged_in')){
             redirect('admin/login');
@@ -65,13 +66,14 @@ class Admin_users extends CI_Controller {
 
             if($search_string){
                 $filter_session_data['search_string_selected'] = $search_string;
+                $this->session->set_userdata($filter_session_data);
             }else{
                 $search_string = $this->session->userdata('search_string_selected');
             }
             $data['search_string_selected'] = $search_string;
 
             //save session data into the session
-            $this->session->set_userdata($filter_session_data);
+
 
             $data['count_users']= $this->users_model->countUsers($search_string);
             $config['total_rows'] = $data['count_users'];
@@ -120,17 +122,22 @@ class Admin_users extends CI_Controller {
             $this->form_validation->set_rules('password2', 'password2', 'trim|required|min_length[8]');
             $this->form_validation->set_rules('name', 'name', 'trim|required');
             $this->form_validation->set_rules('firstName', 'firstName', 'trim|required');
+            $this->form_validation->set_rules('right', 'right', 'trim|required');
+            $this->form_validation->set_rules('instrument', 'instrument', '');
             $this->form_validation->set_rules('phone', 'phone', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
             if ($this->form_validation->run() && $this->input->post('password') == $this->input->post('password2')) {
+                $trash = array("/", ".");
                 $data_to_store = array(
                     'email' => $this->input->post('email'),
                     'password' => $this->input->post('password'),
                     'name' => $this->input->post('name'),
                     'firstName' => $this->input->post('firstName'),
-                    'phone' => $this->input->post('phone')
+                    'right' => $this->input->post('right'),
+                    'instrument' => $this->input->post('instrument'),
+                    'phone' => str_replace($trash, "",$this->input->post('phone'))
                 );
                 //if the insert has returned true then we show the flash message
                 if($this->users_model->create_member($data_to_store)){
@@ -143,6 +150,7 @@ class Admin_users extends CI_Controller {
 
         }
 
+        $data['rights'] = $this->rights_model->getRights();
         $data['instruments'] = $this->instruments_model->getInstruments();
 
         //load the view
@@ -195,8 +203,11 @@ class Admin_users extends CI_Controller {
         //if we are updating, and the data did not pass trough the validation
         //the code below wel reload the current data
 
-        //product data 
-        $data['user'] = $this->users_model->getUserByID($id);
+        //product data
+        $user = $this->users_model->getUserByID($id);
+        $user[0]['idRight'] = $this->users_model->getUserDroit($id);
+        $user[0]['idInstrument'] = $this->users_model->getUserInstrument($id);
+        $data['user'] = $user;
         //load the view
         $data['main_content'] = 'admin/users/edit';
         $this->load->view('includes/template', $data);

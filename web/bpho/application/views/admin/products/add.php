@@ -91,8 +91,8 @@
           echo '</div">';
           ?>
           <div class="form-actions">
-            <button class="btn btn-primary" type="submit">Save changes</button>
-            <button class="btn" type="reset">Cancel</button>
+            <button class="btn btn-primary" type="submit">Sauvegarder</button>
+            <button class="btn" type="reset">Remise à zéro</button>
           </div>
         </fieldset>
 

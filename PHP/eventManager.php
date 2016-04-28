@@ -5,6 +5,8 @@ class EventManager {
 
     public function __construct(PDO $database) {
         $this->db = $database;
+		$ini = $this->db->prepare("SET NAMES 'utf8'");
+		$ini->execute(array());
     }
 	
 	public function getAllEvents($offset, $lang) {

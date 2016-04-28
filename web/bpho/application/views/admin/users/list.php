@@ -2,8 +2,8 @@
 
     <div class="page-header users-header">
         <h2>
-            <?php echo ucfirst($this->uri->segment(2));?>
-            <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success">Add a new</a>
+            Utilisateurs
+            <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success">Ajouter un nouveau</a>
         </h2>
     </div>
 
@@ -33,7 +33,7 @@ height: 26px; margin-right: 20px;"');
             <table class="table table-striped table-bordered table-condensed">
                 <thead>
                 <tr>
-                    <th class="header">#</th>
+                    <!--<th class="header">#</th>-->
                     <th class="yellow header headerSortDown">Nom</th>
                     <th class="green header">Prénom</th>
                     <th class="red header">E-mail</th>
@@ -48,7 +48,7 @@ height: 26px; margin-right: 20px;"');
                 foreach($users as $row)
                 {
                     echo '<tr>';
-                    echo '<td>'.$row['id'].'</td>';
+                    echo '<td style="display:none;">'.$row['id'].'</td>';
                     echo '<td>'.$row['name'].'</td>';
                     echo '<td>'.$row['firstName'].'</td>';
                     echo '<td>'.$row['email'].'</td>';
@@ -56,8 +56,8 @@ height: 26px; margin-right: 20px;"');
                     echo '<td>'.$row['dateLastConnect'].'</td>';
                     echo '<td>'.$row['phone'].'</td>';
                     echo '<td class="crud-actions">
-                  <a href="'.site_url("admin").'/users/update/'.$row['id'].'" class="btn btn-info">view & edit</a>  
-                  <a href="'.site_url("admin").'/users/delete/'.$row['id'].'" class="btn btn-danger">delete</a>
+                  <a href="'.site_url("admin").'/users/update/'.$row['id'].'" class="btn btn-info">Editer</a>  
+                  <a href="'.site_url("admin").'/users/delete/'.$row['id'].'" class="btn btn-danger">Supprimer</a>
                 </td>';
                     echo '</tr>';
                 }

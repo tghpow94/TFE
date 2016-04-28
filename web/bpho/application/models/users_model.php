@@ -1,5 +1,7 @@
 <?php
 
+require "db_connect.php";
+
 class Users_model extends CI_Model {
 
     /**
@@ -31,10 +33,27 @@ class Users_model extends CI_Model {
 		$this->db->where('id', $id);
 		$query = $this->db->get('Users');
 		if ($query->num_rows == 1) {
-			return $query->result();
+			return $query->result_array();
 		}
 	}
 
+	function getUserDroit($id) {
+		$this->db->where('idUser', $id);
+		$query = $this->db->get('User_right');
+		if ($query->num_rows == 1) {
+			$result = $query->result_array();
+			return $result[0]['idRight'];
+		}
+	}
+
+	function getUserInstrument($id) {
+		$this->db->where('idUser', $id);
+		$query = $this->db->get('User_instrument');
+		if ($query->num_rows == 1) {
+			$result = $query->result_array();
+			return $result[0]['idInstrument'];
+		}
+	}
 
     /**
     * Serialize the session data stored in the database, 
@@ -82,9 +101,43 @@ class Users_model extends CI_Model {
 				'dateRegister' => date("Y-m-d H:i:s")
 			);
 			$insert = $this->db->insert('Users', $new_member_insert_data);
+
+			$this->db->where('email', $data['email']);
+			$query = $this->db->get('Users');
+			$result = $query->result_array();
+
+			$new_member_insert_data_right = array(
+				'idUser' => $result[0]['id'],
+				'idRight' => $data['right'],
+				'date' => date("Y-m-d H:i:s")
+			);
+			$insert = $this->db->insert('User_right', $new_member_insert_data_right);
+
+			if ($data['instrument'] != "") {
+				$this->addUserInstrument($data['instrument'], $result[0]['id']);
+			}
+
 			return $insert;
 		}
 
+	}
+
+	function addUserInstrument($instrument, $idUser) {
+		$im = new Instruments_model();
+		if ($im->validateByName($instrument)) {
+			$id = $im->getInstrumentByName($instrument);
+			$new_intrument_link_data = array(
+				'idUser' => $idUser,
+				'idInstrument' => $id[0]['id']
+			);
+		} else {
+			$id = $im->addInstrument($instrument);
+			$new_intrument_link_data = array(
+				'idUser' => $idUser,
+				'idInstrument' => $id
+			);
+		}
+		$this->db->insert('User_instrument', $new_intrument_link_data);
 	}
 
 	function getUsers($search = null, $limit_start, $limit_end) {

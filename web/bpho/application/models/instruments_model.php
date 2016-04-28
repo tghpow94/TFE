@@ -2,6 +2,24 @@
 
 class Instruments_model extends CI_Model {
 
+    function validateByName($name) {
+        $this->db->where('name', $name);
+        $query = $this->db->get('Instruments');
+        if($query->num_rows == 1)
+        {
+            return true;
+        }
+    }
+
+    function validateByID($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('Instruments');
+        if($query->num_rows == 1)
+        {
+            return true;
+        }
+    }
+
     function getInstrumentByName($name) {
         $this->db->where('name', $name);
         $query = $this->db->get('Instruments');
@@ -75,6 +93,18 @@ class Instruments_model extends CI_Model {
 
         $query = $this->db->get();
         return $query->num_rows();
+    }
+    
+    function addInstrument($name) {
+        $data = array(
+            'name' => $name
+        );
+        $this->db->insert('Instruments', $data);
+        $this->db->where('name', $name);
+        $query = $this->db->get('Instruments');
+        $row = $query->result_array();
+        return $row[0]['id'];
+
     }
 
     /**

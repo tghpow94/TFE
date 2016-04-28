@@ -2,7 +2,7 @@
 
     <div class="page-header">
         <h2>
-            Adding <?php echo ucfirst($this->uri->segment(2));?>
+            Ajouter un utilisateur
         </h2>
     </div>
 
@@ -13,7 +13,7 @@
         {
             echo '<div class="alert alert-success">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo '<strong>Well done!</strong> new product created with success.';
+            echo 'Utilisateur ajouté avec <strong>succès</strong> !';
             echo '</div>';
         }else{
             echo '<div class="alert alert-error">';
@@ -39,17 +39,17 @@
                 var pass1 = document.getElementById("password").value;
                 var pass2 = document.getElementById("password2").value;
                 if (pass1.length < 8) {
+                    document.getElementById("password").style.borderColor = "#E34234";
                     document.getElementById("passwordLength").style.visibility = "visible"
                 } else {
+                    document.getElementById("password").style.borderColor = "#ccc";
                     document.getElementById("passwordLength").style.visibility = "collapse"
                 }
                 if (pass1 != pass2 && pass2 != "") {
-                    document.getElementById("password").style.borderColor = "#E34234";
                     document.getElementById("btnSubmit").disabled = true;
                     document.getElementById("password2").style.borderColor = "#E34234";
                     document.getElementById("passwordMatch").style.visibility = "visible";
                 } else {
-                    document.getElementById("password").style.borderColor = "#ccc";
                     document.getElementById("btnSubmit").disabled = false;
                     document.getElementById("password2").style.borderColor = "#ccc";
                     document.getElementById("passwordMatch").style.visibility = "collapse";
@@ -93,14 +93,15 @@
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Droit : </label>
+            <label for="inputError" class="control-label">Droit* : </label>
             <div class="controls">
-                <input type="text" list="rights" name="right" value="<?php echo set_value('right'); ?>">
-                <datalist id="rights">
+                <select id="rights" name="right">
                     <?php
-                    foreach($rights as $right)
+                    foreach($rights as $right) {
+                        echo '<option value="'.$right["id"].'">'.$right["name"].'</option>';
+                    }
                     ?>
-                </datalist>
+                </select>
                 <!--<span class="help-inline">OOps</span>-->
             </div>
         </div>
@@ -125,8 +126,8 @@
             </div>
         </div>
         <div class="form-actions">
-            <button class="btn btn-primary" id="btnSubmit" type="submit">Save changes</button>
-            <button class="btn" type="reset">Cancel</button>
+            <button class="btn btn-primary" id="btnSubmit" type="submit">Sauvegarder</button>
+            <button class="btn" type="reset">Remise à zéro</button>
         </div>
     </fieldset>
 

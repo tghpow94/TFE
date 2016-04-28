@@ -35,11 +35,9 @@ class User extends CI_Controller {
 
 		$user_name = $this->input->post('user_name');
 		$user = $this->Users_model->getUserByName($user_name);
-		var_dump($user);
 		$password = $this->__encrip_password($this->input->post('password'), $user[0]['salt']);
 
 		$is_valid = $this->Users_model->validate($user_name, $password);
-		var_dump($is_valid);
 		if($is_valid)
 		{
 			$data = array(
