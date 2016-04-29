@@ -7,9 +7,6 @@
     </div>
 
     <?php
-    if (!isset($user[0]['id'])) {
-        redirect('admin/users');
-    }
     //flash messages
     if($this->session->flashdata('flash_message')){
         if($this->session->flashdata('flash_message') == 'updated')
@@ -18,7 +15,7 @@
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo 'Données de l\'utilisateur mises à jour avec succès !';
             echo '</div>';
-        } else{
+        }else{
             echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Oh snap!</strong> change a few things up and try submitting again.';

@@ -17,8 +17,8 @@
 	        <li <?php if($this->uri->segment(2) == 'users'){echo 'class="active"';}?>>
 	          <a href="<?php echo base_url(); ?>admin/users">Utilisateurs</a>
 	        </li>
-	        <li <?php if($this->uri->segment(2) == 'manufacturers'){echo 'class="active"';}?>>
-	          <a href="<?php echo base_url(); ?>admin/manufacturers">Evenements</a>
+	        <li <?php if($this->uri->segment(2) == 'events'){echo 'class="active"';}?>>
+	          <a href="<?php echo base_url(); ?>admin/events">Evenements</a>
 			</li>
 			<li <?php if($this->uri->segment(2) == 'deconnexion'){echo 'class="active"';}?>>
 				<a href="<?php echo base_url(); ?>admin/logout">Déconnexion</a>

@@ -1,16 +1,15 @@
 <?php
-class Admin_users extends CI_Controller {
+class Admin_events extends CI_Controller {
 
     /**
-     * Responsable for auto load the model
-     * @return void
+     * Responsible for auto load the model
      */
     public function __construct()
     {
         parent::__construct();
         $this->load->model('users_model');
-        $this->load->model('instruments_model');
-        $this->load->model('rights_model');
+        $this->load->model('events_model');
+        $this->load->model('Labels_model');
 
         if(!$this->session->userdata('is_logged_in')){
             redirect('admin/login');
@@ -32,7 +31,7 @@ class Admin_users extends CI_Controller {
 
         //pagination settings
         $config['per_page'] = 10;
-        $config['base_url'] = base_url().'admin/users';
+        $config['base_url'] = base_url().'admin/events';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 20;
         $config['full_tag_open'] = '<ul>';
@@ -74,18 +73,15 @@ class Admin_users extends CI_Controller {
                 $search_string = $this->session->userdata('search_string_selected');
             }
             $data['search_string_selected'] = $search_string;
-
-            //save session data into the session
-
-
-            $data['count_users']= $this->users_model->countUsers($search_string);
-            $config['total_rows'] = $data['count_users'];
+            
+            $data['count_events']= $this->events_model->countEvents($search_string);
+            $config['total_rows'] = $data['count_events'];
 
             //fetch sql data into arrays
             if($search_string){
-                $data['users'] = $this->users_model->getUsers($search_string, $config['per_page'], $limit_end);
+                $data['events'] = $this->events_model->getEvents($search_string, $config['per_page'], $limit_end);
             }else{
-                $data['users'] = $this->users_model->getUsers('', $config['per_page'],$limit_end);
+                $data['events'] = $this->events_model->getEvents('', $config['per_page'],$limit_end);
             }
 
         }else{
@@ -98,9 +94,9 @@ class Admin_users extends CI_Controller {
             $data['search_string_selected'] = '';
 
             //fetch sql data into arrays
-            $data['count_users']= $this->users_model->countUsers();
-            $data['users'] = $this->users_model->getUsers('', $config['per_page'],$limit_end);
-            $config['total_rows'] = $data['count_users'];
+            $data['count_events']= $this->events_model->countEvents();
+            $data['events'] = $this->events_model->getEvents('', $config['per_page'],$limit_end);
+            $config['total_rows'] = $data['count_events'];
 
         }
 
@@ -108,7 +104,7 @@ class Admin_users extends CI_Controller {
         $this->pagination->initialize($config);
 
         //load the view
-        $data['main_content'] = 'admin/users/list';
+        $data['main_content'] = 'admin/events/list';
         $this->load->view('includes/template', $data);
 
     }//index
@@ -148,26 +144,20 @@ class Admin_users extends CI_Controller {
                 }else{
                     $data['flash_message'] = FALSE;
                 }
-
             }
-
         }
 
-        $data['rights'] = $this->rights_model->getRights();
-        $data['instruments'] = $this->instruments_model->getInstruments();
-
         //load the view
-        $data['main_content'] = 'admin/users/add';
+        $data['main_content'] = 'admin/events/add';
         $this->load->view('includes/template', $data);
     }
 
     /**
      * Update item by his id
-     * @return void
      */
     public function update()
     {
-        //product id 
+        //event id
         $id = $this->uri->segment(4);
 
         //if save button was clicked, get the data sent via post
@@ -217,21 +207,20 @@ class Admin_users extends CI_Controller {
         $data['userInstrument'] = $this->instruments_model->getInstrumentByUser($user[0]['id']);
 
         //load the view
-        $data['main_content'] = 'admin/users/edit';
+        $data['main_content'] = 'admin/events/edit';
         $this->load->view('includes/template', $data);
 
-    }//update
+    }
 
     /**
-     * Delete product by his id
-     * @return void
+     * Delete event by his id
      */
     public function delete()
     {
         //product id 
         $id = $this->uri->segment(4);
-        $this->users_model->delete_user($id);
-        redirect('admin/users');
-    }//edit
+        $this->events_model->delete_event($id);
+        redirect('admin/events');
+    }
 
 }

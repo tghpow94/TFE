@@ -987,7 +987,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
   padding-left: 160px;
 }
 table {
-  max-width: 100%;
+  max-width: 100;
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -1008,6 +1008,7 @@ table {
 .table td {
   vertical-align: top;
 }
+
 .table thead:first-child tr th, .table thead:first-child tr td {
   border-top: 0;
 }

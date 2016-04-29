@@ -69,6 +69,13 @@ $route['admin/users/update/(:any)'] = 'admin_users/update/$1';
 $route['admin/users/delete/(:any)'] = 'admin_users/delete/$1';
 $route['admin/users/(:any)'] = 'admin_users/index/$1';
 
+$route['admin/events'] = 'admin_events/index';
+$route['admin/events/add'] = 'admin_events/add';
+$route['admin/events/update'] = 'admin_events/update';
+$route['admin/events/update/(:any)'] = 'admin_events/update/$1';
+$route['admin/events/delete/(:any)'] = 'admin_events/delete/$1';
+$route['admin/events/(:any)'] = 'admin_events/index/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
