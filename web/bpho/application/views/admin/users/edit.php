@@ -35,14 +35,14 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Nom : </label>
             <div class="controls">
-                <input type="text" id="" name="name" value="<?php echo $user[0]['name']; ?>" >
+                <input type="text" id="" name="name" value="<?php echo $user[0]['name']; ?>" required>
                 <!--<span class="help-inline">Woohoo!</span>-->
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Prénom : </label>
             <div class="controls">
-                <input type="text" id="" name="firstName" value="<?php echo $user[0]['firstName']; ?>">
+                <input type="text" id="" name="firstName" value="<?php echo $user[0]['firstName']; ?>" required>
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
@@ -66,11 +66,11 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <input type="text" list="instruments" name="instrument" value="<?php echo $userInstrument[0]['name']; ?>">
+                <input type="text" id="instrumentInput" list="instruments" name="instrument" value="<?php echo $userInstrument[0]['name']; ?>">
                 <datalist id="instruments" >
                     <?php
                     foreach($instruments as $instrument) {
-                        echo '<option value="'.$instrument["name"].'" >';
+                        echo '<option value="'.$instrument["name"].'">';
                     }
                     ?>
                 </datalist>

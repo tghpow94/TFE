@@ -118,6 +118,7 @@
                 </datalist>
             </div>
         </div>
+
         <div class="control-group">
             <label for="inputError" class="control-label">Téléphone : </label>
             <div class="controls">

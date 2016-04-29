@@ -15,10 +15,9 @@ class Users_model extends CI_Model {
 		$this->db->where('email', $user_name);
 		$this->db->where('password', $password);
 		$query = $this->db->get('Users');
-		if($query->num_rows == 1)
-		{
+		if($query->num_rows == 1) {
 			return true;
-		}		
+		}
 	}
 
 	function getUserByName($user_name) {
@@ -122,24 +121,100 @@ class Users_model extends CI_Model {
 
 	}
 
-	function addUserInstrument($instrument, $idUser) {
-		$im = new Instruments_model();
-		if ($im->validateByName($instrument)) {
-			$id = $im->getInstrumentByName($instrument);
-			$new_intrument_link_data = array(
-				'idUser' => $idUser,
-				'idInstrument' => $id[0]['id']
-			);
-		} else {
-			$id = $im->addInstrument($instrument);
-			$new_intrument_link_data = array(
-				'idUser' => $idUser,
-				'idInstrument' => $id
-			);
+	/**
+	 * update a user's data
+	 * @param $id : user's id
+	 * @param $data : new user's data
+	 * @return bool : true if succes, false if fail
+	 */
+	function updateUser($id, $data) {
+		//update user data
+		$dataUser = array(
+			'name' => $data['name'],
+			'firstName' => $data['firstName'],
+			'phone' => $data['phone']
+		);
+		$this->db->where('id', $id);
+		$this->db->update('Users', $dataUser);
+
+		//update instrument data
+		$this->addUserInstrument($data['instrument'], $id);
+
+		//update right data
+		$dataRight = array(
+			'idRight' => $data['right'],
+			'date' => date("Y-m-d H:i:s")
+		);
+		$this->db->where('idUser', $id);
+		$this->db->update('User_right', $dataRight);
+
+		//errors handler
+		$report = array();
+		$report['error'] = $this->db->_error_number();
+		$report['message'] = $this->db->_error_message();
+		if($report !== 0){
+			return true;
+		}else{
+			return false;
 		}
-		$this->db->insert('User_instrument', $new_intrument_link_data);
 	}
 
+	/**
+	 * check if the user already has an instrument
+	 * @param $id : user's id
+	 * @return bool : true if user has an instrument, false if he hasn't
+	 */
+	function hasInstrument($id) {
+		$this->db->where('idUser', $id);
+		$query = $this->db->get('User_instrument');
+		if($query->num_rows == 1) {
+			return true;
+		}
+	}
+
+	/**
+	 * delete the link between the user and his instrument
+	 * @param $id : user's id
+	 */
+	function deleteUserInstrument($id) {
+		$this->db->where('idUser', $id);
+		$this->db->delete('User_instrument');
+	}
+
+	/**
+	 * ajoute un lien entre un instrument et un user, et ajoute l'instrument si il n'existe pas
+	 * @param $instrument
+	 * @param $idUser
+	 */
+	function addUserInstrument($instrumentName, $idUser) {
+		$im = new Instruments_model();
+		if ($im->validateByName($instrumentName)) {
+			$idInstrument = $im->getInstrumentByName($instrumentName);
+			$idInstrument = $idInstrument[0]['id'];
+		} else {
+			$idInstrument = $im->addInstrument($instrumentName);
+		}
+
+		$updateData = array(
+			'idUser' => $idUser,
+			'idInstrument' => $idInstrument
+		);
+
+		if ($this->hasInstrument($idUser)) {
+			$this->db->where('idUser', $idUser);
+			$this->db->update('User_instrument', $updateData);
+		} else {
+			$this->db->insert('User_instrument', $updateData);
+		}
+	}
+
+	/**
+	 * get all the users from db
+	 * @param null $search
+	 * @param $limit_start
+	 * @param $limit_end
+	 * @return mixed : array of all users
+	 */
 	function getUsers($search = null, $limit_start, $limit_end) {
 		$this->db->select('*');
 		$this->db->from('Users');

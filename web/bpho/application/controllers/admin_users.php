@@ -26,6 +26,9 @@ class Admin_users extends CI_Controller {
 
         //all the posts sent by the view
         $search_string = $this->input->post('search_string');
+        if ($search_string == "") {
+            $search_string = false;
+        }
 
         //pagination settings
         $config['per_page'] = 5;
@@ -171,30 +174,30 @@ class Admin_users extends CI_Controller {
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
             //form validation
-            $this->form_validation->set_rules('description', 'description', 'required');
-            $this->form_validation->set_rules('stock', 'stock', 'required|numeric');
-            $this->form_validation->set_rules('cost_price', 'cost_price', 'required|numeric');
-            $this->form_validation->set_rules('sell_price', 'sell_price', 'required|numeric');
-            $this->form_validation->set_rules('manufacture_id', 'manufacture_id', 'required');
+            $this->form_validation->set_rules('name', 'name', 'required');
+            $this->form_validation->set_rules('firstName', 'firstName', 'required');
+            $this->form_validation->set_rules('right', 'right', 'required');
+            $this->form_validation->set_rules('instrument', 'instrument', 'required');
+            $this->form_validation->set_rules('phone', 'phone', 'required');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
-
+                $trash = array("/", ".");
                 $data_to_store = array(
-                    'description' => $this->input->post('description'),
-                    'stock' => $this->input->post('stock'),
-                    'cost_price' => $this->input->post('cost_price'),
-                    'sell_price' => $this->input->post('sell_price'),
-                    'manufacture_id' => $this->input->post('manufacture_id')
+                    'name' => $this->input->post('name'),
+                    'firstName' => $this->input->post('firstName'),
+                    'right' => $this->input->post('right'),
+                    'instrument' => $this->input->post('instrument'),
+                    'phone' => str_replace($trash, "",$this->input->post('phone'))
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->products_model->update_product($id, $data_to_store) == TRUE){
+                if($this->users_model->updateUser($id, $data_to_store) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
-                redirect('admin/products/update/'.$id.'');
+                redirect('admin/users/update/'.$id.'');
 
             }//validation run
 
