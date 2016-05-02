@@ -34,56 +34,54 @@
     echo form_open('admin/events/add', $attributes);
     ?>
     <fieldset>
-        <script>
-            function myFunction() {
-                var pass1 = document.getElementById("password").value;
-                var pass2 = document.getElementById("password2").value;
-                if (pass1.length < 8) {
-                    document.getElementById("password").style.borderColor = "#E34234";
-                    document.getElementById("passwordLength").style.visibility = "visible"
-                } else {
-                    document.getElementById("password").style.borderColor = "#ccc";
-                    document.getElementById("passwordLength").style.visibility = "collapse"
-                }
-                if (pass1 != pass2 && pass2 != "") {
-                    document.getElementById("btnSubmit").disabled = true;
-                    document.getElementById("password2").style.borderColor = "#E34234";
-                    document.getElementById("passwordMatch").style.visibility = "visible";
-                } else {
-                    document.getElementById("btnSubmit").disabled = false;
-                    document.getElementById("password2").style.borderColor = "#ccc";
-                    document.getElementById("passwordMatch").style.visibility = "collapse";
-                }
-                return ok;
-            }
-        </script>
+        <div class="btn-group" style="margin-left: 230px; margin-bottom: 30px;">
+            <button type="button" name="FR" class="btn btn-primary">Français</button>
+            <button type="button" name="NL" class="btn btn-primary">Nederlands</button>
+            <button type="button" name="EN" class="btn btn-primary">English</button>
+        </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Titre : </label>
             <div class="controls">
-                <input type="text" id="titleInput" name="title" value="<?php echo set_value('title'); ?>" required>
+                <input placeholder="testfr" type="text" id="titleFRInput" name="titleFR" value="<?php echo set_value('titleFR'); ?>">
+                <input placeholder="testnl" style="display: none" type="text" id="titleNLInput" name="titleNL" value="<?php echo set_value('titleNL'); ?>">
+                <input placeholder="testen" style="display: none" type="text" id="titleENInput" name="titleEN" value="<?php echo set_value('titleEN'); ?>">
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Mot de passe* : </label>
+            <label for="inputError" class="control-label">Description : </label>
             <div class="controls">
-                <input type="password" onkeyup="myFunction()" id="password" name="password" value="<?php echo set_value('password'); ?>" required minlength=8>
-                <span id="passwordLength" style="color:red; visibility: collapse">Minimum 8 caractères.</span>
+                <textarea placeholder="testfr" id="descriptionFRInput" name="descriptionFR" content="<?php echo set_value('descriptionFR'); ?>" ></textarea>
+                <textarea placeholder="testnl" style="display: none" id="descriptionNLInput" name="descriptionNL" content="<?php echo set_value('descriptionNL'); ?>" ></textarea>
+                <textarea placeholder="testen" style="display: none" id="descriptionENInput" name="descriptionEN" content="<?php echo set_value('descriptionEN'); ?>" ></textarea>
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Confirmation mot de passe* : </label>
-            <div class="controls">
-                <input type="password" onkeyup="myFunction()" id="password2" name="password2" value="<?php echo set_value('password2'); ?>" required minlength=8>
-                <span id="passwordMatch" style="color:red; visibility: collapse">Les deux mots de passe saisis ne sont pas identiques.</span>
+            <label for="inputError" class="control-label">Date : </label>
+            <div id="datetimepicker" class="input-append date">
+                <input type="text"></input>
+                <span class="add-on">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                </span>
             </div>
-        </div>
-        <div class="control-group">
-            <label for="inputError" class="control-label">Nom* : </label>
-            <div class="controls">
-                <input type="text" id="nameInput" name="name" value="<?php echo set_value('name'); ?>" required>
-                <!--<span class="help-inline">Woohoo!</span>-->
-            </div>
+            <script type="text/javascript"
+                    src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+            </script>
+            <script type="text/javascript"
+                    src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+            </script>
+            <script type="text/javascript"
+                    src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+            </script>
+            <script type="text/javascript"
+                    src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.fr.js">
+            </script>
+            <script type="text/javascript">
+                $('#datetimepicker').datetimepicker({
+                    format: 'dd/MM/yyyy hh:mm',
+                    language: 'fr'
+                });
+            </script>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Prénom* : </label>
@@ -128,7 +126,7 @@
         </div>
         <div class="form-actions">
             <button class="btn btn-primary" id="btnSubmit" type="submit">Sauvegarder</button>
-        </div>
+</div>
     </fieldset>
 
     <?php echo form_close(); ?>

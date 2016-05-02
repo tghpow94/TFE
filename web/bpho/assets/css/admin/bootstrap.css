@@ -987,7 +987,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
   padding-left: 160px;
 }
 table {
-  max-width: 100;
+  max-width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -1123,7 +1123,7 @@ table .span12 {
   width: 14px;
   height: 14px;
   vertical-align: text-top;
-  background-image: url(../img/glyphicons-halflings.png);
+  background-image: url(../../img/admin/glyphicons-halflings.png);
   background-position: 14px 14px;
   background-repeat: no-repeat;
   *margin-right: .3em;
@@ -1132,7 +1132,7 @@ table .span12 {
   *margin-left: 0;
 }
 .icon-white {
-  background-image: url(../img/glyphicons-halflings-white.png);
+  background-image: url(../../img/admin/glyphicons-halflings-white.png);
 }
 .icon-glass {
   background-position: 0      0;
