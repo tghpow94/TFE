@@ -2,12 +2,24 @@
 
 class Events_model extends CI_Model {
 
-    function getEventByName($name) {
-        $this->db->where('email', $name);
-        $query = $this->db->get('Users');
+    function getEventByTitle($name) {
+        $lm = new Labels_model();
+        $label = $lm->searchLabel($name);
+        $this->db->where('title', $label[0]['id']);
+        $query = $this->db->get('Events');
         if($query->num_rows == 1){
             return $query->result_array();
         }
+    }
+
+    /**
+     * return the id of the event $title
+     * @param $title : event's title
+     * @return mixed : event's id
+     */
+    function getEventID($title) {
+        $event = $this->getEventByTitle($title);
+        return $event[0]["id"];
     }
 
     /**
@@ -112,6 +124,53 @@ class Events_model extends CI_Model {
     function delete_Event($id){
         $this->db->where('id', $id);
         $this->db->delete('Events');
+    }
+
+    /**
+     * add a new event
+     * @param $data : event's data
+     */
+    function addEvent($data) {
+        $insert = $this->db->insert('Events', $data);
+        return $insert;
+    }
+
+    /**
+     * Fonction servant à charger une image et la mettre dans un dossier du serveur.
+     * @param $repertoire : le répertoire d'arrivée de l'image.
+     * @param $nom : le nom de l'image.
+     * @param $image_raw : image à stocker
+     */
+    function uploadImage($repertoire, $nom, $image_raw) {
+        $photo = $image_raw['image']['tmp_name'];
+        if( !is_uploaded_file($photo) ) {
+            var_dump($image_raw);
+            exit("Le fichier est introuvable <br>");
+        }
+        // on vérifie maintenant l'extension
+        $typePhoto = $image_raw['image']['type'];
+        if( !strstr($typePhoto, 'jpg') && !strstr($typePhoto, 'jpeg') && !strstr($typePhoto, 'gif') && !strstr($typePhoto, 'png')) {
+            exit("L'image n'est pas au bon format, les formats admis sont jpg, gif et png <br>");
+        }
+        // on copie le fichier dans le dossier de destination
+        $nomPhoto = $nom.".jpg";
+
+
+
+        $donnees=getimagesize($photo);
+        $nouvelleLargeur = 350;
+        $reduction = ( ($nouvelleLargeur * 100) / $donnees[0]);
+        $nouvelleHauteur = ( ($donnees[1] * $reduction) / 100);
+        if ($typePhoto == "jpg" || $typePhoto == "jpeg") {
+            $image = imagecreatefromjpeg($photo);
+        } elseif ($typePhoto == "png") {
+            $image = imagecreatefrompng($photo);
+        } elseif ($typePhoto == "gif") {
+            $image = imagecreatefromgif($photo);
+        }
+        $image_mini = imagecreatetruecolor($nouvelleLargeur, $nouvelleHauteur); //création image finale
+        imagecopyresampled($image_mini, $image, 0, 0, 0, 0, $nouvelleLargeur, $nouvelleHauteur, $donnees[0], $donnees[1]);//copie avec redimensionnement
+        imagejpeg ($image_mini, $repertoire.$nomPhoto);
     }
 }
 

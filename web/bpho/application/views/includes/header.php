@@ -8,13 +8,11 @@
 	<link rel="stylesheet" href="../../assets/css/admin/bootstrap-datetimepicker.min.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="../../assets/js/bootstrap-datetimepicker.min.js"></script>
 	<!--C:\Users\Thomas\Documents\GitHub\TFE\web\bpho\assets\js\bootstrap.js
 	C:\Users\Thomas\Documents\GitHub\TFE\web\bpho\application\views\includes\header.php-->
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.fr-FR.js"></script>
 	<script>
 		function myFunction() {
 			var pass1 = document.getElementById("password").value;

@@ -9,7 +9,7 @@ class Admin_events extends CI_Controller {
         parent::__construct();
         $this->load->model('users_model');
         $this->load->model('events_model');
-        $this->load->model('Labels_model');
+        $this->load->model('labels_model');
 
         if(!$this->session->userdata('is_logged_in')){
             redirect('admin/login');
@@ -116,33 +116,63 @@ class Admin_events extends CI_Controller {
         {
 
             //form validation
-            $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
-            $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[8]');
-            $this->form_validation->set_rules('password2', 'password2', 'trim|required|min_length[8]');
-            $this->form_validation->set_rules('name', 'name', 'trim|required');
-            $this->form_validation->set_rules('firstName', 'firstName', 'trim|required');
-            $this->form_validation->set_rules('right', 'right', 'trim|required');
-            $this->form_validation->set_rules('instrument', 'instrument', '');
-            $this->form_validation->set_rules('phone', 'phone', '');
+            $this->form_validation->set_rules('titleFR', 'titleFR', 'trim|required');
+            $this->form_validation->set_rules('titleNL', 'titleNL', 'trim');
+            $this->form_validation->set_rules('titleEN', 'titleEN', 'trim');
+            $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim|required');
+            $this->form_validation->set_rules('descriptionNL', 'descriptionNL', 'trim');
+            $this->form_validation->set_rules('descriptionEN', 'descriptionEN', 'trim');
+            $this->form_validation->set_rules('date', 'date', '');
+            $this->form_validation->set_rules('city', 'city', 'trim');
+            $this->form_validation->set_rules('cityCode', 'cityCode', 'trim|numeric');
+            $this->form_validation->set_rules('address', 'address', 'trim');
+            $this->form_validation->set_rules('addressInfos', 'addressInfos', 'trim');
+            $this->form_validation->set_rules('price', 'price', 'trim');
+            $this->form_validation->set_rules('reservation', 'reservation', 'trim');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
-            if ($this->form_validation->run() && $this->input->post('password') == $this->input->post('password2')) {
-                $trash = array("/", ".");
+            if ($this->form_validation->run()) {
+
+                $this->input->post('titleFR') != "" ? $titleFR = $this->input->post('titleFR') : $titleFR = null;
+                $this->input->post('titleNL') != "" ? $titleNL = $this->input->post('titleNL') : $titleNL = null;
+                $this->input->post('titleEN') != "" ? $titleEN = $this->input->post('titleEN') : $titleEN = null;
+
+                $this->input->post('descriptionFR') != "" ? $descriptionFR = $this->input->post('descriptionFR') : $descriptionFR = null;
+                $this->input->post('descriptionNL') != "" ? $descriptionNL = $this->input->post('descriptionNL') : $descriptionNL = null;
+                $this->input->post('descriptionEN') != "" ? $descriptionEN = $this->input->post('descriptionEN') : $descriptionEN = null;
+
+                $titleID = $this->labels_model->addLabel($titleFR, $titleNL, $titleEN);
+                $descriptionID = $this->labels_model->addLabel($descriptionFR, $descriptionNL, $descriptionEN);
+
+                $date = date("Y-m-d H:i:s", strtotime($this->input->post('date')));
+
+                $this->input->post('reservation') != "" ? $reservation = $this->input->post('reservation') : $reservation = "http://www.bpho.be/concerts/";
+
                 $data_to_store = array(
-                    'email' => $this->input->post('email'),
-                    'password' => $this->input->post('password'),
-                    'name' => $this->input->post('name'),
-                    'firstName' => $this->input->post('firstName'),
-                    'right' => $this->input->post('right'),
-                    'instrument' => $this->input->post('instrument'),
-                    'phone' => str_replace($trash, "",$this->input->post('phone'))
+                    'title' => $titleID,
+                    'description' => $descriptionID,
+                    'startDate' => $date,
+                    'endDate' => $date,
+                    'city' => $this->input->post('city'),
+                    'cityCode' => $this->input->post('cityCode'),
+                    'addressInfos' => $this->input->post('addressInfos'),
+                    'price' => $this->input->post('price'),
+                    'reservation' => $reservation,
+                    'address' => $this->input->post('address')
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->users_model->create_member($data_to_store)){
+                if($this->events_model->addEvent($data_to_store)){
                     $data['flash_message'] = TRUE;
                 }else{
                     $data['flash_message'] = FALSE;
+                }
+
+                $eventID = $this->events_model->getEventID($titleFR);
+                if(isset($_FILES['image']) && $_FILES['image']['tmp_name'] != "") {
+                    $this->events_model->uploadImage("../images/", "e" . $eventID, $_FILES);
+                } else {
+                    copy("../images/no-image.jpg", "../images/e".$eventID.".jpg");
                 }
             }
         }
