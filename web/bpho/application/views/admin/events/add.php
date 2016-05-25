@@ -34,6 +34,20 @@
 
     echo form_open_multipart('admin/events/add', $attributes);
     ?>
+    <script>
+        var users = <?php echo json_encode($users); ?>;
+        var liste = new Array(users.length);
+        var i = 0;
+        users.forEach(function(user) {
+            alert(user['id']);
+            liste[i] = new Array(4);
+            liste[i][0] = user['id'];
+            liste[i][1] = user['firstName'];
+            liste[i][2] = user['name'];
+            liste[i][3] = user['instrument'];
+            i = i + 1;
+        });
+    </script>
     <fieldset>
         <div class="btn-group" style="margin-left: 230px; margin-bottom: 30px;">
             <button type="button" name="FR" class="btn btn-primary">Français</button>
@@ -145,7 +159,7 @@
 
             reader.onload = (function(theFile) {
                 return function(e) {
-                    document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="250" />'].join('');
+                    document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="150" />'].join('');
                 };
             })(f);
 

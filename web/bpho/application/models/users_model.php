@@ -225,7 +225,7 @@ class Users_model extends CI_Model {
 	 * @param $limit_end
 	 * @return mixed : array of all users
 	 */
-	function getUsers($search = null, $limit_start, $limit_end) {
+	function getUsers($search = null, $limit_start = null, $limit_end = null) {
 		$this->db->select('*');
 		$this->db->from('Users');
 		if($search) {
@@ -233,7 +233,8 @@ class Users_model extends CI_Model {
 			$this->db->or_like('firstName', $search);
 		}
 		$this->db->order_by('id', 'Asc');
-		$this->db->limit($limit_start, $limit_end);
+		if ($limit_end && $limit_start)
+			$this->db->limit($limit_start, $limit_end);
 		$query = $this->db->get();
 
 		return $query->result_array();

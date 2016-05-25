@@ -8,6 +8,8 @@ class Admin_events extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('events_model');
+        $this->load->model('instruments_model');
+        $this->load->model('users_model');
         $this->load->model('labels_model');
 
         if(!$this->session->userdata('is_logged_in')){
@@ -187,6 +189,13 @@ class Admin_events extends CI_Controller {
                 }
             }
         }
+
+        $users = $this->users_model->getUsers();
+        foreach($users as &$user) {
+            $instrument = $this->instruments_model->getInstrumentByUser($user['id']);
+            $user['instrument'] = $instrument[0]['name'];
+        }
+        $data['users'] = $users;
 
         //load the view
         $data['main_content'] = 'admin/events/add';
