@@ -2,7 +2,7 @@
 
     <div class="page-header">
         <h2>
-            Updating <?php echo ucfirst($this->uri->segment(2));?>
+            Mise à jour de l'utilisateur
         </h2>
     </div>
 

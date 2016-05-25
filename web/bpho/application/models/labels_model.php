@@ -28,6 +28,15 @@ class Labels_model extends CI_Model {
         return "Information manquante";
     }
 
+    function getFullLabelByID($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('Labels');
+        if ($query->num_rows == 1) {
+            $result = $query->result_array();
+            return $result[0];
+        }
+    }
+
     /**
      * search for labels based on input string
      * @param $search : string search

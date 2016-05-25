@@ -43,24 +43,24 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Titre : </label>
             <div class="controls">
-                <input placeholder="testfr" type="text" id="titleFRInput" name="titleFR" value="<?php echo set_value('titleFR'); ?>" required>
-                <input placeholder="testnl" style="display: none" type="text" id="titleNLInput" name="titleNL" value="<?php echo set_value('titleNL'); ?>">
-                <input placeholder="testen" style="display: none" type="text" id="titleENInput" name="titleEN" value="<?php echo set_value('titleEN'); ?>">
+                <input placeholder="Français" style="width: 300px;" type="text" id="titleFRInput" name="titleFR" value="<?php echo set_value('titleFR'); ?>" required>
+                <input placeholder="Néerlandais" style="width: 300px; display: none" type="text" id="titleNLInput" name="titleNL" value="<?php echo set_value('titleNL'); ?>">
+                <input placeholder="Anglais" style="width: 300px; display: none" type="text" id="titleENInput" name="titleEN" value="<?php echo set_value('titleEN'); ?>">
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Description : </label>
-            <div class="controls">
-                <textarea placeholder="testfr" id="descriptionFRInput" name="descriptionFR" content="<?php echo set_value('descriptionFR'); ?>" required><?php echo set_value('descriptionFR'); ?></textarea>
-                <textarea placeholder="testnl" style="display: none" id="descriptionNLInput" name="descriptionNL" content="<?php echo set_value('descriptionNL'); ?>" ><?php echo set_value('descriptionNL'); ?></textarea>
-                <textarea placeholder="testen" style="display: none" id="descriptionENInput" name="descriptionEN" content="<?php echo set_value('descriptionEN'); ?>" ><?php echo set_value('descriptionEN'); ?></textarea>
+            <div class="controls" style="margin-left: 230px;">
+                <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px;" placeholder="Français" id="descriptionFRInput" name="descriptionFR"><?php echo set_value('descriptionFR'); ?></textarea>
+                <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" placeholder="Néerlandais" id="descriptionNLInput" name="descriptionNL"  ><?php echo set_value('descriptionNL'); ?></textarea>
+                <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" placeholder="Anglais" id="descriptionENInput" name="descriptionEN"  ><?php echo set_value('descriptionEN'); ?></textarea>
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Date : </label>
             <div id="datetimepicker" class="input-append date">
-                <input type="text" id="dateInput" name="date" value="<?php echo set_value('date'); ?>" required></input>
+                <input style="width: 300px;" type="text" id="dateInput" name="date" value="<?php echo set_value('date'); ?>" required></input>
                 <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                 </span>
@@ -80,6 +80,7 @@
             <script type="text/javascript">
                 $('#datetimepicker').datetimepicker({
                     format: 'dd/MM/yyyy hh:mm',
+                    firstDay: 1,
                     language: 'fr',
                     pickSeconds: false
                 });
@@ -88,44 +89,46 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Ville : </label>
             <div class="controls">
-                <input type="text" id="cityInput" name="city" value="<?php echo set_value('city'); ?>" required>
+                <input style="width: 300px;" type="text" id="cityInput" name="city" value="<?php echo set_value('city'); ?>" required>
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Code postal : </label>
             <div class="controls">
-                <input type="text" id="cityCodeInput" name="cityCode" value="<?php echo set_value('cityCode'); ?>" >
+                <input style="width: 300px;" type="text" id="cityCodeInput" name="cityCode" value="<?php echo set_value('cityCode'); ?>" >
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label" >Adresse : </label>
             <div class="controls">
-                <input type="text" id="addressInput" name="address" value="<?php echo set_value('address'); ?>" required>
+                <input style="width: 300px;" type="text" id="addressInput" name="address" value="<?php echo set_value('address'); ?>" required>
             </div>
         </div>
 
         <div class="control-group">
             <label for="inputError" class="control-label">Lieu / bâtiment : </label>
             <div class="controls">
-                <input type="text" id="addressInfosInput" name="addressInfos" value="<?php echo set_value('addressInfos'); ?>">
+                <input style="width: 300px;" type="text" id="addressInfosInput" name="addressInfos" value="<?php echo set_value('addressInfos'); ?>">
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Prix : </label>
             <div class="controls">
-                <input type="text" id="priceInput" name="price" value="<?php echo set_value('price'); ?>">
+                <input style="width: 300px;" type="text" id="priceInput" name="price" value="<?php echo set_value('price'); ?>">
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Lien de réservation : </label>
             <div class="controls">
-                <input type="text" id="reservationInput" name="reservation" value="<?php echo set_value('reservation'); ?>">
+                <input style="width: 300px;" type="url" id="reservationInput" name="reservation" value="<?php echo set_value('reservation'); ?>">
             </div>
         </div>
+        <output style="margin-left: 250px;" id="list">
+        </output>
         <div class="control-group">
             <label for="inputError" class="control-label">Image : </label>
             <div class="controls">
-                <input type="file" accept="image/gif, image/png, image/jpg, image/jpeg" id="imageInput" name="image" value="<?php echo set_value('image'); ?>">
+                <input style="width: 300px;" type="file" accept="image/gif, image/png, image/jpg, image/jpeg" id="imageInput" name="image" value="<?php echo set_value('image'); ?>">
             </div>
         </div>
 
@@ -133,6 +136,23 @@
             <button class="btn btn-primary" id="btnSubmit" type="submit">Sauvegarder</button>
 </div>
     </fieldset>
+    <script>
+        document.getElementById('imageInput').addEventListener('change', handleFileSelect, false);
+        function handleFileSelect(evt) {
+            var files = evt.target.files;
+            var f = files[0];
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="250" />'].join('');
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
+        }
+
+    </script>
 
     <?php echo form_close(); ?>
 

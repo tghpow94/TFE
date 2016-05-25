@@ -7,7 +7,6 @@ class Admin_events extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('users_model');
         $this->load->model('events_model');
         $this->load->model('labels_model');
 
@@ -119,12 +118,12 @@ class Admin_events extends CI_Controller {
             $this->form_validation->set_rules('titleFR', 'titleFR', 'trim|required');
             $this->form_validation->set_rules('titleNL', 'titleNL', 'trim');
             $this->form_validation->set_rules('titleEN', 'titleEN', 'trim');
-            $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim|required');
+            $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim');
             $this->form_validation->set_rules('descriptionNL', 'descriptionNL', 'trim');
             $this->form_validation->set_rules('descriptionEN', 'descriptionEN', 'trim');
             $this->form_validation->set_rules('date', 'date', '');
             $this->form_validation->set_rules('city', 'city', 'trim');
-            $this->form_validation->set_rules('cityCode', 'cityCode', 'trim|numeric');
+            $this->form_validation->set_rules('cityCode', 'cityCode', 'trim');
             $this->form_validation->set_rules('address', 'address', 'trim');
             $this->form_validation->set_rules('addressInfos', 'addressInfos', 'trim');
             $this->form_validation->set_rules('price', 'price', 'trim');
@@ -147,17 +146,29 @@ class Admin_events extends CI_Controller {
 
                 $date = date("Y-m-d H:i:s", strtotime($this->input->post('date')));
 
+                $fullDate = explode(' ', $this->input->post('date'));
+                $dateArray = explode('/', $fullDate[0]);
+                $heureArray = explode(':', $fullDate[1]);
+                $jour = $dateArray[0];
+                $mois = $dateArray[1];
+                $annee = $dateArray[2];
+                $heure = $heureArray[0];
+                $minute = $heureArray[1];
+                $seconde = "00";
+                $finalDate = $annee.'-'.$mois.'-'.$jour.' '.$heure.':'.$minute.':'.$seconde;
+
+
                 $this->input->post('reservation') != "" ? $reservation = $this->input->post('reservation') : $reservation = "http://www.bpho.be/concerts/";
 
                 $data_to_store = array(
                     'title' => $titleID,
                     'description' => $descriptionID,
-                    'startDate' => $date,
-                    'endDate' => $date,
+                    'startDate' => $finalDate,
+                    'endDate' => $finalDate,
                     'city' => $this->input->post('city'),
                     'cityCode' => $this->input->post('cityCode'),
                     'addressInfos' => $this->input->post('addressInfos'),
-                    'price' => $this->input->post('price'),
+                    'price' => $finalDate,
                     'reservation' => $reservation,
                     'address' => $this->input->post('address')
                 );
@@ -170,7 +181,7 @@ class Admin_events extends CI_Controller {
 
                 $eventID = $this->events_model->getEventID($titleFR);
                 if(isset($_FILES['image']) && $_FILES['image']['tmp_name'] != "") {
-                    $this->events_model->uploadImage("../images/", "e" . $eventID, $_FILES);
+                    $this->events_model->uploadImage("../images/", "e".$eventID, $_FILES);
                 } else {
                     copy("../images/no-image.jpg", "../images/e".$eventID.".jpg");
                 }
@@ -194,11 +205,19 @@ class Admin_events extends CI_Controller {
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
             //form validation
-            $this->form_validation->set_rules('name', 'name', 'required');
-            $this->form_validation->set_rules('firstName', 'firstName', 'required');
-            $this->form_validation->set_rules('right', 'right', 'required');
-            $this->form_validation->set_rules('instrument', 'instrument', 'required');
-            $this->form_validation->set_rules('phone', 'phone', 'required');
+            $this->form_validation->set_rules('titleFR', 'titleFR', 'trim|required');
+            $this->form_validation->set_rules('titleNL', 'titleNL', 'trim');
+            $this->form_validation->set_rules('titleEN', 'titleEN', 'trim');
+            $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim|required');
+            $this->form_validation->set_rules('descriptionNL', 'descriptionNL', 'trim');
+            $this->form_validation->set_rules('descriptionEN', 'descriptionEN', 'trim');
+            $this->form_validation->set_rules('date', 'date', '');
+            $this->form_validation->set_rules('city', 'city', 'trim');
+            $this->form_validation->set_rules('cityCode', 'cityCode', 'trim|numeric');
+            $this->form_validation->set_rules('address', 'address', 'trim');
+            $this->form_validation->set_rules('addressInfos', 'addressInfos', 'trim');
+            $this->form_validation->set_rules('price', 'price', 'trim');
+            $this->form_validation->set_rules('reservation', 'reservation', 'trim');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
@@ -223,18 +242,18 @@ class Admin_events extends CI_Controller {
 
         }
 
-        //rights
-        $data['rights'] = $this->rights_model->getRights();
+        $event = $this->events_model->getEventByID($id);
+        $data['event'] = $event;
 
-        //user data
-        $user = $this->users_model->getUserByID($id);
-        $user[0]['idRight'] = $this->users_model->getUserDroit($id);
-        $user[0]['idInstrument'] = $this->users_model->getUserInstrument($id);
-        $data['user'] = $user;
+        $title = $this->labels_model->getFullLabelByID($event['title']);
+        $data['event']['titleFR'] = $title['fr'];
+        $data['event']['titleNL'] = $title['nl'];
+        $data['event']['titleEN'] = $title['en'];
 
-        //instruments
-        $data['instruments'] = $this->instruments_model->getInstruments();
-        $data['userInstrument'] = $this->instruments_model->getInstrumentByUser($user[0]['id']);
+        $description = $this->labels_model->getFullLabelByID($event['description']);
+        $data['event']['descriptionFR'] = $description['fr'];
+        $data['event']['descriptionNL'] = $description['nl'];
+        $data['event']['descriptionEN'] = $description['en'];
 
         //load the view
         $data['main_content'] = 'admin/events/edit';

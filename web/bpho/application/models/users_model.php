@@ -36,6 +36,16 @@ class Users_model extends CI_Model {
 		}
 	}
 
+	function getUserDroitByEmail($email) {
+		$this->db->where('email', $email);
+		$query = $this->db->get('Users');
+		if ($query->num_rows == 1) {
+			$result = $query->result_array();
+			$userID = $result[0]['id'];
+			return $this->getUserDroit($userID);
+		}
+	}
+
 	function getUserDroit($id) {
 		$this->db->where('idUser', $id);
 		$query = $this->db->get('User_right');

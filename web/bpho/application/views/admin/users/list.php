@@ -45,6 +45,7 @@ height: 26px; margin-right: 20px;"');
                 </thead>
                 <tbody>
                 <?php
+                $test = "test";
                 foreach($users as $row)
                 {
                     echo '<tr>';
@@ -57,13 +58,14 @@ height: 26px; margin-right: 20px;"');
                     echo '<td>'.$row['phone'].'</td>';
                     echo '<td class="crud-actions">
                   <a href="'.site_url("admin").'/users/update/'.$row['id'].'" class="btn btn-info">Editer</a>  
-                  <a href="'.site_url("admin").'/users/delete/'.$row['id'].'" class="btn btn-danger">Supprimer</a>
+                  <a href="'.site_url("admin").'/users/delete/'.$row['id'].'" class="btn btn-danger" >Supprimer</a>
                 </td>';
                     echo '</tr>';
                 }
                 ?>
                 </tbody>
             </table>
+
 
             <?php echo '<div class="pagination">'.$this->pagination->create_links().'</div>'; ?>
 

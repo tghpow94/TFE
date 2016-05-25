@@ -13,6 +13,60 @@
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+	<script>
+		tinymce.init({
+			selector: '#descriptionFRInput',
+			toolbar: 'styleselect bold italic underline ',
+			menubar: false,
+			statusbar: false,
+			width: 500,
+			height: 250,
+			max_height: 500,
+			max_width: 700,
+			min_height: 100,
+			min_width: 300,
+			resize: 'both',
+			style_formats: [
+				{title: 'Titre 1', block: 'h1'},
+				{title: 'Titre 2', block: 'h2'}
+			]
+		});
+		tinymce.init({
+			selector: '#descriptionNLInput',
+			toolbar: 'styleselect bold italic underline ',
+			menubar: false,
+			statusbar: false,
+			width: 500,
+			height: 250,
+			max_height: 500,
+			max_width: 700,
+			min_height: 100,
+			min_width: 300,
+			resize: 'both',
+			style_formats: [
+				{title: 'Titre 1', block: 'h1'},
+				{title: 'Titre 2', block: 'h2'}
+			]
+		});
+		tinymce.init({
+			selector: '#descriptionENInput',
+			toolbar: 'styleselect bold italic underline ',
+			menubar: false,
+			statusbar: false,
+			width: 500,
+			height: 250,
+			max_height: 500,
+			max_width: 700,
+			min_height: 100,
+			min_width: 300,
+			resize: 'both',
+			style_formats: [
+				{title: 'Titre 1', block: 'h1'},
+				{title: 'Titre 2', block: 'h2'}
+			]
+		});
+	</script>
 	<script>
 		function myFunction() {
 			var pass1 = document.getElementById("password").value;
@@ -43,23 +97,23 @@
 					$("#titleFRInput").show();
 					$("#titleNLInput").hide();
 					$("#titleENInput").hide();
-					$("#descriptionFRInput").show();
-					$("#descriptionENInput").hide();
-					$("#descriptionNLInput").hide();
+					$("#mceu_4").show();
+					$("#mceu_22").hide();
+					$("#mceu_13").hide();
 				} else if (name == "NL") {
 					$("#titleFRInput").hide();
 					$("#titleNLInput").show();
 					$("#titleENInput").hide();
-					$("#descriptionFRInput").hide();
-					$("#descriptionENInput").hide();
-					$("#descriptionNLInput").show();
+					$("#mceu_4").hide();
+					$("#mceu_22").hide();
+					$("#mceu_13").show();
 				} else if (name == "EN") {
 					$("#titleFRInput").hide();
 					$("#titleNLInput").hide();
 					$("#titleENInput").show();
-					$("#descriptionFRInput").hide();
-					$("#descriptionENInput").show();
-					$("#descriptionNLInput").hide();
+					$("#mceu_4").hide();
+					$("#mceu_22").show();
+					$("#mceu_13").hide();
 				}
 			});
 		});

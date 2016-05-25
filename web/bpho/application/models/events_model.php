@@ -31,7 +31,8 @@ class Events_model extends CI_Model {
         $this->db->where('id', $id);
         $query = $this->db->get('Events');
         if ($query->num_rows == 1) {
-            return $query->result_array();
+            $result = $query->result_array();
+            return $result[0];
         }
     }
 
@@ -161,11 +162,11 @@ class Events_model extends CI_Model {
         $nouvelleLargeur = 350;
         $reduction = ( ($nouvelleLargeur * 100) / $donnees[0]);
         $nouvelleHauteur = ( ($donnees[1] * $reduction) / 100);
-        if ($typePhoto == "jpg" || $typePhoto == "jpeg") {
+        if ($typePhoto == "image/jpg" || $typePhoto == "image/jpeg") {
             $image = imagecreatefromjpeg($photo);
-        } elseif ($typePhoto == "png") {
+        } elseif ($typePhoto == "image/png") {
             $image = imagecreatefrompng($photo);
-        } elseif ($typePhoto == "gif") {
+        } elseif ($typePhoto == "image/gif") {
             $image = imagecreatefromgif($photo);
         }
         $image_mini = imagecreatetruecolor($nouvelleLargeur, $nouvelleHauteur); //création image finale

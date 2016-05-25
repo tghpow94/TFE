@@ -17,10 +17,14 @@
           echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo 'Identifiants incorrects, ré-essayez.';
-          echo '</div>';             
+          echo '</div>';
       }
-      echo "<br />";
-      echo anchor('admin/signup', 'Signup!');
+      if(isset($droit_error) && $droit_error){
+        echo '<div class="alert alert-error">';
+        echo '<a class="close" data-dismiss="alert">×</a>';
+        echo 'Permission insuffisante, veuillez contacter un administrateur.';
+        echo '</div>';
+      }
       echo "<br />";
       echo "<br />";
       echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');

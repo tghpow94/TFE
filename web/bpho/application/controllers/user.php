@@ -40,12 +40,19 @@ class User extends CI_Controller {
 		$is_valid = $this->Users_model->validate($user_name, $password);
 		if($is_valid)
 		{
-			$data = array(
-				'user_name' => $user_name,
-				'is_logged_in' => true
-			);
-			$this->session->set_userdata($data);
-			redirect('admin/users');
+			$userDroit = $this->Users_model->getUserDroitByEmail($user_name);
+			if($userDroit <= 2 && $userDroit != null) {
+
+				$data = array(
+					'user_name' => $user_name,
+					'is_logged_in' => true
+				);
+				$this->session->set_userdata($data);
+				redirect('admin/users');
+			} else {
+				$data['droit_error'] = TRUE;
+				$this->load->view('admin/login', $data);
+			}
 		}
 		else // incorrect username or password
 		{
