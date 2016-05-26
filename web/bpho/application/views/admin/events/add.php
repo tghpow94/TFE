@@ -35,11 +35,17 @@
     echo form_open_multipart('admin/events/add', $attributes);
     ?>
     <script>
+        $(document).ready(function() {
+            $('option').mousedown(function(e) {
+                e.preventDefault();
+                $(this).prop('selected', !$(this).prop('selected'));
+                return false;
+            });
+        });
         var users = <?php echo json_encode($users); ?>;
         var liste = new Array(users.length);
         var i = 0;
         users.forEach(function(user) {
-            alert(user['id']);
             liste[i] = new Array(4);
             liste[i][0] = user['id'];
             liste[i][1] = user['firstName'];
@@ -143,6 +149,25 @@
             <label for="inputError" class="control-label">Image : </label>
             <div class="controls">
                 <input style="width: 300px;" type="file" accept="image/gif, image/png, image/jpg, image/jpeg" id="imageInput" name="image" value="<?php echo set_value('image'); ?>">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="inputError" class="control-label">Musiciens associés : </label>
+            <div class="controls">
+                <select name="users" multiple="multiple" size="10" style="width: 320px;">
+                    <?php
+                    $lettre = "A";
+                    echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;
+                    foreach($users as $user) {
+                        if ($lettre != $user['firstName'][0]) {
+                            $lettre = $user['firstName'][0];
+                            echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;
+                        }
+                        echo '<option value="'.$user['id'].'">'.$user['firstName'].' '.$user['name'].' - '.$user['instrument'];
+                    }
+                    ?>
+                </select>
             </div>
         </div>
 

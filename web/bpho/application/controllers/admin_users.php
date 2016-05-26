@@ -133,11 +133,15 @@ class Admin_users extends CI_Controller {
             //if the form has passed through the validation
             if ($this->form_validation->run() && $this->input->post('password') == $this->input->post('password2')) {
                 $trash = array("/", ".");
+                $name = $this->input->post('name');
+                $name[0] = strtoupper($name[0]);
+                $firstName = $this->input->post('firstName');
+                $firstName[0] = strtoupper($firstName[0]);
                 $data_to_store = array(
                     'email' => $this->input->post('email'),
                     'password' => $this->input->post('password'),
-                    'name' => $this->input->post('name'),
-                    'firstName' => $this->input->post('firstName'),
+                    'name' => $name,
+                    'firstName' => $firstName,
                     'right' => $this->input->post('right'),
                     'instrument' => $this->input->post('instrument'),
                     'phone' => str_replace($trash, "",$this->input->post('phone'))

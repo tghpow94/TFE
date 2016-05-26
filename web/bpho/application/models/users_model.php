@@ -241,6 +241,28 @@ class Users_model extends CI_Model {
 	}
 
 	/**
+	 * get all the users from db
+	 * @param null $search
+	 * @param $limit_start
+	 * @param $limit_end
+	 * @return mixed : array of all users
+	 */
+	function getUsersOrderByFirstName($search = null, $limit_start = null, $limit_end = null) {
+		$this->db->select('*');
+		$this->db->from('Users');
+		if($search) {
+			$this->db->or_like('name', $search);
+			$this->db->or_like('firstName', $search);
+		}
+		$this->db->order_by('firstName', 'Asc');
+		if ($limit_end && $limit_start)
+			$this->db->limit($limit_start, $limit_end);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	/**
 	 * Count the number of rows
 	 * @param int $search_string
 	 * @return int

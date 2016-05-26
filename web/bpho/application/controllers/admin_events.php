@@ -190,10 +190,14 @@ class Admin_events extends CI_Controller {
             }
         }
 
-        $users = $this->users_model->getUsers();
+        $users = $this->users_model->getUsersOrderByFirstName();
         foreach($users as &$user) {
-            $instrument = $this->instruments_model->getInstrumentByUser($user['id']);
-            $user['instrument'] = $instrument[0]['name'];
+            if($this->users_model->hasInstrument($user['id'])) {
+                $instrument = $this->instruments_model->getInstrumentByUser($user['id']);
+                $user['instrument'] = $instrument[0]['name'];
+            } else {
+                $user['instrument'] = "";
+            }
         }
         $data['users'] = $users;
 
