@@ -57,14 +57,15 @@ class Labels_model extends CI_Model {
      * @param $en : label EN
      */
     function addLabel($fr, $nl, $en) {
-        $data = array(
-            'fr' => $fr,
-            'nl' => $nl,
-            'en' => $en
-        );
-        $this->db->insert('Labels', $data);
-        $this->db->where('fr', $fr);
-        return $this->getLabelId($fr);
+        if (!$this->getLabelIdFullLang($fr,$nl,$en)) {
+            $data = array(
+                'fr' => $fr,
+                'nl' => $nl,
+                'en' => $en
+            );
+            $this->db->insert('Labels', $data);
+        }
+        return $this->getLabelIdFullLang($fr, $nl, $en);
     }
 
     /**
@@ -73,6 +74,15 @@ class Labels_model extends CI_Model {
      */
     function getLabelId($fr) {
         $this->db->where('fr', $fr);
+        $query = $this->db->get('Labels');
+        $result = $query->result_array();
+        return $result[0]['id'];
+    }
+
+    function getLabelIdFullLang($fr, $nl, $en) {
+        $this->db->where('fr', $fr);
+        $this->db->where('nl', $nl);
+        $this->db->where('en', $en);
         $query = $this->db->get('Labels');
         $result = $query->result_array();
         return $result[0]['id'];

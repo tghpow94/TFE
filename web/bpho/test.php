@@ -8,33 +8,33 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
-    <script>
-        $(function() {
-            $( "#dialog" ).dialog({
-                autoOpen: false,
-                show: {
-                    effect: "blind",
-                    duration: 10
-                },
-                hide: {
-                    effect: "explode",
-                    duration: 1000
-                }
-            });
 
-            $( "#opener" ).click(function() {
-                $( "#dialog" ).dialog( "open" );
+    <script>
+        $(document).ready(function() {
+            $('option').mousedown(function(e) {
+                e.preventDefault();
+                $(this).prop('selected', !$(this).prop('selected'));
+                return false;
             });
         });
     </script>
 </head>
 <body>
 
-<div id="dialog" title="Basic dialog">
-    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>
 
-<button id="opener">Open Dialog</button>
+<form action="test.php" method="post">
+    <select  name="users[]" multiple="multiple" size="10">
+        <option value="1">user1</option>
+        <option value="2">user2</option>
+        <option value="3">user3</option>
+        <option value="4">user4</option>
+        <option value="5">user5</option>
+    </select>
+    <button type="submit"></button>
+    <?php
+    var_dump($_POST['users'][0]);
+    ?>
+</form>
 
 
 </body>

@@ -31,7 +31,7 @@ class Admin_events extends CI_Controller {
         }
 
         //pagination settings
-        $config['per_page'] = 10;
+        $config['per_page'] = 20;
         $config['base_url'] = base_url().'admin/events';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 20;
@@ -130,6 +130,7 @@ class Admin_events extends CI_Controller {
             $this->form_validation->set_rules('addressInfos', 'addressInfos', 'trim');
             $this->form_validation->set_rules('price', 'price', 'trim');
             $this->form_validation->set_rules('reservation', 'reservation', 'trim');
+            $this->form_validation->set_rules('users', 'users', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
@@ -146,8 +147,6 @@ class Admin_events extends CI_Controller {
                 $titleID = $this->labels_model->addLabel($titleFR, $titleNL, $titleEN);
                 $descriptionID = $this->labels_model->addLabel($descriptionFR, $descriptionNL, $descriptionEN);
 
-                $date = date("Y-m-d H:i:s", strtotime($this->input->post('date')));
-
                 $fullDate = explode(' ', $this->input->post('date'));
                 $dateArray = explode('/', $fullDate[0]);
                 $heureArray = explode(':', $fullDate[1]);
@@ -159,7 +158,6 @@ class Admin_events extends CI_Controller {
                 $seconde = "00";
                 $finalDate = $annee.'-'.$mois.'-'.$jour.' '.$heure.':'.$minute.':'.$seconde;
 
-
                 $this->input->post('reservation') != "" ? $reservation = $this->input->post('reservation') : $reservation = "http://www.bpho.be/concerts/";
 
                 $data_to_store = array(
@@ -170,7 +168,7 @@ class Admin_events extends CI_Controller {
                     'city' => $this->input->post('city'),
                     'cityCode' => $this->input->post('cityCode'),
                     'addressInfos' => $this->input->post('addressInfos'),
-                    'price' => $finalDate,
+                    'price' => $this->input->post('price'),
                     'reservation' => $reservation,
                     'address' => $this->input->post('address')
                 );
@@ -186,6 +184,15 @@ class Admin_events extends CI_Controller {
                     $this->events_model->uploadImage("../images/", "e".$eventID, $_FILES);
                 } else {
                     copy("../images/no-image.jpg", "../images/e".$eventID.".jpg");
+                }
+
+
+                if (isset($_POST['users'][0])) {
+                    $musiciens = $_POST['users'];
+                    $this->events_model->deleteEventUsers($eventID);
+                    foreach ($musiciens as $musicien) {
+                        $this->events_model->addEventUser($eventID, $musicien);
+                    }
                 }
             }
         }
@@ -221,41 +228,94 @@ class Admin_events extends CI_Controller {
             $this->form_validation->set_rules('titleFR', 'titleFR', 'trim|required');
             $this->form_validation->set_rules('titleNL', 'titleNL', 'trim');
             $this->form_validation->set_rules('titleEN', 'titleEN', 'trim');
-            $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim|required');
+            $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim');
             $this->form_validation->set_rules('descriptionNL', 'descriptionNL', 'trim');
             $this->form_validation->set_rules('descriptionEN', 'descriptionEN', 'trim');
             $this->form_validation->set_rules('date', 'date', '');
             $this->form_validation->set_rules('city', 'city', 'trim');
-            $this->form_validation->set_rules('cityCode', 'cityCode', 'trim|numeric');
+            $this->form_validation->set_rules('cityCode', 'cityCode', 'trim');
             $this->form_validation->set_rules('address', 'address', 'trim');
             $this->form_validation->set_rules('addressInfos', 'addressInfos', 'trim');
             $this->form_validation->set_rules('price', 'price', 'trim');
             $this->form_validation->set_rules('reservation', 'reservation', 'trim');
+            $this->form_validation->set_rules('users', 'users', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
-                $trash = array("/", ".");
+                $this->input->post('titleFR') != "" ? $titleFR = $this->input->post('titleFR') : $titleFR = null;
+                $this->input->post('titleNL') != "" ? $titleNL = $this->input->post('titleNL') : $titleNL = null;
+                $this->input->post('titleEN') != "" ? $titleEN = $this->input->post('titleEN') : $titleEN = null;
+
+                $this->input->post('descriptionFR') != "" ? $descriptionFR = $this->input->post('descriptionFR') : $descriptionFR = null;
+                $this->input->post('descriptionNL') != "" ? $descriptionNL = $this->input->post('descriptionNL') : $descriptionNL = null;
+                $this->input->post('descriptionEN') != "" ? $descriptionEN = $this->input->post('descriptionEN') : $descriptionEN = null;
+
+                $titleID = $this->labels_model->addLabel($titleFR, $titleNL, $titleEN);
+                $descriptionID = $this->labels_model->addLabel($descriptionFR, $descriptionNL, $descriptionEN);
+
+                $fullDate = explode(' ', $this->input->post('date'));
+                $dateArray = explode('/', $fullDate[0]);
+                $heureArray = explode(':', $fullDate[1]);
+                $jour = $dateArray[0];
+                $mois = $dateArray[1];
+                $annee = $dateArray[2];
+                $heure = $heureArray[0];
+                $minute = $heureArray[1];
+                $seconde = "00";
+                $finalDate = $annee.'-'.$mois.'-'.$jour.' '.$heure.':'.$minute.':'.$seconde;
+
+                $this->input->post('reservation') != "" ? $reservation = $this->input->post('reservation') : $reservation = "http://www.bpho.be/concerts/";
+
                 $data_to_store = array(
-                    'name' => $this->input->post('name'),
-                    'firstName' => $this->input->post('firstName'),
-                    'right' => $this->input->post('right'),
-                    'instrument' => $this->input->post('instrument'),
-                    'phone' => str_replace($trash, "",$this->input->post('phone'))
+                    'title' => $titleID,
+                    'description' => $descriptionID,
+                    'startDate' => $finalDate,
+                    'endDate' => $finalDate,
+                    'city' => $this->input->post('city'),
+                    'cityCode' => $this->input->post('cityCode'),
+                    'addressInfos' => $this->input->post('addressInfos'),
+                    'price' => $this->input->post('price'),
+                    'reservation' => $reservation,
+                    'address' => $this->input->post('address')
                 );
+
                 //if the insert has returned true then we show the flash message
-                if($this->users_model->updateUser($id, $data_to_store) == TRUE){
+                if($this->events_model->updateEvent($id, $data_to_store) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
-                redirect('admin/users/update/'.$id.'');
 
-            }//validation run
+                if(isset($_FILES['image']) && $_FILES['image']['tmp_name'] != "") {
+                    $this->events_model->uploadImage("../images/", "e".$id, $_FILES);
+                }
+
+                if (isset($_POST['users'][0])) {
+                    $musiciens = $_POST['users'];
+                    $this->events_model->deleteEventUsers($id);
+                    foreach ($musiciens as $musicien) {
+                        $this->events_model->addEventUser($id, $musicien);
+                    }
+                } else {
+                    $this->events_model->deleteEventUsers($id);
+                }
+
+                redirect('admin/events/update/'.$id.'');
+
+            }
 
         }
 
         $event = $this->events_model->getEventByID($id);
+        $fullDate2 = explode(" ", $event['startDate']);
+        $date = explode("-", $fullDate2[0]);
+        $annee = $date[0];
+        $mois = $date[1];
+        $jour = $date[2];
+        $dateFinal = $jour."/".$mois."/".$annee." ".$fullDate2[1];
+        $event['startDate'] = $dateFinal;
+
         $data['event'] = $event;
 
         $title = $this->labels_model->getFullLabelByID($event['title']);
@@ -268,6 +328,19 @@ class Admin_events extends CI_Controller {
         $data['event']['descriptionNL'] = $description['nl'];
         $data['event']['descriptionEN'] = $description['en'];
 
+        $users = $this->users_model->getUsersOrderByFirstName();
+        foreach($users as &$user) {
+            if($this->users_model->hasInstrument($user['id'])) {
+                $instrument = $this->instruments_model->getInstrumentByUser($user['id']);
+                $user['instrument'] = $instrument[0]['name'];
+            } else {
+                $user['instrument'] = "";
+            }
+        }
+        $data['users'] = $users;
+
+        $data['event']['users'] = $this->events_model->getEventUsers($id);
+
         //load the view
         $data['main_content'] = 'admin/events/edit';
         $this->load->view('includes/template', $data);
@@ -279,7 +352,6 @@ class Admin_events extends CI_Controller {
      */
     public function delete()
     {
-        //product id 
         $id = $this->uri->segment(4);
         $this->events_model->delete_event($id);
         redirect('admin/events');

@@ -663,19 +663,19 @@ class CI_DB_active_record extends CI_DB_driver {
 			
 			if ($side == 'none')
 			{
-				$like_statement = $prefix." $k $not LIKE '{$v}'";
+				$like_statement = $prefix." lower($k) $not LIKE '{$v}'";
 			}
 			elseif ($side == 'before')
 			{
-				$like_statement = $prefix." $k $not LIKE '%{$v}'";
+				$like_statement = $prefix." lower($k) $not LIKE '%{$v}'";
 			}
 			elseif ($side == 'after')
 			{
-				$like_statement = $prefix." $k $not LIKE '{$v}%'";
+				$like_statement = $prefix." lower($k) $not LIKE '{$v}%'";
 			}
 			else
 			{
-				$like_statement = $prefix." $k $not LIKE '%{$v}%'";
+				$like_statement = $prefix." lower($k) $not LIKE '%{$v}%'";
 			}
 
 			// some platforms require an escape sequence definition for LIKE wildcards

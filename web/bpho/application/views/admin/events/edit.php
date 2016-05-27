@@ -27,14 +27,23 @@
     }
 
     //form data
-    $attributes = array('class' => 'form-horizontal', 'id' => '');
+    $attributes = array('class' => 'form-horizontal', 'id' => 'formEditEvent');
 
     //form validation
     echo validation_errors();
 
-    echo form_open('admin/events/update/'.$this->uri->segment(4).'', $attributes);
+    echo form_open_multipart('admin/events/update/'.$this->uri->segment(4).'', $attributes);
     ?>
     <fieldset>
+        <script>
+            $(document).ready(function() {
+                $('option').mousedown(function(e) {
+                    e.preventDefault();
+                    $(this).prop('selected', !$(this).prop('selected'));
+                    return false;
+                });
+            });
+        </script>
         <div class="btn-group" style="margin-left: 230px; margin-bottom: 30px;">
             <button type="button" name="FR" class="btn btn-primary">Français</button>
             <button type="button" name="NL" class="btn btn-primary">Nederlands</button>
@@ -52,7 +61,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Description : </label>
             <div class="controls" style="margin-left: 230px;">
-                <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px;" class="description" placeholder="Français" id="descriptionFRInput" name="descriptionFR" required><?php echo  $event['descriptionFR']; ?></textarea>
+                <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px;" class="description" placeholder="Français" id="descriptionFRInput" name="descriptionFR"><?php echo  $event['descriptionFR']; ?></textarea>
                 <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" class="description" placeholder="Néerlandais" id="descriptionNLInput" name="descriptionNL" ><?php echo $event['descriptionNL']; ?></textarea>
                 <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" class="description" placeholder="Anglais" id="descriptionENInput" name="descriptionEN"  ><?php echo $event['descriptionEN']; ?></textarea>
             </div>
@@ -133,12 +142,43 @@
                 <input style="width: 300px;" type="file" accept="image/gif, image/png, image/jpg, image/jpeg" id="imageInput" name="image">
             </div>
         </div>
+
+        <div class="control-group">
+            <label for="inputError" class="control-label">Musiciens associés : </label>
+            <div class="controls">
+
+                <select name="users[]" form="formEditEvent" multiple="multiple" size="10" style="width: 320px;">
+                    <?php
+                    $lettre = "A";
+                    echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;
+                    foreach($users as $user) {
+                        if ($lettre != $user['firstName'][0]) {
+                            $lettre = $user['firstName'][0];
+                            echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;
+                        }
+                        $exist = false;
+                        foreach($event['users'] as $user2) {
+                            if ($user['id']  == $user2['idUser']) {
+                                $exist = true;
+                            }
+                        }
+                        if ($exist) {
+                            echo '<option value="' . $user['id'] . '" selected>' . $user['firstName'] . ' ' . $user['name'] . ' - ' . $user['instrument'];
+                        } else {
+                            echo '<option value="' . $user['id'] . '">' . $user['firstName'] . ' ' . $user['name'] . ' - ' . $user['instrument'];
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
         <div class="form-actions">
             <button class="btn btn-primary" type="submit">Sauvegarder</button>
-            <button class="btn" type="reset">Annuler</button>
         </div>
     </fieldset>
     <script>
+
         document.getElementById('imageInput').addEventListener('change', handleFileSelect, false);
         function handleFileSelect(evt) {
             var files = evt.target.files;
@@ -147,7 +187,7 @@
 
             reader.onload = (function(theFile) {
                 return function(e) {
-                    document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="250" />'].join('');
+                    document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="300" />'].join('');
                 };
             })(f);
 

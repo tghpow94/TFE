@@ -136,6 +136,41 @@ class Events_model extends CI_Model {
         return $insert;
     }
 
+    function addEventUser($idEvent, $idUser) {
+        $data = array(
+            'idEvent' => $idEvent,
+            'idUser' => $idUser
+        );
+        $insert = $this->db->insert('Event_users', $data);
+        return $insert;
+    }
+
+    function getEventUsers($idEvent) {
+        $this->db->where('idEvent', $idEvent);
+        $query = $this->db->get('Event_users');
+        return $query->result_array();
+    }
+
+    function deleteEventUsers($idEvent) {
+        $this->db->where('idEvent', $idEvent);
+        $this->db->delete('Event_users');
+    }
+
+    function updateEvent($id, $data) {
+        $this->db->where('id', $id);
+        $this->db->update('Events', $data);
+
+        //errors handler
+        $report = array();
+        $report['error'] = $this->db->_error_number();
+        $report['message'] = $this->db->_error_message();
+        if($report !== 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Fonction servant à charger une image et la mettre dans un dossier du serveur.
      * @param $repertoire : le répertoire d'arrivée de l'image.
@@ -155,8 +190,6 @@ class Events_model extends CI_Model {
         }
         // on copie le fichier dans le dossier de destination
         $nomPhoto = $nom.".jpg";
-
-
 
         $donnees=getimagesize($photo);
         $nouvelleLargeur = 350;

@@ -25,13 +25,13 @@ class Admin_users extends CI_Controller {
     {
 
         //all the posts sent by the view
-        $search_string = $this->input->post('search_string');
+        $search_string = strtolower($this->input->post('search_string'));
         if ($search_string == "") {
             $search_string = false;
         }
 
         //pagination settings
-        $config['per_page'] = 10;
+        $config['per_page'] = 20;
         $config['base_url'] = base_url().'admin/users';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 20;
@@ -83,9 +83,9 @@ class Admin_users extends CI_Controller {
 
             //fetch sql data into arrays
             if($search_string){
-                $data['users'] = $this->users_model->getUsers($search_string, $config['per_page'], $limit_end);
+                $data['users'] = $this->users_model->getUsersOrderByFirstName($search_string, $config['per_page'], $limit_end);
             }else{
-                $data['users'] = $this->users_model->getUsers('', $config['per_page'],$limit_end);
+                $data['users'] = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
             }
 
         }else{
@@ -99,7 +99,7 @@ class Admin_users extends CI_Controller {
 
             //fetch sql data into arrays
             $data['count_users']= $this->users_model->countUsers();
-            $data['users'] = $this->users_model->getUsers('', $config['per_page'],$limit_end);
+            $data['users'] = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_users'];
 
         }
@@ -218,7 +218,12 @@ class Admin_users extends CI_Controller {
 
         //instruments
         $data['instruments'] = $this->instruments_model->getInstruments();
-        $data['userInstrument'] = $this->instruments_model->getInstrumentByUser($user[0]['id']);
+        if ($this->users_model->hasInstrument($user[0]['id'])) {
+            $data['hasInstrument'] = true;
+            $data['userInstrument'] = $this->instruments_model->getInstrumentByUser($user[0]['id']);
+        } else {
+            $data['hasInstrument'] = false;
+        }
 
         //load the view
         $data['main_content'] = 'admin/users/edit';

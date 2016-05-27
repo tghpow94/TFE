@@ -34,8 +34,8 @@ height: 26px; margin-right: 20px;"');
                 <thead>
                 <tr>
                     <!--<th class="header">#</th>-->
-                    <th class="yellow header headerSortDown">Nom</th>
-                    <th class="green header">Prénom</th>
+                    <th class="yellow header headerSortDown">Prénom</th>
+                    <th class="green header">Nom</th>
                     <th class="red header">E-mail</th>
                     <th class="red header">Date d'inscription</th>
                     <th class="red header">Dernière connexion</th>
@@ -50,8 +50,8 @@ height: 26px; margin-right: 20px;"');
                 {
                     echo '<tr>';
                     echo '<td style="display:none;">'.$row['id'].'</td>';
-                    echo '<td>'.$row['name'].'</td>';
                     echo '<td>'.$row['firstName'].'</td>';
+                    echo '<td>'.$row['name'].'</td>';
                     echo '<td>'.$row['email'].'</td>';
                     echo '<td>'.$row['dateRegister'].'</td>';
                     echo '<td>'.$row['dateLastConnect'].'</td>';

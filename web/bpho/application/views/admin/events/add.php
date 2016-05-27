@@ -7,6 +7,7 @@
     </div>
 
     <?php
+
     //flash messages
     if(isset($flash_message)){
         if($flash_message == TRUE)
@@ -26,6 +27,7 @@
     ?>
 
     <?php
+
     //form data
     $attributes = array('class' => 'form-horizontal', 'id' => 'formAddEvent');
 
@@ -155,7 +157,8 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Musiciens associés : </label>
             <div class="controls">
-                <select name="users" multiple="multiple" size="10" style="width: 320px;">
+
+                <select name="users[]" form="formAddEvent" multiple="multiple" size="10" style="width: 320px;">
                     <?php
                     $lettre = "A";
                     echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;

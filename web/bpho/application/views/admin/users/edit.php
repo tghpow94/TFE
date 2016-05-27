@@ -69,7 +69,11 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <input type="text" id="instrumentInput" list="instruments" name="instrument" value="<?php echo $userInstrument[0]['name']; ?>">
+                <input type="text" id="instrumentInput" list="instruments" name="instrument" value="<?php
+                    if ($hasInstrument) {
+                        echo $userInstrument[0]['name'];
+                    }
+                ?>">
                 <datalist id="instruments" >
                     <?php
                     foreach($instruments as $instrument) {

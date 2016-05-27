@@ -179,6 +179,8 @@ class Users_model extends CI_Model {
 		$query = $this->db->get('User_instrument');
 		if($query->num_rows == 1) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
