@@ -83,9 +83,9 @@ class Admin_users extends CI_Controller {
 
             //fetch sql data into arrays
             if($search_string){
-                $data['users'] = $this->users_model->getUsersOrderByFirstName($search_string, $config['per_page'], $limit_end);
+                $users = $this->users_model->getUsersOrderByFirstName($search_string, $config['per_page'], $limit_end);
             }else{
-                $data['users'] = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
+                $users = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
             }
 
         }else{
@@ -99,10 +99,15 @@ class Admin_users extends CI_Controller {
 
             //fetch sql data into arrays
             $data['count_users']= $this->users_model->countUsers();
-            $data['users'] = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
+            $users = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_users'];
 
         }
+
+        foreach ($users as &$user) {
+            $user['droit'] = $this->users_model->getUserDroit($user['id']);
+        }
+        $data['users'] = $users;
 
         //initializate the panination helper 
         $this->pagination->initialize($config);

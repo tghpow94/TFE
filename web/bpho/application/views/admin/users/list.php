@@ -56,10 +56,12 @@ height: 26px; margin-right: 20px;"');
                     echo '<td>'.$row['dateRegister'].'</td>';
                     echo '<td>'.$row['dateLastConnect'].'</td>';
                     echo '<td>'.$row['phone'].'</td>';
-                    echo '<td class="crud-actions">
-                  <a href="'.site_url("admin").'/users/update/'.$row['id'].'" class="btn btn-info">Editer</a>  
-                  <a href="'.site_url("admin").'/users/delete/'.$row['id'].'" class="btn btn-danger" >Supprimer</a>
-                </td>';
+                    echo '<td class="crud-actions">';
+                    echo '<a href="'.site_url("admin").'/users/update/'.$row['id'].'" class="btn btn-info">Editer</a>';
+                    if ($row['droit'] != 1) {
+                        echo '<a href="' . site_url("admin") . '/users/delete/' . $row['id'] . '" class="btn btn-danger" >Supprimer</a>';
+                    }
+                    echo '</td>';
                     echo '</tr>';
                 }
                 ?>
