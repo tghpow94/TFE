@@ -186,8 +186,8 @@ class Admin_users extends CI_Controller {
             $this->form_validation->set_rules('name', 'name', 'required');
             $this->form_validation->set_rules('firstName', 'firstName', 'required');
             $this->form_validation->set_rules('right', 'right', 'required');
-            $this->form_validation->set_rules('instrument', 'instrument', 'required');
-            $this->form_validation->set_rules('phone', 'phone', 'required');
+            $this->form_validation->set_rules('instrument', 'instrument', '');
+            $this->form_validation->set_rules('phone', 'phone', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())

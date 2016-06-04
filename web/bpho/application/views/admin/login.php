@@ -26,10 +26,15 @@
         echo '</div>';
       }
       echo "<br />";
+      echo '<a href="">Mot de passe oublié ?</a>';
+      echo "<br />";
       echo "<br />";
       echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');
       echo form_close();
-      ?>      
+      ?>
+
+
+
     </div><!--container-->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.7.1.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>

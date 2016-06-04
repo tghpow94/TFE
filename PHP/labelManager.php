@@ -16,7 +16,7 @@ class labelManager {
         ));
 		if ($retour = $resultats->fetch(PDO::FETCH_ASSOC)) {
 			if ($retour[$lang] == null) {
-				$resultat = $this->db->prepare("SELECT id, fr as ".$lang." FROM Labels where id = :id");
+				$resultat = $this->db->prepare("SELECT id, en as ".$lang." FROM Labels where id = :id");
 				$resultat->execute(array(
 					":id" => $id
 				));
@@ -24,7 +24,7 @@ class labelManager {
 			}
 		} else {
 			$retour['id'] = $id;
-			$retour[$lang] = "aucune valeur trouvée.";
+			$retour[$lang] = "";
 		}
 		return $retour;
 	}

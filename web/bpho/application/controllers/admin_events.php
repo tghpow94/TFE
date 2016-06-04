@@ -31,7 +31,7 @@ class Admin_events extends CI_Controller {
         }
 
         //pagination settings
-        $config['per_page'] = 20;
+        $config['per_page'] = 5;
         $config['base_url'] = base_url().'admin/events';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 20;

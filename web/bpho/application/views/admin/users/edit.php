@@ -36,21 +36,21 @@
     ?>
     <fieldset>
         <div class="control-group">
-            <label for="inputError" class="control-label">Nom : </label>
+            <label for="inputError" class="control-label">Nom * : </label>
             <div class="controls">
                 <input type="text" id="" name="name" value="<?php echo $user[0]['name']; ?>" required>
                 <!--<span class="help-inline">Woohoo!</span>-->
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Prénom : </label>
+            <label for="inputError" class="control-label">Prénom * : </label>
             <div class="controls">
                 <input type="text" id="" name="firstName" value="<?php echo $user[0]['firstName']; ?>" required>
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
         <div class="control-group">
-            <label for="inputError" class="control-label">Droit : </label>
+            <label for="inputError" class="control-label">Droit * : </label>
             <div class="controls">
                 <select id="rights" name="right">
                     <?php

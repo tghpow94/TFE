@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Bpho_spect</string>
-    <string name="action_settings">Paramètres</string>
-    <string name="name">Nom</string>
-    <string name="email">Adresse email</string>
-    <string name="message">Votre message</string>
-    <string name="send">Envoyer</string>
-    <string name="event">Evénement</string>
-    <string name="generalInfos">A propos...</string>
-    <string name="noMoreEvent">Pas d\'événement plus ancien</string>
-    <string name="agenda_title">Agenda du BPHO</string>
-    <string name="loading">Chargement...</string>
-    <string name="contact_title">Contactez-nous !</string>
-    <string name="missingData">Veuillez remplir tous les champs.</string>
-    <string name="contact_text">Vous avez une question, une suggestion ? veuillez nous envoyer un message ci dessous.</string>
-    <string name="reservation">Réservation online</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="email">Email address</string>
+    <string name="message">Your message</string>
+    <string name="send">Send</string>
+    <string name="event">Event</string>
+    <string name="generalInfos">About</string>
+    <string name="noMoreEvent">No more event</string>
+    <string name="agenda_title">BPHO\'s agenda</string>
+    <string name="loading">Loading...</string>
+    <string name="contact_title">Contact us !</string>
+    <string name="missingData">Please fill all fields</string>
+    <string name="contact_text">Have a question or a suggestion? please send us a message below.</string>
+    <string name="reservation">Online booking</string>
 </resources>
