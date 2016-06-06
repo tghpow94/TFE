@@ -6,7 +6,9 @@
 	
 	$mailVerif = champsEmailValable($mail);
 	$message = str_replace("<", "", $message);
+	$message = str_replace(";", "", $message);
 	$name = str_replace("<", "", $name);
+	$name = str_replace(";", "", $name);
 	
 	if ($mailVerif) {
 		$to = "thomaspicke2@gmail.com";
@@ -14,6 +16,13 @@
 		$sujet = "BPHO Appli : Message de ".$name;
 		$entete = "From:" . $from . "\r\n";
         $entete .= "Content-Type: text/html; charset=utf-8\r\n";
+		mail($to, $sujet, $message, $entete);
+
+		$to = $mail;
+		$from = "thomaspicke2@gmail.com";
+		$sujet = "BPHO Appli : votre message a bien été envoyé";
+		$entete = "From:" . $from . "\r\n";
+		$entete .= "Content-Type: text/html; charset=utf-8\r\n";
 		mail($to, $sujet, $message, $entete);
 	}
 	

@@ -90,14 +90,11 @@ class Admin_users extends CI_Controller {
 
         }else{
 
-            //clean filter data inside section
             $filter_session_data['search_string_selected'] = null;
             $this->session->set_userdata($filter_session_data);
 
-            //pre selected options
             $data['search_string_selected'] = '';
 
-            //fetch sql data into arrays
             $data['count_users']= $this->users_model->countUsers();
             $users = $this->users_model->getUsersOrderByFirstName('', $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_users'];
@@ -109,7 +106,6 @@ class Admin_users extends CI_Controller {
         }
         $data['users'] = $users;
 
-        //initializate the panination helper 
         $this->pagination->initialize($config);
 
         //load the view

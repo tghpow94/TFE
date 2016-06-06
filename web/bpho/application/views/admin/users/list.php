@@ -45,9 +45,7 @@ height: 26px; margin-right: 20px;"');
                 </thead>
                 <tbody>
                 <?php
-                $test = "test";
-                foreach($users as $row)
-                {
+                foreach($users as $row) {
                     echo '<tr>';
                     echo '<td style="display:none;">'.$row['id'].'</td>';
                     echo '<td>'.$row['firstName'].'</td>';
@@ -73,3 +71,42 @@ height: 26px; margin-right: 20px;"');
 
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <Label>
+        <ID>501283</ID>
+        <FR>texte en Français</FR>
+        <NL>tekst in het Nederlands</NL>
+        <EN>text in English</EN>
+    </Label>
+
+    <Label>
+        <ID>501284</ID>
+    </Label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
