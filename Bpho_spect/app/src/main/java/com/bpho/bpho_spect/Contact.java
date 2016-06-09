@@ -30,6 +30,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by Thomas on 19/03/2016.
@@ -89,10 +90,11 @@ public class Contact extends AppCompatActivity {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/sendMessage.php");
                 ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
                 nameValuePairs.add(new BasicNameValuePair("name", name));
                 nameValuePairs.add(new BasicNameValuePair("mail", mail));
                 nameValuePairs.add(new BasicNameValuePair("message", message));
+                nameValuePairs.add(new BasicNameValuePair("lang", Locale.getDefault().getLanguage()));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 final String response = httpclient.execute(httppost, responseHandler);
                 hideSoftKeyboard(Contact.this);

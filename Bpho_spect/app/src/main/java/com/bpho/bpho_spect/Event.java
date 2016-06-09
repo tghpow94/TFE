@@ -16,7 +16,7 @@ public class Event implements Serializable{
     private String title, thumbnailUrl;
     private String date;
     private String description;
-    private String startDate, endDate;
+    private String startDate, endDate, startTime, endTime;
     private String city, cityCode, address, addressInfos, fullAddress;
     private String price;
     private String reservationLink;
@@ -30,6 +30,7 @@ public class Event implements Serializable{
             setStartDate(obj.getString("startDate"));
             setEndDate(obj.getString("endDate"));
             setDate(getStartDate(), getEndDate());
+            setTime(getStartDate(), getEndDate());
             setCity(obj.getString("city"));
             setCityCode(obj.getString("cityCode"));
             setAddress(obj.getString("address"));
@@ -61,7 +62,11 @@ public class Event implements Serializable{
         return title;
     }
     public void setTitle(String name) {
-        this.title = name;
+        if(name.equals("null")) {
+            this.title = "";
+        } else {
+            this.title = name;
+        }
     }
 
     public String getThumbnailUrl() {
@@ -75,7 +80,11 @@ public class Event implements Serializable{
         return this.description;
     }
     public void setDescription(String description) {
-        this.description = description;
+        if (description.equals("null")) {
+            this.description = "";
+        } else {
+            this.description = description;
+        }
     }
 
     public String getStartDate() {
@@ -103,9 +112,24 @@ public class Event implements Serializable{
         String[] end = endTemp[0].split("-");
         endDate = end[2] + "/" + end[1] + "/" + end[0];
         if (!startDate.equals(endDate))
-            this.date = "Du " + startDate + " au " + endDate;
+            this.date = startDate + " au " + endDate;
         else
-            this.date = "Le " + startDate;
+            this.date = startDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+    public String getEndTime() {
+        return endTime;
+    }
+    public void setTime(String startDate, String endDate) {
+        String[] temp = startDate.split(" ");
+        String[] startTimeTemp = temp[1].split(":");
+        this.startTime = startTimeTemp[0] + ":" + startTimeTemp[1];
+        String[] temp2 = endDate.split(" ");
+        String[] endTimeTemp = temp[1].split(":");
+        this.endTime = endTimeTemp[0] + ":" + endTimeTemp[1];
     }
 
     public String getCity() {
@@ -140,7 +164,29 @@ public class Event implements Serializable{
         return fullAddress;
     }
     public void setFullAddress(String addressInfos, String address, String city, String cityCode) {
-        this.fullAddress = addressInfos + " - " + address + " - " + cityCode + " " + city;
+        String addressTemp = "";
+        if (!addressInfos.equals("null") && !addressInfos.equals("")) {
+            addressTemp = addressTemp + addressInfos;
+        }
+        if (!address.equals("null") && !address.equals("")) {
+            if(!addressTemp.equals("")) {
+                addressTemp = addressTemp + " - ";
+            }
+            addressTemp = addressTemp + address;
+        }
+        if (!cityCode.equals("null") && !cityCode.equals("") && !cityCode.equals("0")) {
+            if(!addressTemp.equals("")) {
+                addressTemp = addressTemp + " - ";
+            }
+            addressTemp = addressTemp + cityCode;
+        }
+        if (!city.equals("null") && !city.equals("")) {
+            if(!addressTemp.equals("")) {
+                addressTemp = addressTemp + " - ";
+            }
+            addressTemp = addressTemp + city;
+        }
+        this.fullAddress = addressTemp;
     }
 
     public String getPrice() {

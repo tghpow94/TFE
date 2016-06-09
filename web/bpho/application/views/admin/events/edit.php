@@ -67,6 +67,23 @@
             </div>
         </div>
         <div class="control-group">
+            <label for="inputError" class="control-label">Catégorie : </label>
+            <div class="controls">
+                <select id="categorie" name="categorie">
+                    <?php
+                    foreach($categories as $categorie) {
+                        echo '<option value="'.$categorie["id"].'" ';
+                        if ($categorie['id'] == $event['categorie']) {
+                            echo 'selected="selected"';
+                        }
+                        echo ' >'.$categorie["name"].'</option>';
+                    }
+                    ?>
+                </select>
+                <!--<span class="help-inline">OOps</span>-->
+            </div>
+        </div>
+        <div class="control-group">
             <label for="inputError" class="control-label">Date : </label>
             <div id="datetimepicker" class="input-append date">
                 <input style="width: 300px;" type="text" id="dateInput" name="date" value="<?php echo $event['startDate']; ?>" required></input>

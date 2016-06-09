@@ -123,6 +123,7 @@ class Admin_events extends CI_Controller {
             $this->form_validation->set_rules('descriptionFR', 'descriptionFR', 'trim');
             $this->form_validation->set_rules('descriptionNL', 'descriptionNL', 'trim');
             $this->form_validation->set_rules('descriptionEN', 'descriptionEN', 'trim');
+            $this->form_validation->set_rules('categorie', 'categorie', '');
             $this->form_validation->set_rules('date', 'date', '');
             $this->form_validation->set_rules('city', 'city', 'trim');
             $this->form_validation->set_rules('cityCode', 'cityCode', 'trim');
@@ -144,8 +145,8 @@ class Admin_events extends CI_Controller {
                 $this->input->post('descriptionNL') != "" ? $descriptionNL = $this->input->post('descriptionNL') : $descriptionNL = null;
                 $this->input->post('descriptionEN') != "" ? $descriptionEN = $this->input->post('descriptionEN') : $descriptionEN = null;
 
-                $titleID = $this->labels_model->addLabel($titleFR, $titleNL, $titleEN);
-                $descriptionID = $this->labels_model->addLabel($descriptionFR, $descriptionNL, $descriptionEN);
+                $titleID = $this->labels_model->addLabel2($titleFR, $titleNL, $titleEN);
+                $descriptionID = $this->labels_model->addLabel2($descriptionFR, $descriptionNL, $descriptionEN);
 
                 $fullDate = explode(' ', $this->input->post('date'));
                 $dateArray = explode('/', $fullDate[0]);
@@ -160,13 +161,15 @@ class Admin_events extends CI_Controller {
 
                 $this->input->post('reservation') != "" ? $reservation = $this->input->post('reservation') : $reservation = "http://www.bpho.be/concerts/";
 
+                $this->input->post('cityCode') == 0 ? $cityCode = "" : $cityCode = $this->input->post('cityCode');
+
                 $data_to_store = array(
                     'title' => $titleID,
                     'description' => $descriptionID,
                     'startDate' => $finalDate,
                     'endDate' => $finalDate,
                     'city' => $this->input->post('city'),
-                    'cityCode' => $this->input->post('cityCode'),
+                    'cityCode' => $cityCode,
                     'addressInfos' => $this->input->post('addressInfos'),
                     'price' => $this->input->post('price'),
                     'reservation' => $reservation,
@@ -179,13 +182,14 @@ class Admin_events extends CI_Controller {
                     $data['flash_message'] = FALSE;
                 }
 
-                $eventID = $this->events_model->getEventID($titleFR);
+                $eventID = $this->events_model->getEventID();
                 if(isset($_FILES['image']) && $_FILES['image']['tmp_name'] != "") {
                     $this->events_model->uploadImage("../images/", "e".$eventID, $_FILES);
                 } else {
                     copy("../images/no-image.jpg", "../images/e".$eventID.".jpg");
                 }
 
+                $this->events_model->addCategory($eventID, $this->input->post("categorie"));
 
                 if (isset($_POST['users'][0])) {
                     $musiciens = $_POST['users'];
@@ -207,6 +211,8 @@ class Admin_events extends CI_Controller {
             }
         }
         $data['users'] = $users;
+
+        $data['categories'] = $this->events_model->getCategories();
 
         //load the view
         $data['main_content'] = 'admin/events/add';
@@ -232,6 +238,7 @@ class Admin_events extends CI_Controller {
             $this->form_validation->set_rules('descriptionNL', 'descriptionNL', 'trim');
             $this->form_validation->set_rules('descriptionEN', 'descriptionEN', 'trim');
             $this->form_validation->set_rules('date', 'date', '');
+            $this->form_validation->set_rules('categorie', 'categorie', '');
             $this->form_validation->set_rules('city', 'city', 'trim');
             $this->form_validation->set_rules('cityCode', 'cityCode', 'trim');
             $this->form_validation->set_rules('address', 'address', 'trim');
@@ -251,8 +258,12 @@ class Admin_events extends CI_Controller {
                 $this->input->post('descriptionNL') != "" ? $descriptionNL = $this->input->post('descriptionNL') : $descriptionNL = null;
                 $this->input->post('descriptionEN') != "" ? $descriptionEN = $this->input->post('descriptionEN') : $descriptionEN = null;
 
-                $titleID = $this->labels_model->addLabel($titleFR, $titleNL, $titleEN);
-                $descriptionID = $this->labels_model->addLabel($descriptionFR, $descriptionNL, $descriptionEN);
+                $event = $this->events_model->getEventByID($id);
+                $titleID = $event['title'];
+                $descriptionID = $event['description'];
+
+                $this->labels_model->editLabel($titleID, $titleFR, $titleNL, $titleEN);
+                $this->labels_model->editLabel($descriptionID, $descriptionFR, $descriptionNL, $descriptionEN);
 
                 $fullDate = explode(' ', $this->input->post('date'));
                 $dateArray = explode('/', $fullDate[0]);
@@ -291,6 +302,8 @@ class Admin_events extends CI_Controller {
                     $this->events_model->uploadImage("../images/", "e".$id, $_FILES);
                 }
 
+                $this->events_model->addCategory($id, $this->input->post("categorie"));
+
                 if (isset($_POST['users'][0])) {
                     $musiciens = $_POST['users'];
                     $this->events_model->deleteEventUsers($id);
@@ -327,6 +340,9 @@ class Admin_events extends CI_Controller {
         $data['event']['descriptionFR'] = $description['fr'];
         $data['event']['descriptionNL'] = $description['nl'];
         $data['event']['descriptionEN'] = $description['en'];
+
+        $data['event']['categorie'] = $this->events_model->getEventCategory($id);
+        $data['categories'] = $this->events_model->getCategories();
 
         $users = $this->users_model->getUsersOrderByFirstName();
         foreach($users as &$user) {

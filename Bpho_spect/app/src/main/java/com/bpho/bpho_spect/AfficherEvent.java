@@ -53,7 +53,7 @@ public class AfficherEvent extends AppCompatActivity {
         imageLoader = AppController.getInstance().getImageLoader();
         thumbNail.setImageUrl(event.getThumbnailUrl(), imageLoader);
         title.setText(event.getTitle());
-        date.setText(event.getDate());
+        date.setText(event.getDate() + " - " + event.getStartTime());
         address.setText(event.getFullAddress());
         prix.setText(event.getPrice());
         description.setText(Html.fromHtml(event.getDescription()));

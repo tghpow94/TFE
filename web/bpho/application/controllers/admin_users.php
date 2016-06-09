@@ -131,7 +131,7 @@ class Admin_users extends CI_Controller {
             $this->form_validation->set_rules('phone', 'phone', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
-            //if the form has passed through the validation
+
             if ($this->form_validation->run() && $this->input->post('password') == $this->input->post('password2')) {
                 $trash = array("/", ".");
                 $name = $this->input->post('name');
@@ -147,7 +147,7 @@ class Admin_users extends CI_Controller {
                     'instrument' => $this->input->post('instrument'),
                     'phone' => str_replace($trash, "",$this->input->post('phone'))
                 );
-                //if the insert has returned true then we show the flash message
+
                 if($this->users_model->create_member($data_to_store)){
                     $data['flash_message'] = TRUE;
                 }else{

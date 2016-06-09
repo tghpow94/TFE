@@ -17,9 +17,8 @@ class Events_model extends CI_Model {
      * @param $title : event's title
      * @return mixed : event's id
      */
-    function getEventID($title) {
-        $event = $this->getEventByTitle($title);
-        return $event[0]["id"];
+    function getEventID() {
+        return $this->db->insert_id();
     }
 
     /**
@@ -123,8 +122,22 @@ class Events_model extends CI_Model {
      * @return boolean
      */
     function delete_Event($id){
+        $event = $this->getEventByID($id);
+
+        $this->db->where('id', $event['title']);
+        $this->db->delete('Labels');
+        $this->db->where('id', $event['description']);
+        $this->db->delete('Labels');
+
+        $this->db->where('idEvent', $id);
+        $this->db->delete('Event_category');
+
+        $this->db->where('idEvent', $id);
+        $this->db->delete('Event_users');
+
         $this->db->where('id', $id);
         $this->db->delete('Events');
+        $this->deleteEventUsers($id);
     }
 
     /**
@@ -134,6 +147,29 @@ class Events_model extends CI_Model {
     function addEvent($data) {
         $insert = $this->db->insert('Events', $data);
         return $insert;
+    }
+
+    function getCategories() {
+        $query = $this->db->get('Category');
+        return $query->result_array();
+    }
+
+    function getEventCategory($id) {
+        $this->db->select('idCategory');
+        $this->db->where('idEvent', $id);
+        $query = $this->db->get('Event_category');
+        $result = $query->result_array();
+        return $result[0];
+    }
+
+    function addCategory($idEvent, $idCategory) {
+        $this->db->where('idEvent', $idEvent);
+        $this->db->delete('Event_category');
+        $data = array(
+            "idEvent" => $idEvent,
+            "idCategory" => $idCategory
+        );
+        $this->db->insert('Event_category', $data);
     }
 
     function addEventUser($idEvent, $idUser) {

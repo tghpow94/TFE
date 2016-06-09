@@ -12,7 +12,7 @@ class EventManager {
 	public function getAllEvents($offset, $lang) {
 		$date = date("Y-m-d H:i:s");
         $newDate = date("Y-m-d H:i:s", strtotime("$date -$offset month"));
-		$resultats = $this->db->prepare("SELECT * FROM Events where startDate > :newDate ORDER BY startDate");
+		$resultats = $this->db->prepare("SELECT * FROM Events where startDate > :newDate  ORDER BY startDate");
         $resultats->execute(array(
 			":newDate" => $newDate
 		));

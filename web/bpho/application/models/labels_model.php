@@ -69,6 +69,33 @@ class Labels_model extends CI_Model {
     }
 
     /**
+     * Add a label in the label table
+     * @param $fr : label FR
+     * @param $nl : label NL
+     * @param $en : label EN
+     */
+    function addLabel2($fr, $nl, $en) {
+        $data = array(
+            'fr' => $fr,
+            'nl' => $nl,
+            'en' => $en
+        );
+        $this->db->insert('Labels', $data);
+
+        return $this->db->insert_id();
+    }
+
+    function editLabel($id, $fr, $nl, $en) {
+        $data = array(
+            'fr' => $fr,
+            'nl' => $nl,
+            'en' => $en
+        );
+        $this->db->where('id', $id);
+        $this->db->update('Labels', $data);
+    }
+
+    /**
      * return the label ID of the label $fr
      * @param $fr : label to look for
      */

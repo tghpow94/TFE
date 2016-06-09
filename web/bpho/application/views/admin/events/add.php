@@ -7,7 +7,6 @@
     </div>
 
     <?php
-
     //flash messages
     if(isset($flash_message)){
         if($flash_message == TRUE)
@@ -77,6 +76,18 @@
                 <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px;" placeholder="Français" id="descriptionFRInput" name="descriptionFR"><?php echo set_value('descriptionFR'); ?></textarea>
                 <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" placeholder="Néerlandais" id="descriptionNLInput" name="descriptionNL"  ><?php echo set_value('descriptionNL'); ?></textarea>
                 <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" placeholder="Anglais" id="descriptionENInput" name="descriptionEN"  ><?php echo set_value('descriptionEN'); ?></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="inputError" class="control-label">Catégorie : </label>
+            <div class="controls">
+                <select style="width: 300px;" id="categorie" name="categorie" value="<?php echo set_value('categorie'); ?>">
+                    <?php
+                    foreach($categories as $categorie) {
+                        echo '<option value="'.$categorie["id"].'">'.$categorie["name"].'</option>';
+                    }
+                    ?>
+                </select>
             </div>
         </div>
         <div class="control-group">
