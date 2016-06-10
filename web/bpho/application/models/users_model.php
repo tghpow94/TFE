@@ -16,8 +16,80 @@ class Users_model extends CI_Model {
 		$this->db->where('password', $password);
 		$query = $this->db->get('Users');
 		if($query->num_rows == 1) {
+			$data = array(
+				"dateLastConnect" => date("Y-m-d H:i:s")
+			);
+			$this->db->where('email', $user_name);
+			$this->db->update('Users', $data);
 			return true;
 		}
+		return false;
+	}
+
+	function passwordreset($mail) {
+		$this->db->where('email', $mail);
+		$query = $this->db->get('Users');
+		if($query->num_rows < 1) {
+			return false;
+		} else {
+			$rows = $query->result_array();
+			$user = $rows[0];
+
+			$code = $this->genererCode();
+
+			$this->db->where('idUser', $user['id']);
+			$this->db->delete('Activation');
+			$dataActivation = array(
+				"idUser" => $user['id'],
+				"code" => $code,
+				"date" => date("Y-m-d H:i:s"),
+				"description" => "mot de passe oublié"
+			);
+
+			$this->db->insert('Activation', $dataActivation);
+
+			$message = "Bonjour, <br><br>
+						Vous avez demandé à réinitialiser votre mot de passe.<br><br>
+						Cliquez sur le lien suivant pour finaliser la procédure : <a href='http://91.121.151.137/TFE/bpho/admin/passwordreset_final?code=".$code."'>http://91.121.151.137/TFE/bpho/admin/passwordreset_final?code=".$code."</a>";
+
+			$to = $mail;
+			$from = "thomaspicke2@gmail.com";
+			$sujet = "BPHO : Réinitialisation de votre mot de passe";
+			$entete = "From:" . $from . "\r\n";
+			$entete .= "Content-Type: text/html; charset=utf-8\r\n";
+			mail($to, $sujet, $message, $entete);
+
+			return true;
+		}
+	}
+
+	function checkCode($code, $description) {
+		$this->db->where('code', $code);
+		$this->db->where('description', $description);
+		$query = $this->db->get('Activation');
+		if ($query->num_rows == 1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	function deleteActivationMdp($id, $description) {
+		$this->db->where('idUser', $id);
+		$this->db->where('description', $description);
+		$this->db->delete('Activation');
+	}
+
+	function genererCode() {
+		$characts    = 'abcdefghijklmnopqrstuvwxyz';
+		$characts   .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$characts   .= '1234567890';
+		$code_aleatoire      = '';
+
+		for($i=0;$i < 10;$i++){
+			$code_aleatoire .= substr($characts,rand()%(strlen($characts)),1);
+		}
+		return $code_aleatoire;
 	}
 
 	function getUserByName($user_name) {
@@ -81,6 +153,25 @@ class Users_model extends CI_Model {
 		    $user['is_logged_in'] = $udata['is_logged_in']; 
 		}
 		return $user;
+	}
+
+	function getActivationByCode($code) {
+		$this->db->where('code', $code);
+		$this->db->where('description', "mot de passe oublié");
+		$query = $this->db->get('Activation');
+		if($query->num_rows == 1 ) {
+			$result = $query->result_array();
+			return $result[0];
+		}
+		return false;
+	}
+
+	function updateMdp($password, $salt, $id) {
+		$data = array(
+			"password" => hash('sha256', $password.$salt)
+		);
+		$this->db->where('id', $id);
+		$this->db->update('Users', $data);
 	}
 
 	/**
@@ -289,8 +380,16 @@ class Users_model extends CI_Model {
 	 * @return boolean
 	 */
 	function delete_user($id){
-		$this->db->where('id', $id);
-		$this->db->delete('Users');
+		$this->db->where('idUser', $id);
+		$query = $this->db->get('User_right');
+		$resultat = $query->result_array();
+		$droit = $resultat[0]['idRight'];
+		if ($droit == 1) {
+			return false;
+		} else {
+			$this->db->where('id', $id);
+			$this->db->delete('Users');
+		}
 	}
 }
 

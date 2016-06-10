@@ -26,7 +26,8 @@
         echo '</div>';
       }
       echo "<br />";
-      echo '<a href="">Mot de passe oublié ?</a>';
+      echo anchor('admin/passwordreset', 'Mot de passe oublié ?');
+      //echo '<a href="http://91.121.151.137/TFE/bpho/passwordreset.php">Mot de passe oublié ?</a>';
       echo "<br />";
       echo "<br />";
       echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');
