@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bpho_music</string>
+    <string name="mailHint">Email address</string>
+    <string name="passwordHint">Password</string>
+    <string name="connexion">Log in</string>
+    <string name="forgotPassword">Forgot account ?</string>
+    <string name="validateUser">Validating User...</string>
+    <string name="wrongConnect">Wrong Email or password</string>
+    <string name="connected">Successfully connected</string>
+    <string name="send">Send</string>
+    <string name="resetPasswordSent">An E-mail was sent to reset your password</string>
+    <string name="incorrectMail">This E-mail is incorrect</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="loading">Loading...</string>
+    <string name="noMoreEvent">No more event</string>
+    <string name="eventsPerso">Personnal events</string>
+    <string name="navigation">Navigation</string>
+</resources>

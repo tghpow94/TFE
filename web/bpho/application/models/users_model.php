@@ -16,14 +16,17 @@ class Users_model extends CI_Model {
 		$this->db->where('password', $password);
 		$query = $this->db->get('Users');
 		if($query->num_rows == 1) {
-			$data = array(
-				"dateLastConnect" => date("Y-m-d H:i:s")
-			);
-			$this->db->where('email', $user_name);
-			$this->db->update('Users', $data);
 			return true;
 		}
 		return false;
+	}
+
+	function updateLastConnect($mail) {
+		$data = array(
+			"dateLastConnect" => date("Y-m-d H:i:s")
+		);
+		$this->db->where('email', $mail);
+		$this->db->update('Users', $data);
 	}
 
 	function passwordreset($mail) {
@@ -38,6 +41,7 @@ class Users_model extends CI_Model {
 			$code = $this->genererCode();
 
 			$this->db->where('idUser', $user['id']);
+			$this->db->where('description', "mot de passe oublié");
 			$this->db->delete('Activation');
 			$dataActivation = array(
 				"idUser" => $user['id'],

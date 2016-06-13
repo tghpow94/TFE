@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bpho_music</string>
+    <string name="mailHint">mailadres</string>
+    <string name="passwordHint">Wachtwoord</string>
+    <string name="connexion">Aanmelden</string>
+    <string name="forgotPassword">Account vergeten ?</string>
+    <string name="validateUser">Bevestiging gebruiker....</string>
+    <string name="wrongConnect">Onjuist informaties</string>
+    <string name="connected">Succes aangesloten</string>
+    <string name="send">Sturen</string>
+    <string name="resetPasswordSent">Een e-mail werd verzonden naar u om uw wachtwoord opnieuw in te stellen</string>
+    <string name="incorrectMail">Dit e-mail is onjuist</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="loading">Lading...</string>
+    <string name="noMoreEvent">Geen oudste event</string>
+    <string name="eventsPerso">Personeel events</string>
+    <string name="navigation">Navigatie</string>
+</resources>

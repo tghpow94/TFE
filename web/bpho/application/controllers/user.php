@@ -41,7 +41,7 @@ class User extends CI_Controller {
 		if($is_valid) {
 			$userDroit = $this->Users_model->getUserDroitByEmail($user_name);
 			if($userDroit <= 2 && $userDroit != null) {
-
+				$this->Users_model->updateLastConnect($user_name);
 				$data = array(
 					'user_name' => $user_name,
 					'is_logged_in' => true

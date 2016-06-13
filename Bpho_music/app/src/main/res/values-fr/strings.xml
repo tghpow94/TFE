@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bpho_music</string>
+    <string name="mailHint">Adresse mail</string>
+    <string name="passwordHint">Mot de passe</string>
+    <string name="connexion">Connexion</string>
+    <string name="forgotPassword">Mot de passe oublié ?</string>
+    <string name="validateUser">Validation de l\'utilisateur...</string>
+    <string name="wrongConnect">Informations incorrectes</string>
+    <string name="connected">Connexion réussie</string>
+    <string name="send">Envoyer</string>
+    <string name="resetPasswordSent">Un email vous a été envoyé pour réinitialiser votre mot de passe</string>
+    <string name="incorrectMail">Cette adresse mail est incorrecte</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="loading">Chargement...</string>
+    <string name="noMoreEvent">Pas d\'événement plus ancien</string>
+    <string name="eventsPerso">Evénements personnels</string>
+    <string name="navigation">Navigation</string>
+</resources>
