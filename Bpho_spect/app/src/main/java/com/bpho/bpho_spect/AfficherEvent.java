@@ -33,7 +33,6 @@ public class AfficherEvent extends AppCompatActivity {
         setContentView(R.layout.layout_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        int i = 0;
         getSupportActionBar().setTitle(getString(R.string.event));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (android.os.Build.VERSION.SDK_INT > 9) {

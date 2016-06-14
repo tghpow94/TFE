@@ -2,7 +2,7 @@
 
     <div class="page-header users-header">
         <h2>
-            Evenements
+            Alertes
             <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success">Ajouter un nouveau</a>
         </h2>
     </div>
@@ -15,7 +15,7 @@
 
                 $attributes = array('class' => 'form-inline reset-margin', 'id' => 'myform');
 
-                echo form_open('admin/events', $attributes);
+                echo form_open('admin/alertes', $attributes);
 
                 echo form_label('Search:', 'search_string');
                 echo form_input('search_string', $search_string_selected, 'style="width: 170px;
@@ -34,28 +34,23 @@ height: 26px; margin-right: 20px;"');
                 <thead>
                 <tr>
                     <!--<th class="header">#</th>-->
-                    <th class="yellow header headerSortDown">Titre</th>
-                    <th class="red header">Date</th>
-                    <th class="red header">Adresse</th>
-                    <th class="red header">Actions</th>
+                    <th class="yellow header headerSortDown">Id</th>
+                    <th class="red header">idEvent</th>
+                    <th class="red header">Text</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                foreach($events as $row)
-                {
+                foreach($alertes as $row) {
+
                     echo '<tr>';
                     echo '<td style="display:none;">'.$row['id'].'</td>';
-                    if (strlen($row['title']) > 30)
-                        echo '<td class="testTD">' . substr($row['title'], 0, 30) . '...</td>';
-                    else
-                        echo '<td class="testTD">'.$row['title'].'</td>';
-                    echo '<td class="testTD">'.date("d/m/Y H\hi", strtotime($row['date'])).'</td>';
-                    echo '<td class="testTD">'.$row['city'].' - '.$row['addressInfos'].'</td>';
+                    echo '<td class="testTD">'.$row['id'].'</td>';
+                    echo '<td class="testTD">'.$row['idEvent'].'</td>';
+                    echo '<td class="testTD">'.$row['text'].'</td>';
                     echo '<td style="width: 210px;" class="crud-actions">
-                  <a href="'.site_url("admin").'/events/update/'.$row['id'].'" class="btn btn-info">Editer</a>  
-                  <a href="'.site_url("admin").'/events/delete/'.$row['id'].'" class="btn btn-danger">Supprimer</a>
-                  <a href="'.site_url("admin").'/alertes/update/'.$row['id'].'" class="btn btn-warning">Alertes</a>
+                  <a href="'.site_url("admin").'/alertes/update/'.$row['id'].'" class="btn btn-info">Editer</a>
+                  <a href="'.site_url("admin").'/alertes/delete/'.$row['id'].'" class="btn btn-danger">Supprimer</a>
                 </td>';
                     echo '</tr>';
                 }

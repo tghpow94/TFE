@@ -4,13 +4,11 @@ require "db_connect.php";
 require "eventManager.php";
 require "labelManager.php";
 
-$offset = $_POST['offset'];
-$lang = $_POST['lang'];
-$type = $_POST['type'];
+$idEvent = $_POST['idEvent'];
 $idUser = $_POST['idUser'];
 
 $em = new eventManager(connexionDb());
-$tab = $em->getAllEvents($offset, $lang, $type, $idUser);
+$tab = $em->getEventAlerts($idEvent, $idUser);
 echo json_encode($tab);
 
 ?>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    tools:context="com.bpho.bpho_music.AfficherEvent"
+    android:id="@+id/drawer_layout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/headEvent">
+
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="150dp"
+                    android:layout_height="212dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date"
+                    android:layout_toRightOf="@id/thumbnail"
+                    android:text="date"
+                    android:textSize="@dimen/title"
+                    android:textStyle="bold"
+                    android:textColor="@color/pourpre"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title"
+                    android:text="titre"
+                    android:textSize="@dimen/title"
+                    android:layout_toRightOf="@id/thumbnail"
+                    android:layout_below="@id/date"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/address"
+                    android:text="address"
+                    android:textSize="@dimen/address"
+                    android:layout_below="@id/title"
+                    android:layout_toRightOf="@id/thumbnail"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prix"
+                    android:layout_toRightOf="@id/thumbnail"
+                    android:layout_below="@id/address"
+                    android:text="prix"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reservation"
+                    android:layout_toRightOf="@id/thumbnail"
+                    android:layout_below="@id/prix"
+                    android:text="@string/reservation"
+                    android:layout_marginTop="5dp"
+                    android:linksClickable="true"
+                    android:onClick="launchReservation"
+                    android:textColor="@color/pourpre"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/headEvent"
+                android:id="@+id/description"
+                android:textSize="@dimen/address"
+                android:text="description"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ListView
+        android:id="@+id/menu"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:background="#ffeeeeee" />
+
+</android.support.v4.widget.DrawerLayout>

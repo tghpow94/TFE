@@ -55,6 +55,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout swipeRefreshLayout;
     private int offSet = 0;
     private String langue = Locale.getDefault().getLanguage();
+    String type = "general";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,12 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         pDialog.setMessage(getString(R.string.loading));
         pDialog.show();
 
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
+        if (type == null) {
+            type = "general";
+        }
+
         onRefresh();
 
         addOptionOnClick(eventList);
@@ -97,33 +104,41 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
+        String getEventsResponse = "";
         String id = "-1";
-        if (offSet > 0) {
+        if (offSet > 0 && eventList.size() > 0) {
             id = eventList.get(0).getId();
         }
         eventList.clear();
         JSONArray response = null;
         try {
-            response = new JSONArray(getEvents());
+            getEventsResponse = getEvents();
+            if(getEventsResponse.contains("{")) {
+                response = new JSONArray(getEventsResponse);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < response.length(); i++) {
-            try {
-                JSONObject obj = response.getJSONObject(i);
-                Event event = new Event(obj);
-                eventList.add(event);
+        if (response != null) {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject obj = response.getJSONObject(i);
+                    Event event = new Event(obj);
+                    eventList.add(event);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
-        if (id.equals(eventList.get(0).getId()) && offSet < 60) {
+        if ((!getEventsResponse.contains("{") || id.equals(eventList.get(0).getId())) && offSet < 60) {
             onRefresh();
-        } else if (offSet >= 60) {
-            Toast.makeText(Agenda.this, getString(R.string.noMoreEvent), Toast.LENGTH_SHORT).show();
+        } else if (offSet >= 60 && getEventsResponse.contains("{")) {
+            Toast.makeText(Agenda.this, getString(R.string.noMoreEvent), Toast.LENGTH_LONG).show();
+        } else if (offSet >= 60 && !getEventsResponse.contains("{")){
+            Toast.makeText(Agenda.this, getString(R.string.noUserEvents), Toast.LENGTH_LONG).show();
         } else {
             adapter.notifyDataSetChanged();
         }
@@ -140,9 +155,9 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     }
 
     public void afficherEvent(int position, List<Event> list){
-        //Intent intent = new Intent(this, AfficherEvent.class);
-        //intent.putExtra("event", list.get(position));
-        //startActivity(intent);
+        Intent intent = new Intent(this, AfficherEvent.class);
+        intent.putExtra("event", list.get(position));
+        startActivity(intent);
     }
 
     @Override
@@ -163,9 +178,11 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
             nameValuePairs.add(new BasicNameValuePair("offset", String.valueOf(offSet)));
             nameValuePairs.add(new BasicNameValuePair("lang", langue));
+            nameValuePairs.add(new BasicNameValuePair("type", type));
+            nameValuePairs.add(new BasicNameValuePair("idUser", session.getId()));
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             final String response = httpclient.execute(httppost, responseHandler);
@@ -216,8 +233,9 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                     //startActivity(intent);
                 }
                 if (position == 2) {
-                    //Intent intent = new Intent(Agenda.this, Profil.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(Agenda.this, Profil.class);
+                    intent.putExtra("id", Integer.valueOf(session.getId()));
+                    startActivity(intent);
                 }
                 if (position == 3) {
                     logoutUser();
@@ -260,7 +278,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_perso, menu);
+        getMenuInflater().inflate(R.menu.menu_agenda, menu);
         return true;
     }
 
@@ -270,8 +288,14 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         switch (item.getItemId()) {
             case R.id.events_perso:
                 Intent intent = new Intent(Agenda.this, Agenda.class);
-                intent.putExtra("type", "general");
+                intent.putExtra("type", "perso");
                 startActivity(intent);
+                break;
+            case R.id.events_general:
+                Intent intent2 = new Intent(Agenda.this, Agenda.class);
+                intent2.putExtra("type", "general");
+                startActivity(intent2);
+                break;
         }
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {

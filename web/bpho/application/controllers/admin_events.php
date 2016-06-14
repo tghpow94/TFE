@@ -11,6 +11,7 @@ class Admin_events extends CI_Controller {
         $this->load->model('instruments_model');
         $this->load->model('users_model');
         $this->load->model('labels_model');
+        $this->load->model('alertes_model');
 
         if(!$this->session->userdata('is_logged_in')){
             redirect('admin/login');
@@ -110,11 +111,9 @@ class Admin_events extends CI_Controller {
 
     }//index
 
-    public function add()
-    {
+    public function add() {
         //if save button was clicked, get the data sent via post
-        if ($this->input->server('REQUEST_METHOD') === 'POST')
-        {
+        if ($this->input->server('REQUEST_METHOD') === 'POST') {
 
             //form validation
             $this->form_validation->set_rules('titleFR', 'titleFR', 'trim|required');
@@ -222,14 +221,13 @@ class Admin_events extends CI_Controller {
     /**
      * Update item by his id
      */
-    public function update()
-    {
+    public function update() {
         //event id
         $id = $this->uri->segment(4);
 
         //if save button was clicked, get the data sent via post
-        if ($this->input->server('REQUEST_METHOD') === 'POST')
-        {
+        if ($this->input->server('REQUEST_METHOD') === 'POST') {
+
             //form validation
             $this->form_validation->set_rules('titleFR', 'titleFR', 'trim|required');
             $this->form_validation->set_rules('titleNL', 'titleNL', 'trim');
@@ -248,8 +246,8 @@ class Admin_events extends CI_Controller {
             $this->form_validation->set_rules('users', 'users', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
-            if ($this->form_validation->run())
-            {
+            if ($this->form_validation->run()) {
+
                 $this->input->post('titleFR') != "" ? $titleFR = $this->input->post('titleFR') : $titleFR = null;
                 $this->input->post('titleNL') != "" ? $titleNL = $this->input->post('titleNL') : $titleNL = null;
                 $this->input->post('titleEN') != "" ? $titleEN = $this->input->post('titleEN') : $titleEN = null;
@@ -294,7 +292,7 @@ class Admin_events extends CI_Controller {
                 //if the insert has returned true then we show the flash message
                 if($this->events_model->updateEvent($id, $data_to_store) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
-                }else{
+                } else {
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
 
@@ -366,11 +364,12 @@ class Admin_events extends CI_Controller {
     /**
      * Delete event by his id
      */
-    public function delete()
-    {
+    public function delete() {
+
         $id = $this->uri->segment(4);
         $this->events_model->delete_event($id);
         redirect('admin/events');
+
     }
 
 }

@@ -15,6 +15,11 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="loading">Lading...</string>
     <string name="noMoreEvent">Geen oudste event</string>
-    <string name="eventsPerso">Personeel events</string>
+    <string name="eventsPerso">Mijn evenementen</string>
     <string name="navigation">Navigatie</string>
+    <string name="eventsGeneral">Alle evenementen</string>
+    <string name="noUserEvents">U hebt geen evenementen</string>
+    <string name="event">Evenement</string>
+    <string name="reservation">Online boeking</string>
+    <string name="alerts">Alerts</string>
 </resources>

@@ -76,6 +76,23 @@
 				{title: 'Titre 2', block: 'h2'}
 			]
 		});
+		tinymce.init({
+			selector: '#messageAlerte',
+			toolbar: 'styleselect bold italic underline ',
+			menubar: false,
+			statusbar: false,
+			width: 500,
+			height: 150,
+			max_height: 500,
+			max_width: 700,
+			min_height: 100,
+			min_width: 300,
+			resize: 'both',
+			style_formats: [
+				{title: 'Titre 1', block: 'h1'},
+				{title: 'Titre 2', block: 'h2'}
+			]
+		});
 	</script>
 	<script>
 		function myFunction() {

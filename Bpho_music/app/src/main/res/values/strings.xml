@@ -14,6 +14,11 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="loading">Loading...</string>
     <string name="noMoreEvent">No more event</string>
-    <string name="eventsPerso">Personnal events</string>
+    <string name="eventsPerso">My events</string>
     <string name="navigation">Navigation</string>
+    <string name="eventsGeneral">All events</string>
+    <string name="noUserEvents">You don\'t have any event</string>
+    <string name="event">Event</string>
+    <string name="reservation">Online booking</string>
+    <string name="alerts">Alerts</string>
 </resources>

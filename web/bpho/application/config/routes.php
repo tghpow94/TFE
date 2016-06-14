@@ -72,6 +72,13 @@ $route['admin/users/update/(:any)'] = 'admin_users/update/$1';
 $route['admin/users/delete/(:any)'] = 'admin_users/delete/$1';
 $route['admin/users/(:any)'] = 'admin_users/index/$1';
 
+$route['admin/alertes'] = 'admin_alertes/index';
+$route['admin/alertes/add'] = 'admin_alertes/add';
+$route['admin/alertes/update'] = 'admin_alertes/update';
+$route['admin/alertes/update/(:any)'] = 'admin_alertes/update/$1';
+$route['admin/alertes/delete/(:any)'] = 'admin_alertes/delete/$1';
+$route['admin/alertes/(:any)'] = 'admin_alertes/index/$1';
+
 $route['admin/events'] = 'admin_events/index';
 $route['admin/events/add'] = 'admin_events/add';
 $route['admin/events/update'] = 'admin_events/update';

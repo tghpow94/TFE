@@ -163,9 +163,11 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
             nameValuePairs.add(new BasicNameValuePair("offset", String.valueOf(offSet)));
             nameValuePairs.add(new BasicNameValuePair("lang", langue));
+            nameValuePairs.add(new BasicNameValuePair("type", "general"));
+            nameValuePairs.add(new BasicNameValuePair("idUser", "0"));
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             final String response = httpclient.execute(httppost, responseHandler);
