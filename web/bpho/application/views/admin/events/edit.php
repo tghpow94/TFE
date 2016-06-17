@@ -16,7 +16,7 @@
         {
             echo '<div class="alert alert-success">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo 'Données de l\'événement mises à jour avec succès !';
+            echo 'Données de l\'événement mises à jour avec <strong>succès</strong> !';
             echo '</div>';
         }else{
             echo '<div class="alert alert-error">';
@@ -34,7 +34,7 @@
 
     echo form_open_multipart('admin/events/update/'.$this->uri->segment(4).'', $attributes);
     ?>
-    <fieldset>
+    <fieldset style="width: 105%;">
         <script>
             $(document).ready(function() {
                 $('option').mousedown(function(e) {
@@ -69,7 +69,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Catégorie : </label>
             <div class="controls">
-                <select id="categorie" name="categorie">
+                <select style="width: 310px;" onchange="changeCat()" id="categorie" name="categorie">
                     <?php
                     foreach($categories as $categorie) {
                         echo '<option value="'.$categorie["id"].'" ';
@@ -80,16 +80,46 @@
                     }
                     ?>
                 </select>
-                <!--<span class="help-inline">OOps</span>-->
+                <span id="warningChangeCat" style="color: orange; margin-left: 10px; visibility: collapse;">Les associations entre ce concert et ses répétitions seront supprimées</span>
             </div>
         </div>
+
+        <div class="control-group" id="blocConcert"
+
+            <?php
+            if($event['categorie'] == 2) {
+                echo ' style="display: none;" ';
+            }
+            ?>
+
+        >
+            <label for="inputError" class="control-label">Concert associé : </label>
+            <div class="controls">
+                <select style="width: 310px;" id="concert" name="concert" value="<?php echo set_value('concert'); ?>">
+                    <option value="0"></option>
+                    <?php
+                    foreach($concerts as $concert) {
+                        if($event['concert'] == $concert['id']) {
+                            echo '<option value="' . $concert["id"] . '" selected>' . $concert["title"] . '</option>';
+                        } else {
+                            echo '<option value="' . $concert["id"] . '" >' . $concert["title"] . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <input type="hidden" id="oldCategory" name="oldCategory" value="<?php echo $event['categorie']; ?>">
+
         <div class="control-group">
             <label for="inputError" class="control-label">Date : </label>
             <div id="datetimepicker" class="input-append date">
-                <input style="width: 300px;" type="text" id="dateInput" name="date" value="<?php echo $event['startDate']; ?>" required></input>
+                <input style="width: 300px;" type="text" id="dateInput" name="date" value="<?php echo $event['startDate']; ?>" required>
                 <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                 </span>
+                <span style="color: orange; visibility: collapse; margin-left: 13px;" id="dateError">  La date de l'événement est dépassée.</span>
             </div>
             <script type="text/javascript"
                     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
@@ -104,6 +134,61 @@
                     src="<?php echo base_url(); ?>assets/js/datetimepicker.fr.js">
             </script>
             <script type="text/javascript">
+
+                function changeCat() {
+                    if (document.getElementById("categorie").value == 1) {
+                        document.getElementById("blocConcert").style.display = "block";
+                    } else {
+                        document.getElementById("blocConcert").style.display = "none";
+                    }
+
+                    if(document.getElementById("categorie").value == 1 && document.getElementById("oldCategory").value == 2) {
+                        document.getElementById("warningChangeCat").style.visibility = "visible";
+                    } else {
+                        document.getElementById("warningChangeCat").style.visibility = "collapse";
+                    }
+                }
+
+                $( document ).ready(function() {
+                    myFunction();
+                    $(".day").attr("onclick","myFunction()");
+                    $(".btn").attr("onclick","myFunction()");
+                });
+
+                function myFunction() {
+                    setTimeout(function(){
+                        var date = document.getElementById("dateInput").value;
+                        var check;
+                        if (date != "") {
+                            date = date.split(" ");
+                            date = date[0].split("/");
+                            var day = date[0];
+                            var month = date[1];
+                            var year = date[2];
+                            date = new Date(year, month - 1, day, 0, 0, 0, 0);
+                            var today = new Date();
+                            var dd = today.getDate();
+                            var mm = today.getMonth();
+                            var yyyy = today.getFullYear();
+
+                            today = new Date(yyyy, mm, dd, 0, 0, 0, 0);
+
+                            if (date.getTime() < today.getTime()) {
+                                document.getElementById("dateError").style.visibility = "visible";
+                                check = false;
+                            } else {
+                                document.getElementById("dateError").style.visibility = "collapse";
+                                check = true;
+                            }
+                        }
+                    }, 100);
+                    setTimeout(function(){
+                        $(".day").attr("onclick","myFunction()");
+                        $(".btn").attr("onclick","myFunction()");
+                    }, 100);
+                    return check;
+                }
+
                 $('#datetimepicker').datetimepicker({
                     format: 'dd/MM/yyyy hh:mm',
                     firstDay: 1,
@@ -180,9 +265,18 @@
                             }
                         }
                         if ($exist) {
-                            echo '<option value="' . $user['id'] . '" selected>' . $user['firstName'] . ' ' . $user['name'] . ' - ' . $user['instrument'];
+                            echo '<option value="' . $user['id'] . '" selected>' . $user['firstName'] . ' ' . $user['name'] . ' - ';
                         } else {
-                            echo '<option value="' . $user['id'] . '">' . $user['firstName'] . ' ' . $user['name'] . ' - ' . $user['instrument'];
+                            echo '<option value="' . $user['id'] . '">' . $user['firstName'] . ' ' . $user['name'] . ' - ';
+                        }
+                        if(is_array($user['instruments'])) {
+                            $i = 0;
+                            foreach ($user['instruments'] as $instrument) {
+                                if($i > 0 )
+                                    echo ", ";
+                                echo $instrument['name'];
+                                $i++;
+                            }
                         }
                     }
                     ?>

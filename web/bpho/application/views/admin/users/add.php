@@ -108,7 +108,8 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <input type="text" id="instrumentInput" list="instruments" name="instrument" value="<?php echo set_value('instrument'); ?>">
+                <input type="text" id="instrumentInput_1" list="instruments" name="instrument_1" value="<?php echo set_value('instrument_1'); ?>">
+                <button style="margin-left: 10px;" class="btn btn-primary" id="btnAddInstru" type="button">+</button>
                 <datalist id="instruments" >
                     <?php
                     foreach($instruments as $instrument) {

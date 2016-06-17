@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -37,15 +39,14 @@ public class Alerts extends AppCompatActivity {
     private SessionManager session;
 
     //menu
-    private ListView mDrawerList;
-    private DrawerLayout mDrawerLayout;
-    private ArrayAdapter<String> mAdapter;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private String mActivityTitle;
+    //private ListView mDrawerList;
+    //private DrawerLayout mDrawerLayout;
+    //private ArrayAdapter<String> mAdapter;
+    //private ActionBarDrawerToggle mDrawerToggle;
+    //private String mActivityTitle;
 
     int id = 0;
     ListView LValerts;
-    TextView TVtest;
     private ArrayList<String> list = new ArrayList<String>();
     private ArrayAdapter<String> activiteAdapter;
     LayoutInflater mInflater;
@@ -63,21 +64,20 @@ public class Alerts extends AppCompatActivity {
 
         session = new SessionManager(getApplicationContext());
 
-        mDrawerList = (ListView)findViewById(R.id.menu);
+        /*mDrawerList = (ListView)findViewById(R.id.menu);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         addDrawerItems();
-        setupDrawer();
+        setupDrawer();*/
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
 
         Intent intent = getIntent();
-        id = intent.getIntExtra("id", Integer.valueOf(session.getId()));
+        id = intent.getIntExtra("idEvent", Integer.valueOf(session.getId()));
 
         LValerts = (ListView) findViewById(R.id.LValerts);
         getAlerts(id);
-
 
     }
 
@@ -92,7 +92,7 @@ public class Alerts extends AppCompatActivity {
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             final String response = httpclient.execute(httppost, responseHandler);
 
-            JSONArray jsonArray = new JSONArray(response);
+            final JSONArray jsonArray = new JSONArray(response);
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jObj = jsonArray.getJSONObject(i);
@@ -102,7 +102,12 @@ public class Alerts extends AppCompatActivity {
                 String[] dateTemp = tempTab[0].split("-");
                 String[] timeTemp = tempTab[1].split(":");
                 date = dateTemp[2] + "/" + dateTemp[1] + "/" + dateTemp[0] + " - " + timeTemp[0] + ":" + timeTemp[1];
-                String alerte = "<br><b>" + date + "</b>" + message;
+                String alerte = "<br><b>" + date + "</b><spanseparate>" + message;
+                list.add(alerte);
+            }
+
+            if(jsonArray.length() == 0) {
+                String alerte = getString(R.string.noAlert);
                 list.add(alerte);
             }
 
@@ -118,9 +123,16 @@ public class Alerts extends AppCompatActivity {
                         row = convertView;
                     }
 
-                    TextView tv = (TextView) row.findViewById(R.id.text1);
-                    tv.setText(Html.fromHtml(getItem(position)));
-                    //tv.setText(getItem(position));
+                    TextView tv1 = (TextView) row.findViewById(R.id.text1);
+                    TextView tv2 = (TextView) row.findViewById(R.id.text2);
+                    if(jsonArray.length() > 0) {
+                        String alerteTemp = getItem(position);
+                        String[] alerte = alerteTemp.split("<spanseparate>");
+                        tv1.setText(Html.fromHtml(alerte[0]));
+                        tv2.setText(Html.fromHtml(alerte[1]));
+                    } else {
+                        tv2.setText(Html.fromHtml(getItem(position)));
+                    }
 
                     return row;
                 }
@@ -141,9 +153,15 @@ public class Alerts extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
+
+        /*if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -164,7 +182,7 @@ public class Alerts extends AppCompatActivity {
         finish();
     }
 
-    private void addDrawerItems() {
+    /*private void addDrawerItems() {
         final String[] osArray;
         osArray = new String[] {getString(R.string.event), "Liste des utilisateurs", "Messagerie", "Profil", "Se déconnecter"};
 
@@ -227,6 +245,6 @@ public class Alerts extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+    }*/
 
 }

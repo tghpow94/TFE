@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -97,7 +98,12 @@ public class Contact extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("lang", Locale.getDefault().getLanguage()));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 final String response = httpclient.execute(httppost, responseHandler);
-                hideSoftKeyboard(Contact.this);
+                if(response.equals("false")) {
+                    Snackbar.make(v, getString(R.string.incorrectDataMail), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else {
+                    hideSoftKeyboard(Contact.this);
+                    Toast.makeText(this, getString(R.string.mailSent), Toast.LENGTH_SHORT).show();
+                }
             }
 
         } catch (Exception e) {

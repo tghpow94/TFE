@@ -39,6 +39,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     private SessionManager session;
 
+    int i;
     //menu
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;

@@ -31,7 +31,7 @@ class Instruments_model extends CI_Model {
      * @param $id : id of the user
      * @return array : retour[0] = 'id' => 1, 'name' => aaaaa
      */
-    function getInstrumentByUser($id) {
+    function getInstrumentsByUser($id) {
         $this->db->where('idUser', $id);
         $query = $this->db->get('User_instrument');
         $result = $query->result_array();

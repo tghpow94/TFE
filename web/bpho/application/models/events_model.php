@@ -90,6 +90,35 @@ class Events_model extends CI_Model {
         return $results;
     }
 
+    function getConcert() {
+        $lm = new Labels_model();
+
+
+        $this->db->where('idCategory', 2);
+        $query = $this->db->get('Event_category');
+        $response = $query->result_array();
+        $ids = array();
+        foreach($response as $item) {
+            $ids[] = $item['idEvent'];
+        }
+
+        $this->db->where_in('id', $ids);
+
+        $this->db->select('*');
+        $this->db->from('Events');
+
+        $this->db->order_by('startDate', 'Desc');
+        $query = $this->db->get();
+        $results = $query->result_array();
+        foreach ($results as &$row) {
+            $row['title'] = $lm->getLabelByID($row['title']);
+            $row['description'] = $lm->getLabelByID($row['description']);
+            $row['date'] = $row['startDate'];
+        }
+
+        return $results;
+    }
+
     /**
      * Count the number of rows
      * @param int $search
@@ -146,7 +175,7 @@ class Events_model extends CI_Model {
      */
     function addEvent($data) {
         $insert = $this->db->insert('Events', $data);
-        return $insert;
+        return true;
     }
 
     function getCategories() {
@@ -159,7 +188,7 @@ class Events_model extends CI_Model {
         $this->db->where('idEvent', $id);
         $query = $this->db->get('Event_category');
         $result = $query->result_array();
-        return $result[0];
+        return $result[0]['idCategory'];
     }
 
     function addCategory($idEvent, $idCategory) {
@@ -170,6 +199,33 @@ class Events_model extends CI_Model {
             "idCategory" => $idCategory
         );
         $this->db->insert('Event_category', $data);
+    }
+
+    function addLinkConcert($idRepet, $idConcert) {
+        $data = array(
+            "idConcert" => $idConcert,
+            "idRepet" => $idRepet
+        );
+        $this->db->insert('Event_concert', $data);
+    }
+
+    function deleteLinkRepet($id) {
+        $this->db->where('idRepet', $id);
+        $this->db->delete('Event_concert');
+    }
+
+    function deleteLinkConcert($id) {
+        $this->db->where('idConcert', $id);
+        $this->db->delete('Event_concert');
+    }
+
+    function getEventConcert($id) {
+        $this->db->where('idRepet', $id);
+        $query = $this->db->get('Event_concert');
+        if($query->num_rows > 0) {
+            $result = $query->result_array();
+            return $result[0]['idConcert'];
+        }
     }
 
     function addEventUser($idEvent, $idUser) {

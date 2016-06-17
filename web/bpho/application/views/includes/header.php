@@ -15,6 +15,8 @@
 	?>
 
 
+	<style>
+	</style>
 	<link rel="stylesheet" href="../../assets/css/admin/bootstrap-datetimepicker.min.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -142,6 +144,23 @@
 					$("#mceu_22").show();
 					$("#mceu_13").hide();
 				}
+			});
+		});
+
+		var idTemp = "instrumentInput_";
+		var nameTemp = "instrument_";
+		var instruNB = 2;
+		$(function() {
+			$("#btnAddInstru").click(function() {
+
+				while (document.getElementById(idTemp + instruNB.toString()) !== null) {
+					instruNB = instruNB + 1;
+				}
+
+				var $input = $("<br><input style='margin-left: 73px; margin-top: 10px;' name='" + nameTemp + instruNB.toString() + "' type='text' id='" + idTemp + instruNB.toString() + "' list='instruments'>");
+				var idAppend = "#" + idTemp + (instruNB-1).toString();
+				$('input' + idAppend).after($input);
+				instruNB = instruNB + 1;
 			});
 		});
 	</script>

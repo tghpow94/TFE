@@ -61,12 +61,10 @@ public class InfosGenerales extends AppCompatActivity {
                 "<br>" +
                 "<b>Des Chefs d'orchestre</b><br>" +
                 "<br>" +
-                "<br>" +
                 "Après le décès en août 2012 du Chef Permanent, Roger BAUSIER, deux chefs se sont partagés la direction des concerts du BPO : Thanos ADAMOPOULOS, et David NAVARRO TURRES. Depuis le 1/1/2014, David NAVARRO TURRES est le chef d'orchestre principal et conseiller musical.\n" +
                 "<br>" +
                 "<br>" +
                 "<b>De l'ASBL Presto Vivace</b><br>" +
-                "<br>" +
                 "<br>" +
                 "L'ASBL Presto Vivace est gérante du Brussels Philharmonic Orchestra. Elle a pour objet social «d’offrir aux jeunes musiciens, notamment des étudiants des Conservatoires, d’acquérir ou d’approfondir, entourés d’ex-professionnels de notoriété, une expérience du répertoire symphonique dans un ensemble orchestral, et en ce sens de promouvoir la musique orchestrale, symphonique ou de chambre, dans le cadre d’activités ou évènements organisés à des fins sociales, caritatives et/ou culturelles ».\n" +
                 "<br>" +

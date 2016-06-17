@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bpho_spect</string>
+    <string name="app_name">Agenda du BPHO</string>
     <string name="action_settings">Paramètres</string>
     <string name="agenda_title">Agenda du BPHO</string>
     <string name="contact_text">Vous avez une question, une suggestion ? veuillez nous envoyer un message ci dessous.</string>
     <string name="contact_title">Contactez-nous !</string>
     <string name="email">Adresse email</string>
-    <string name="event">Événement</string>
+    <string name="event">Concert</string>
     <string name="generalInfos">A propos...</string>
     <string name="loading">Chargement...</string>
     <string name="message">Votre message</string>
@@ -15,5 +15,7 @@
     <string name="noMoreEvent">Pas d\'événement plus ancien</string>
     <string name="reservation">Réservation online</string>
     <string name="send">Envoyer</string>
+    <string name="mailSent">Votre message a été envoyé avec succès</string>
+    <string name="incorrectDataMail">Votre adresse mail n\'est pas valide</string>
 
 </resources>

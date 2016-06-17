@@ -138,13 +138,23 @@ class Admin_users extends CI_Controller {
                 $name[0] = strtoupper($name[0]);
                 $firstName = $this->input->post('firstName');
                 $firstName[0] = strtoupper($firstName[0]);
+
+                $i = 1;
+                $instruInput = "instrument_";
+                $instruTemp = $instruInput.strval($i);
+                while(isset($_POST[$instruTemp])) {
+                    $instruments[$i-1] = $_POST[$instruTemp];
+                    $i++;
+                    $instruTemp = $instruInput.strval($i);
+                }
+
                 $data_to_store = array(
                     'email' => $this->input->post('email'),
                     'password' => $this->input->post('password'),
                     'name' => $name,
                     'firstName' => $firstName,
                     'right' => $this->input->post('right'),
-                    'instrument' => $this->input->post('instrument'),
+                    'instruments' => $instruments,
                     'phone' => str_replace($trash, "",$this->input->post('phone'))
                 );
 
@@ -186,14 +196,23 @@ class Admin_users extends CI_Controller {
             $this->form_validation->set_rules('phone', 'phone', '');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
-            if ($this->form_validation->run())
-            {
+            if ($this->form_validation->run()) {
+
+                $i = 1;
+                $instruInput = "instrument_";
+                $instruTemp = $instruInput.strval($i);
+                while(isset($_POST[$instruTemp])) {
+                    $instruments[$i-1] = $_POST[$instruTemp];
+                    $i++;
+                    $instruTemp = $instruInput.strval($i);
+                }
+
                 $trash = array("/", ".");
                 $data_to_store = array(
                     'name' => $this->input->post('name'),
                     'firstName' => $this->input->post('firstName'),
                     'right' => $this->input->post('right'),
-                    'instrument' => $this->input->post('instrument'),
+                    'instruments' => $instruments,
                     'phone' => str_replace($trash, "",$this->input->post('phone'))
                 );
                 //if the insert has returned true then we show the flash message
@@ -214,14 +233,13 @@ class Admin_users extends CI_Controller {
         //user data
         $user = $this->users_model->getUserByID($id);
         $user[0]['idRight'] = $this->users_model->getUserDroit($id);
-        $user[0]['idInstrument'] = $this->users_model->getUserInstrument($id);
-        $data['user'] = $user;
+        $user[0]['instruments'] = $this->instruments_model->getInstrumentsByUser($user[0]['id']);
+        $data['user'] = $user[0];
 
         //instruments
         $data['instruments'] = $this->instruments_model->getInstruments();
         if ($this->users_model->hasInstrument($user[0]['id'])) {
             $data['hasInstrument'] = true;
-            $data['userInstrument'] = $this->instruments_model->getInstrumentByUser($user[0]['id']);
         } else {
             $data['hasInstrument'] = false;
         }

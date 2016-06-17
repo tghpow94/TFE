@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bpho_spect</string>
+    <string name="app_name">Bpho\'s Agenda</string>
     <string name="action_settings">Settings</string>
     <string name="name">Name</string>
     <string name="email">Email address</string>
     <string name="message">Your message</string>
     <string name="send">Send</string>
-    <string name="event">Event</string>
+    <string name="event">Concert</string>
     <string name="generalInfos">About</string>
     <string name="noMoreEvent">No more event</string>
     <string name="agenda_title">BPHO\'s agenda</string>
@@ -15,5 +15,7 @@
     <string name="missingData">Please fill all fields</string>
     <string name="contact_text">Have a question or a suggestion? please send us a message below.</string>
     <string name="reservation">Online booking</string>
+    <string name="mailSent">Your message was successfuly sent</string>
+    <string name="incorrectDataMail">Your email address is invalid</string>
 
 </resources>

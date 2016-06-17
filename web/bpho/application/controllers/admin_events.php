@@ -32,7 +32,7 @@ class Admin_events extends CI_Controller {
         }
 
         //pagination settings
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $config['base_url'] = base_url().'admin/events';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 20;
@@ -190,6 +190,10 @@ class Admin_events extends CI_Controller {
 
                 $this->events_model->addCategory($eventID, $this->input->post("categorie"));
 
+                if($this->input->post("categorie") == 1 && $this->input->post("concert") > 0) {
+                    $this->events_model->addLinkConcert($eventID, $this->input->post("concert"));
+                }
+
                 if (isset($_POST['users'][0])) {
                     $musiciens = $_POST['users'];
                     $this->events_model->deleteEventUsers($eventID);
@@ -197,19 +201,23 @@ class Admin_events extends CI_Controller {
                         $this->events_model->addEventUser($eventID, $musicien);
                     }
                 }
+                $data['test'] = true;
             }
         }
 
-        $users = $this->users_model->getUsersOrderByFirstName();
+        $events = $this->events_model->getConcert();
+
+        $users = $this->users_model->getUsersOrderByFirstName2();
         foreach($users as &$user) {
             if($this->users_model->hasInstrument($user['id'])) {
-                $instrument = $this->instruments_model->getInstrumentByUser($user['id']);
-                $user['instrument'] = $instrument[0]['name'];
+                $instruments = $this->instruments_model->getInstrumentsByUser($user['id']);
+                $user['instruments'] = $instruments;
             } else {
-                $user['instrument'] = "";
+                $user['instruments'] = "";
             }
         }
         $data['users'] = $users;
+        $data['concerts'] = $events;
 
         $data['categories'] = $this->events_model->getCategories();
 
@@ -302,6 +310,23 @@ class Admin_events extends CI_Controller {
 
                 $this->events_model->addCategory($id, $this->input->post("categorie"));
 
+                $oldCat = $this->input->post("oldCategory");
+                $newCat = $this->input->post("categorie");
+
+                if($oldCat == 1 && $newCat == 2) {
+                    $this->events_model->deleteLinkRepet($id);
+                } elseif($oldCat == 1 && $newCat == 1) {
+                    $this->events_model->deleteLinkRepet($id);
+                    if($this->input->post("categorie") == 1 && $this->input->post("concert") > 0) {
+                        $this->events_model->addLinkConcert($id, $this->input->post("concert"));
+                    }
+                } elseif($oldCat == 2 && $newCat == 1) {
+                    $this->events_model->deleteLinkConcert($id);
+                    if($this->input->post("categorie") == 1 && $this->input->post("concert") > 0) {
+                        $this->events_model->addLinkConcert($id, $this->input->post("concert"));
+                    }
+                }
+
                 if (isset($_POST['users'][0])) {
                     $musiciens = $_POST['users'];
                     $this->events_model->deleteEventUsers($id);
@@ -324,7 +349,8 @@ class Admin_events extends CI_Controller {
         $annee = $date[0];
         $mois = $date[1];
         $jour = $date[2];
-        $dateFinal = $jour."/".$mois."/".$annee." ".$fullDate2[1];
+        $time = explode(":", $fullDate2[1]);
+        $dateFinal = $jour."/".$mois."/".$annee." ".$time[0].":".$time[1];
         $event['startDate'] = $dateFinal;
 
         $data['event'] = $event;
@@ -341,14 +367,22 @@ class Admin_events extends CI_Controller {
 
         $data['event']['categorie'] = $this->events_model->getEventCategory($id);
         $data['categories'] = $this->events_model->getCategories();
+        $concerts = $this->events_model->getConcert();
+        $data['concerts'] = $concerts;
+
+        if($data['event']['categorie'] == 1) {
+            $data['event']['concert'] = $this->events_model->getEventConcert($id);
+        } else {
+            $data['event']['concert'] = 0;
+        }
 
         $users = $this->users_model->getUsersOrderByFirstName();
         foreach($users as &$user) {
             if($this->users_model->hasInstrument($user['id'])) {
-                $instrument = $this->instruments_model->getInstrumentByUser($user['id']);
-                $user['instrument'] = $instrument[0]['name'];
+                $instruments = $this->instruments_model->getInstrumentsByUser($user['id']);
+                $user['instruments'] = $instruments;
             } else {
-                $user['instrument'] = "";
+                $user['instruments'] = "";
             }
         }
         $data['users'] = $users;

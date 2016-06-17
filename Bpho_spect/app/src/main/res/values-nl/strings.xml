@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bpho_spect</string>
+    <string name="app_name">Agenda of BPHO</string>
     <string name="email">E-mailadres</string>
-    <string name="event">Evenement</string>
+    <string name="event">Concert</string>
     <string name="generalInfos"> Algemene informatie</string>
     <string name="message">Uw bericht</string>
     <string name="name">Naam</string>
@@ -15,4 +15,6 @@
     <string name="missingData">Vul alle velden in.</string>
     <string name="contact_text">Heeft u een vraag of een suggestie? stuur ons een bericht hieronder.</string>
     <string name="reservation">Online boeking</string>
+    <string name="mailSent">Uw bericht is verzonden</string>
+    <string name="incorrectDataMail">Uw e-mailadres is niet geldig</string>
 </resources>

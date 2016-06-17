@@ -7,7 +7,7 @@
     </div>
 
     <?php
-    if (!isset($user[0]['id'])) {
+    if (!isset($user['id'])) {
         redirect('admin/users');
     }
     //flash messages
@@ -16,7 +16,7 @@
         {
             echo '<div class="alert alert-success">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo 'Données de l\'utilisateur mises à jour avec succès !';
+            echo 'Données de l\'utilisateur mises à jour avec <strong>succès</strong> !';
             echo '</div>';
         } else{
             echo '<div class="alert alert-error">';
@@ -38,14 +38,14 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Nom * : </label>
             <div class="controls">
-                <input type="text" id="" name="name" value="<?php echo $user[0]['name']; ?>" required>
+                <input type="text" id="" name="name" value="<?php echo $user['name']; ?>" required>
                 <!--<span class="help-inline">Woohoo!</span>-->
             </div>
         </div>
         <div class="control-group">
             <label for="inputError" class="control-label">Prénom * : </label>
             <div class="controls">
-                <input type="text" id="" name="firstName" value="<?php echo $user[0]['firstName']; ?>" required>
+                <input type="text" id="" name="firstName" value="<?php echo $user['firstName']; ?>" required>
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>
@@ -56,7 +56,7 @@
                     <?php
                     foreach($rights as $right) {
                         echo '<option value="'.$right["id"].'" ';
-                        if ($right['id'] == $user[0]['idRight']) {
+                        if ($right['id'] == $user['idRight']) {
                             echo 'selected="selected"';
                         }
                         echo ' >'.$right["name"].'</option>';
@@ -69,11 +69,21 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Instrument : </label>
             <div class="controls">
-                <input type="text" id="instrumentInput" list="instruments" name="instrument" value="<?php
+                <input type="text" id="instrumentInput_1" list="instruments" name="instrument_1" value="<?php
                     if ($hasInstrument) {
-                        echo $userInstrument[0]['name'];
+                        echo $user['instruments'][0]['name'];
                     }
                 ?>">
+                <?php
+                $idInput = "instrumentInput_";
+                $nameInput = "instrument_";
+                $i = 2;
+                for($i; $i < count($user['instruments'])+1; $i++) {
+                    echo '<br>';
+                    echo '<input style="margin-left: 73px; margin-top: 10px;" type="text" list="instruments" id="'.$idInput.strval($i).'" name="'.$nameInput.strval($i).'" value="'.$user['instruments'][$i-1]['name'].'">';
+                }
+                ?>
+                <button style="margin-left: 10px;" class="btn btn-primary" id="btnAddInstru" type="button">+</button>
                 <datalist id="instruments" >
                     <?php
                     foreach($instruments as $instrument) {
@@ -86,7 +96,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Téléphone : </label>
             <div class="controls">
-                <input type="text" id="" name="phone" value="<?php echo $user[0]['phone']; ?>">
+                <input type="text" id="" name="phone" value="<?php echo $user['phone']; ?>">
                 <!--<span class="help-inline">Cost Price</span>-->
             </div>
         </div>

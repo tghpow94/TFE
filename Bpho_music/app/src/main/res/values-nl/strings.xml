@@ -22,4 +22,5 @@
     <string name="event">Evenement</string>
     <string name="reservation">Online boeking</string>
     <string name="alerts">Alerts</string>
+    <string name="noAlert">Geen waarschuwingen beschikbaar voor dit evenement</string>
 </resources>

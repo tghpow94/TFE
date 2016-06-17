@@ -131,12 +131,11 @@ class Users_model extends CI_Model {
 		}
 	}
 
-	function getUserInstrument($id) {
+	function getUserInstruments($id) {
 		$this->db->where('idUser', $id);
 		$query = $this->db->get('User_instrument');
 		if ($query->num_rows == 1) {
-			$result = $query->result_array();
-			return $result[0]['idInstrument'];
+			return $query->result_array();
 		}
 	}
 
@@ -217,8 +216,10 @@ class Users_model extends CI_Model {
 			);
 			$insert = $this->db->insert('User_right', $new_member_insert_data_right);
 
-			if ($data['instrument'] != "") {
-				$this->addUserInstrument($data['instrument'], $result[0]['id']);
+			foreach($data['instruments'] as $instrument) {
+				if(trim($instrument) != "") {
+					$this->addUserInstrument(trim($instrument), $result[0]['id']);
+				}
 			}
 
 			return $insert;
@@ -243,7 +244,12 @@ class Users_model extends CI_Model {
 		$this->db->update('Users', $dataUser);
 
 		//update instrument data
-		$this->addUserInstrument($data['instrument'], $id);
+		$this->deleteUserInstrument($id);
+		foreach($data['instruments'] as $instrument) {
+			if(trim($instrument) != "") {
+				$this->addUserInstrument(trim($instrument), $id);
+			}
+		}
 
 		//update right data
 		$dataRight = array(
@@ -272,7 +278,7 @@ class Users_model extends CI_Model {
 	function hasInstrument($id) {
 		$this->db->where('idUser', $id);
 		$query = $this->db->get('User_instrument');
-		if($query->num_rows == 1) {
+		if($query->num_rows > 0) {
 			return true;
 		} else {
 			return false;
@@ -307,10 +313,11 @@ class Users_model extends CI_Model {
 			'idInstrument' => $idInstrument
 		);
 
-		if ($this->hasInstrument($idUser)) {
-			$this->db->where('idUser', $idUser);
-			$this->db->update('User_instrument', $updateData);
-		} else {
+		$this->db->where('idUser', $idUser);
+		$this->db->where('idInstrument', $idInstrument);
+		$query = $this->db->get('User_instrument');
+
+		if($query->num_rows == 0) {
 			$this->db->insert('User_instrument', $updateData);
 		}
 	}
@@ -346,6 +353,23 @@ class Users_model extends CI_Model {
 	 */
 	function getUsersOrderByFirstName($search = null, $limit_start = null, $limit_end = null) {
 		$this->db->select('*');
+		$this->db->from('Users');
+		if($search) {
+			$this->db->or_like('name', $search);
+			$this->db->or_like('firstName', $search);
+		}
+		$this->db->order_by('firstName', 'Asc');
+		if ($limit_end && $limit_start)
+			$this->db->limit($limit_start, $limit_end);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	function getUsersOrderByFirstName2($search = null, $limit_start = null, $limit_end = null) {
+		$this->db->select('id');
+		$this->db->select('name');
+		$this->db->select('firstName');
 		$this->db->from('Users');
 		if($search) {
 			$this->db->or_like('name', $search);

@@ -22,4 +22,5 @@
     <string name="event">Event</string>
     <string name="reservation">Online booking</string>
     <string name="alerts">Alerts</string>
+    <string name="noAlert">No alert available for this event</string>
 </resources>

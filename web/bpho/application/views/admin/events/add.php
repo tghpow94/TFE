@@ -13,13 +13,12 @@
         {
             echo '<div class="alert alert-success">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo 'Utilisateur ajouté avec <strong>succès</strong> !';
+            echo 'Evénement ajouté avec <strong>succès</strong> !';
             echo '</div>';
-            redirect('admin/events/add');
         }else{
             echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo '<strong>Adresse email déjà utilisée !</strong> Veuillez en choisir une autre.';
+            echo '<strong>Erreur !</strong> Vérifiez les informations de l\'événement.';
             echo '</div>';
         }
     }
@@ -78,10 +77,19 @@
                 <textarea style="max-width: 620px; max-height: 350px; width: 360px; height: 130px; display: none" placeholder="Anglais" id="descriptionENInput" name="descriptionEN"  ><?php echo set_value('descriptionEN'); ?></textarea>
             </div>
         </div>
+        <script>
+            function changeCat() {
+                if (document.getElementById("categorie").value == 1) {
+                    document.getElementById("blocConcert").style.display = "block";
+                } else {
+                    document.getElementById("blocConcert").style.display = "none";
+                }
+            }
+        </script>
         <div class="control-group">
             <label for="inputError" class="control-label">Catégorie : </label>
             <div class="controls">
-                <select style="width: 300px;" id="categorie" name="categorie" value="<?php echo set_value('categorie'); ?>">
+                <select style="width: 310px;" onchange="changeCat()" id="categorie" name="categorie" value="<?php echo set_value('categorie'); ?>">
                     <?php
                     foreach($categories as $categorie) {
                         echo '<option value="'.$categorie["id"].'">'.$categorie["name"].'</option>';
@@ -90,13 +98,29 @@
                 </select>
             </div>
         </div>
+
+        <div class="control-group" id="blocConcert" >
+            <label for="inputError" class="control-label">Concert associé : </label>
+            <div class="controls">
+                <select style="width: 310px;" id="concert" name="concert" value="<?php echo set_value('concert'); ?>">
+                    <option value="0"></option>
+                    <?php
+                    foreach($concerts as $concert) {
+                        echo '<option value="'.$concert["id"].'">'.$concert["title"].'</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
         <div class="control-group">
             <label for="inputError" class="control-label">Date : </label>
             <div id="datetimepicker" class="input-append date">
-                <input style="width: 300px;" type="text" id="dateInput" name="date" value="<?php echo set_value('date'); ?>" required></input>
+                <input style="width: 300px;" type="datetime" onkeyup="myFunction()"  id="dateInput" name="date" value="<?php echo date("d/m/Y H:i"); ?>" min="<?php echo date("d/m/Y H:i"); ?>" required>
                 <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                 </span>
+                <span style="color: red; visibility: collapse" id="dateError">La date de l'événement ne peut pas être dépassée.</span>
             </div>
             <script type="text/javascript"
                     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
@@ -111,6 +135,48 @@
                     src="<?php echo base_url(); ?>assets/js/datetimepicker.fr.js">
             </script>
             <script type="text/javascript">
+
+                $( document ).ready(function() {
+                    $(".day").attr("onclick","myFunction()");
+                    $(".btn").attr("onclick","myFunction()");
+                });
+
+                function myFunction() {
+                    setTimeout(function(){
+                        var date = document.getElementById("dateInput").value;
+                        var check;
+                        if (date != "") {
+                            date = date.split(" ");
+                            date = date[0].split("/");
+                            var day = date[0];
+                            var month = date[1];
+                            var year = date[2];
+                            date = new Date(year, month - 1, day, 0, 0, 0, 0);
+                            var today = new Date();
+                            var dd = today.getDate();
+                            var mm = today.getMonth();
+                            var yyyy = today.getFullYear();
+
+                            today = new Date(yyyy, mm, dd, 0, 0, 0, 0);
+
+                            if (date.getTime() < today.getTime()) {
+                                document.getElementById("dateError").style.visibility = "visible";
+                                document.getElementById("btnSubmit").disabled = true;
+                                check = false;
+                            } else {
+                                document.getElementById("dateError").style.visibility = "collapse";
+                                document.getElementById("btnSubmit").disabled = false;
+                                check = true;
+                            }
+                        }
+                    }, 100);
+                    setTimeout(function(){
+                        $(".day").attr("onclick","myFunction()");
+                        $(".btn").attr("onclick","myFunction()");
+                    }, 100);
+                    return check;
+                }
+
                 $('#datetimepicker').datetimepicker({
                     format: 'dd/MM/yyyy hh:mm',
                     firstDay: 1,
@@ -122,7 +188,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label">Ville : </label>
             <div class="controls">
-                <input style="width: 300px;" type="text" id="cityInput" name="city" value="<?php echo set_value('city'); ?>" required>
+                <input style="width: 300px;" type="text" id="cityInput" name="city" value="<?php echo set_value('city'); ?>">
             </div>
         </div>
         <div class="control-group">
@@ -134,7 +200,7 @@
         <div class="control-group">
             <label for="inputError" class="control-label" >Adresse : </label>
             <div class="controls">
-                <input style="width: 300px;" type="text" id="addressInput" name="address" value="<?php echo set_value('address'); ?>" required>
+                <input style="width: 300px;" type="text" id="addressInput" name="address" value="<?php echo set_value('address'); ?>">
             </div>
         </div>
 
@@ -169,7 +235,7 @@
             <label for="inputError" class="control-label">Musiciens associés : </label>
             <div class="controls">
 
-                <select name="users[]" form="formAddEvent" multiple="multiple" size="10" style="width: 320px;">
+                <select name="users[]" form="formAddEvent" multiple="multiple" size="10" style="width: 520px;">
                     <?php
                     $lettre = "A";
                     echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;
@@ -178,7 +244,16 @@
                             $lettre = $user['firstName'][0];
                             echo '<option style="font-weight: bold; font-size: 150%;" disabled>' . $lettre;
                         }
-                        echo '<option value="'.$user['id'].'">'.$user['firstName'].' '.$user['name'].' - '.$user['instrument'];
+                        echo '<option value="'.$user['id'].'">'.$user['firstName'].' '.$user['name'].' - ';
+                        if(is_array($user['instruments'])) {
+                            $i = 0;
+                            foreach ($user['instruments'] as $instrument) {
+                                if($i > 0 )
+                                    echo ", ";
+                                echo $instrument['name'];
+                                $i++;
+                            }
+                        }
                     }
                     ?>
                 </select>

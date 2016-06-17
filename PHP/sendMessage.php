@@ -36,7 +36,11 @@
 		$sujet = "BPHO Appli : votre message a bien été envoyé";
 		$entete = "From:" . $from . "\r\n";
 		$entete .= "Content-Type: text/html; charset=utf-8\r\n";
-		return mail($to, $sujet, $messageConfirm, $entete);
+		$retour = mail($to, $sujet, $messageConfirm, $entete);
+		echo json_encode($retour);
+	} else {
+		$retour = false;
+		echo json_encode($retour);
 	}
 	
 	function champsEmailValable($champ) {
