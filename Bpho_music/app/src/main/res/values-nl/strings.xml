@@ -23,4 +23,18 @@
     <string name="reservation">Online boeking</string>
     <string name="alerts">Alerts</string>
     <string name="noAlert">Geen waarschuwingen beschikbaar voor dit evenement</string>
+    <string name="profil">Profiel</string>
+    <string name="name">Naam</string>
+    <string name="firstName">Voornaam</string>
+    <string name="newPassword">Nieuw wachtwoord (8 tekens)</string>
+    <string name="passwordConfirm"> Wachtwoord bevestigen</string>
+    <string name="phone">Telefoon</string>
+    <string name="currentPassword">Huidig wachtwoord</string>
+    <string name="apply">Toepassen</string>
+    <string name="passwordDontMatch">Nieuw wachtwoord velden komen niet overeen</string>
+    <string name="passwordTooShort">Het nieuwe wachtwoord is te kort (min. 8 tekens)</string>
+    <string name="emptyCurrentPassword">Het huidige wachtwoord is vereist</string>
+    <string name="profilUpdated">Bijgewerkt Profile</string>
+    <string name="wrongCurrentPassword">Onjuist huidige wachtwoord</string>
+    <string name="emailTaken">Dit e-mailadres is al in gebruik</string>
 </resources>

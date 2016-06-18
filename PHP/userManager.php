@@ -9,6 +9,60 @@ class UserManager {
         $ini->execute(array());
     }
 
+    public function getUser($id) {
+        $resultats = $this->db->prepare("SELECT id, name, firstName, dateRegister, dateLastConnect, email, phone FROM Users where id = :id");
+        $resultats->execute(array(
+            ":id" => $id
+        ));
+
+        $tabUsers = $resultats->fetchAll(PDO::FETCH_ASSOC);
+
+        if (isset($tabUsers[0]['id'])) {
+            $tabUsers[0]['error'] = false;
+            $tabUsers[0]['droit'] = $this->getUserDroitName($tabUsers[0]['id']);
+            $tabUsers[0]['hasInstrument'] = $this->hasInstrument($id);
+            if($tabUsers[0]['hasInstrument']) {
+                $tabUsers[0]['instruments'] = $this->getUserInstruments($id);
+            }
+        } else {
+            $tabUsers[0]['error'] = true;
+        }
+
+        return $tabUsers[0];
+    }
+
+    public function hasInstrument($id) {
+        $resultats = $this->db->prepare("SELECT * FROM User_instrument where idUser = :id");
+        $resultats->execute(array(
+            ":id" => $id
+        ));
+        $tabUsers = $resultats->fetchAll(PDO::FETCH_ASSOC);
+        if(isset($tabUsers[0]['idUser'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getUserInstruments($id) {
+        $resultats = $this->db->prepare("SELECT * FROM Instruments where id IN (SELECT idInstrument FROM User_instrument WHERE idUser = :id AND idInstrument = id)");
+        $resultats->execute(array(
+            ":id" => $id
+        ));
+
+        $tabInstruments = $resultats->fetchAll(PDO::FETCH_ASSOC);
+        $tabReturn = array();
+
+        if(isset($tabInstruments[0]['name'])) {
+            foreach($tabInstruments as $instrument) {
+                $tabReturn[] = $instrument['name'];
+            }
+            return $tabReturn;
+        } else {
+            return false;
+        }
+    }
+
     public function getUserConnect($mail, $password) {
         $user = $this->getUserByMail($mail);
         if ($user != null && is_numeric($user['id'])) {
@@ -51,6 +105,20 @@ class UserManager {
 
         if (isset($tabUsers[0]['idRight']))
             return $tabUsers[0]['idRight'];
+        else
+            return null;
+    }
+
+    public function getUserDroitName($id) {
+        $resultats = $this->db->prepare("SELECT * FROM Rights WHERE id IN (SELECT idRight FROM User_right WHERE idRight = id AND idUser = :id)");
+        $resultats->execute(array(
+            ":id" => $id
+        ));
+
+        $tabUsers = $resultats->fetchAll(PDO::FETCH_ASSOC);
+
+        if (isset($tabUsers[0]['name']))
+            return $tabUsers[0]['name'];
         else
             return null;
     }
@@ -120,6 +188,74 @@ class UserManager {
             $code_aleatoire .= substr($characts,rand()%(strlen($characts)),1);
         }
         return $code_aleatoire;
+    }
+
+    function updateUser($newUser) {
+        $newUser['name'][0] = strtoupper($newUser['name'][0]);
+        $newUser['firstName'][0] = strtoupper($newUser['firstName'][0]);
+        $retour['error'] = "ok";
+        $retour['name'] = $newUser['name'];
+        $retour['firstName'] = $newUser['firstName'];
+
+        if($newUser['mail'] != $newUser['oldMail']) {
+            $emailChange = true;
+        } else {
+            $emailChange = false;
+        }
+
+        if($this->champsEmailValable($newUser['mail'])) {
+            if($this->getUserByMail($newUser['mail']) != null && $emailChange) {
+                $retour['error'] = "email taken";
+            } else {
+                $user = $this->getUserConnect($newUser['oldMail'], $newUser['oldPassword']);
+                if (isset($user['id']) && $user['error'] == false) {
+                    $retour['error'] = "ok";
+                    if($newUser['mail'] != $newUser['oldMail']) {
+                        $this->updateEmail($newUser['id'], $newUser['mail']);
+                    }
+                    $resultats = $this->db->prepare("UPDATE Users SET name = :name, firstName = :firstName, phone = :phone  WHERE id = :id");
+                    $resultats->execute(array(
+                        ":name" => $newUser['name'],
+                        ":firstName" => $newUser['firstName'],
+                        ":phone" => $newUser['phone'],
+                        ":id" => $newUser['id']
+                    ));
+
+                    if ($newUser['newPassword'] != "") {
+                        $password = hash("sha256", $newUser['newPassword'] . $user['salt']);
+                        $resultats = $this->db->prepare("UPDATE Users SET password = :password WHERE id = :id");
+                        $resultats->execute(array(
+                            ":password" => $password,
+                            ":id" => $newUser['id']
+                        ));
+                    }
+
+                } else {
+                    $retour['error'] = "wrong user";
+                }
+            }
+        } else {
+            $retour['error'] = "wrong email";
+        }
+
+        return $retour;
+    }
+
+    function updateEmail($idUser, $mail) {
+        $resultats = $this->db->prepare("UPDATE Users SET email = :email  WHERE id = :id");
+        $resultats->execute(array(
+            ":email" => $mail,
+            ":id" => $idUser
+        ));
+    }
+
+    function champsEmailValable($champ) {
+        if(preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $champ)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 ?>

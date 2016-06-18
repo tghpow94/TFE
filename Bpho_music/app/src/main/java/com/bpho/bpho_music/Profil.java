@@ -3,6 +3,7 @@ package com.bpho.bpho_music;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.StrictMode;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class Profil extends AppCompatActivity {
 
@@ -25,12 +44,23 @@ public class Profil extends AppCompatActivity {
     private String mActivityTitle;
 
     //profil
-    public int id;
+    public int idUser;
+    public String name, firstName, mail, dateRegister, dateLastConnect, phone, droit;
+    public String instruments;
+    public boolean hasInstrument;
+
+    TextView TVname, TVmail, TVphone, TVdroit, TVinstruments;
+
+    //image
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    NetworkImageView thumbNail;
+    String thumbnailUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_profil);
+        getSupportActionBar().setTitle(getString(R.string.profil));
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -45,11 +75,92 @@ public class Profil extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        TVname = (TextView) findViewById(R.id.name);
+        TVmail = (TextView) findViewById(R.id.mail);
+        TVphone = (TextView) findViewById(R.id.phone);
+        TVdroit = (TextView) findViewById(R.id.droit);
+        TVinstruments = (TextView) findViewById(R.id.instruments);
+
+        thumbNail = (NetworkImageView) findViewById(R.id.imageUser);
+
         Intent intent = getIntent();
-        id = intent.getIntExtra("id", Integer.valueOf(session.getId()));
+        idUser = intent.getIntExtra("idUser", Integer.valueOf(session.getId()));
 
         addDrawerItems();
         setupDrawer();
+
+        if(getUser()) {
+            TVname.setText(firstName + " " + name);
+            TVmail.setText(mail);
+            if (phone != "null")
+                TVphone.setText(phone);
+            else
+                TVphone.setText("");
+            TVdroit.setText(droit);
+            TVinstruments.setText(instruments);
+
+            if (imageLoader == null)
+                imageLoader = AppController.getInstance().getImageLoader();
+            thumbNail.setImageUrl(thumbnailUrl, imageLoader);
+        }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        if(idUser == Integer.valueOf(session.getId())) {
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profil.this, ModifProfil.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private boolean getUser() {
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getUser.php");
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+            nameValuePairs.add(new BasicNameValuePair("id", String.valueOf(idUser)));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            ResponseHandler<String> responseHandler = new BasicResponseHandler();
+            final String response = httpclient.execute(httppost, responseHandler);
+
+            JSONObject jsonObject = new JSONObject(response);
+            Boolean error = jsonObject.getBoolean("error");
+
+            if(!error) {
+                name = jsonObject.getString("name");
+                firstName = jsonObject.getString("firstName");
+                mail = jsonObject.getString("email");
+                dateRegister = jsonObject.getString("dateRegister");
+                dateLastConnect = jsonObject.getString("dateLastConnect");
+                phone = jsonObject.getString("phone");
+                droit = jsonObject.getString("droit");
+                thumbnailUrl = "http://91.121.151.137/TFE/images/u" + idUser + ".jpg";
+                hasInstrument = jsonObject.getBoolean("hasInstrument");
+                instruments = "";
+                if(hasInstrument) {
+                    JSONArray jsonArray = jsonObject.getJSONArray("instruments");
+                    for(int i = 0; i < jsonArray.length(); i++) {
+                        String instru = jsonArray.get(i).toString();
+                        if(i > 0) {
+                            instruments += ", ";
+                        }
+                        instruments += instru;
+                    }
+                }
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 
     private void logoutUser() {
@@ -71,7 +182,7 @@ public class Profil extends AppCompatActivity {
 
     private void addDrawerItems() {
         final String[] osArray;
-        if(id == Integer.valueOf(session.getId())) {
+        if(idUser == Integer.valueOf(session.getId())) {
             osArray = new String[]{"Agenda", "Liste des utilisateurs", "Messagerie", "Se déconnecter"};
         } else {
             osArray = new String[]{"Agenda", "Liste des utilisateurs", "Messagerie", "Profil", "Se déconnecter"};
@@ -96,7 +207,7 @@ public class Profil extends AppCompatActivity {
                     //startActivity(intent);
                 }
                 if (position == 3) {
-                    if (id == Integer.valueOf(session.getId())) {
+                    if (idUser == Integer.valueOf(session.getId())) {
                         logoutUser();
                     } else {
                         Intent intent = new Intent(Profil.this, Profil.class);

@@ -23,4 +23,18 @@
     <string name="reservation">Réservation en ligne</string>
     <string name="alerts">Alertes</string>
     <string name="noAlert">Aucune alerte disponible pour cet événement</string>
+    <string name="profil">Profil</string>
+    <string name="name">Nom</string>
+    <string name="firstName">Prénom</string>
+    <string name="newPassword">Nouveau mot de passe (8 caractères)</string>
+    <string name="passwordConfirm">Confirmation mot de passe</string>
+    <string name="phone">Téléphone</string>
+    <string name="currentPassword">Mot de passe actuel</string>
+    <string name="apply">Appliquer</string>
+    <string name="passwordDontMatch">Les champs du nouveau mot de passe ne correspondent pas</string>
+    <string name="passwordTooShort">Le nouveau mot de passe est trop court (min. 8 caractères)</string>
+    <string name="emptyCurrentPassword">Le mot de passe actuel est nécessaire</string>
+    <string name="profilUpdated">Profil mis à jour</string>
+    <string name="wrongCurrentPassword">Mot de passe actuel incorrect</string>
+    <string name="emailTaken">Cette adresse mail est déjà utilisée</string>
 </resources>

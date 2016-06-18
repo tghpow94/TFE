@@ -39,68 +39,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/add.php">
+      <file leaf-file-name="edit.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/edit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+            <state vertical-scroll-proportion="-9.153846">
+              <caret line="14" column="53" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="53" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#2;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#6;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#7;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#8;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#9;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#10;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#11;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#output#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#12;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#13;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1466102954665" expanded="true" signature="1002:1018" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="2793:3127" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="2917:2936" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="2937:3127" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="2972:3037" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="3193:3272" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="3433:3512" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="3685:4033" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="3720:4016" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="3791:3894" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="3900:4002" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="4069:4313" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="4183:4313" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="4216:4229" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="4674:4898" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="4795:4898" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="4828:4841" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="5281:5860" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="5419:5860" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="5451:5464" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="5659:5769" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="5800:5832" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="5967:6080" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="6124:6247" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="6291:6432" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="6476:6580" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="6624:8614" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="6859:8595" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="7058:8310" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="7751:8014" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="8020:8284" placeholder="{...}" />
-                <marker date="1466102954665" expanded="true" signature="11612:11647" placeholder="..." />
-                <marker date="1466102954665" expanded="true" signature="11892:11927" placeholder="..." />
+                <marker date="1466102462198" expanded="true" signature="12570:12605" placeholder="..." />
+                <marker date="1466102462198" expanded="true" signature="12850:12885" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sendMessage.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../PHP/sendMessage.php">
+      <file leaf-file-name="admin_users.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6670747">
-              <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+            <state vertical-scroll-proportion="-13.730769">
+              <caret line="136" column="51" selection-start-line="136" selection-start-column="51" selection-end-line="136" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -109,48 +65,18 @@
       <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/add.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.230769">
-              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+            <state vertical-scroll-proportion="-18.307692">
+              <caret line="77" column="141" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="141" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/edit.php">
+      <file leaf-file-name="instruments_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bpho/application/models/instruments_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.769231">
-              <caret line="18" column="67" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
-              <folding>
-                <element signature="n#style#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#div#0;n#div#2;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#4;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#5;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#div#0;n#div#5;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1466102462198" expanded="true" signature="12570:12605" placeholder="..." />
-                <marker date="1466102462198" expanded="true" signature="12850:12885" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin_events.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_events.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8545456">
-              <caret line="203" column="37" selection-start-line="203" selection-start-column="37" selection-end-line="203" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin_users.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_users.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.872727">
-              <caret line="164" column="17" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="17" />
+            <state vertical-scroll-proportion="-9.461538">
+              <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -159,25 +85,11 @@
       <file leaf-file-name="edit.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/edit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537">
+            <state vertical-scroll-proportion="-0.65384614">
               <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
               <folding>
-                <marker date="1466102462187" expanded="true" signature="3469:3487" placeholder="..." />
-                <marker date="1466102462187" expanded="true" signature="3598:3714" placeholder="..." />
-                <marker date="1466102462187" expanded="true" signature="3900:4093" placeholder="..." />
-                <marker date="1466102462187" expanded="true" signature="4014:4093" placeholder="..." />
-                <marker date="1466102462187" expanded="true" signature="4243:4399" placeholder="..." />
+                <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="events_model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bpho/application/models/events_model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6909091">
-              <caret line="171" column="7" selection-start-line="171" selection-start-column="7" selection-end-line="171" selection-end-column="7" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -185,9 +97,51 @@
       <file leaf-file-name="users_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bpho/application/models/users_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.8363636">
-              <caret line="197" column="42" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
+            <state vertical-scroll-proportion="-2.709091">
+              <caret line="194" column="14" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Email.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bpho/system/libraries/Email.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.576923">
+              <caret line="759" column="22" selection-start-line="759" selection-start-column="22" selection-end-line="759" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin_alertes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_alertes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-39.346153">
+              <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bpho/application/controllers/user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.90566">
+              <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="passwordreset_final.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/passwordreset_final.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8187204">
+              <caret line="64" column="84" selection-start-line="64" selection-start-column="84" selection-end-line="64" selection-end-column="84" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -197,7 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bpho/application/controllers/user.php" />
         <option value="$PROJECT_DIR$/bpho/application/views/admin/events/alertes.php" />
         <option value="$PROJECT_DIR$/bpho/application/models/alerts_model.php" />
         <option value="$PROJECT_DIR$/bpho/application/views/admin/events/list.php" />
@@ -224,6 +177,8 @@
         <option value="$PROJECT_DIR$/bpho/application/controllers/admin_events.php" />
         <option value="$PROJECT_DIR$/bpho/application/views/admin/events/add.php" />
         <option value="$PROJECT_DIR$/../PHP/sendMessage.php" />
+        <option value="$PROJECT_DIR$/bpho/application/controllers/user.php" />
+        <option value="$PROJECT_DIR$/bpho/application/views/admin/passwordreset_final.php" />
       </list>
     </option>
   </component>
@@ -267,6 +222,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -583,8 +540,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -638,23 +593,23 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26066098" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26332623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -673,6 +628,67 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/add.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="67" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
+          <folding>
+            <marker date="1466102462198" expanded="true" signature="12570:12605" placeholder="..." />
+            <marker date="1466102462198" expanded="true" signature="12850:12885" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_events.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="37" selection-start-line="203" selection-start-column="37" selection-end-line="203" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="164" column="17" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/models/events_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="171" column="7" selection-start-line="171" selection-start-column="7" selection-end-line="171" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/models/users_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="197" column="42" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_alertes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -685,9 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="79" column="37" selection-start-line="79" selection-start-column="37" selection-end-line="79" selection-end-column="37" />
-          <folding>
-            <marker date="1466044383874" expanded="true" signature="4959:4995" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,7 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -703,9 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="62" column="70" selection-start-line="62" selection-start-column="70" selection-end-line="62" selection-end-column="70" />
-          <folding>
-            <marker date="1465861014876" expanded="true" signature="1789:1840" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -714,52 +723,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="61" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="61" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#2;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#6;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#7;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#8;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#9;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#10;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#11;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#output#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#12;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#13;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
             <marker date="1466102954665" expanded="true" signature="1002:1018" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="2793:3127" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="2917:2936" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="2937:3127" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="2972:3037" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3193:3272" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3433:3512" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3685:4033" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3720:4016" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="3791:3894" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="3900:4002" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="4069:4313" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4183:4313" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4216:4229" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4674:4898" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4795:4898" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4828:4841" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5281:5860" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5419:5860" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5451:5464" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5659:5769" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5800:5832" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5967:6080" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6124:6247" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6291:6432" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6476:6580" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6624:8614" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6859:8595" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="7058:8310" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="7751:8014" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="8020:8284" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="11612:11647" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="11892:11927" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -802,14 +766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="148.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bpho/application/views/includes/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6153846">
@@ -828,7 +784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.346153">
           <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -836,7 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -844,17 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="62" column="70" selection-start-line="62" selection-start-column="70" selection-end-line="62" selection-end-column="70" />
-          <folding>
-            <marker date="1465861014876" expanded="true" signature="1789:1840" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_alertes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-120.30769">
-          <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -869,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -877,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.5384617">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -885,7 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.576923">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -893,7 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.5">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -901,7 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.5384617">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -909,7 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5272727">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,7 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5272727">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -925,7 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.963636">
           <caret line="697" column="0" selection-start-line="697" selection-start-column="0" selection-end-line="697" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,7 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.020858895">
           <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -941,15 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="867" column="44" selection-start-line="867" selection-start-column="39" selection-end-line="867" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44668245">
-          <caret line="154" column="44" selection-start-line="154" selection-start-column="44" selection-end-line="154" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -957,17 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.8867924">
           <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding>
-            <marker date="1466044383874" expanded="true" signature="4959:4995" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/models/instruments_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.927273">
-          <caret line="85" column="30" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -975,133 +889,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding>
-            <marker date="1466102462187" expanded="true" signature="3469:3487" placeholder="..." />
-            <marker date="1466102462187" expanded="true" signature="3598:3714" placeholder="..." />
-            <marker date="1466102462187" expanded="true" signature="3900:4093" placeholder="..." />
-            <marker date="1466102462187" expanded="true" signature="4014:4093" placeholder="..." />
-            <marker date="1466102462187" expanded="true" signature="4243:4399" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bpho/application/models/events_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6909091">
+        <state vertical-scroll-proportion="0.0">
           <caret line="171" column="7" selection-start-line="171" selection-start-column="7" selection-end-line="171" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/models/users_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8363636">
-          <caret line="197" column="42" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.872727">
-          <caret line="164" column="17" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_events.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8545456">
+        <state vertical-scroll-proportion="0.0">
           <caret line="203" column="37" selection-start-line="203" selection-start-column="37" selection-end-line="203" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231">
-          <caret line="18" column="67" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
-          <folding>
-            <element signature="n#style#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#2;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#4;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#5;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#5;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1466102462198" expanded="true" signature="12570:12605" placeholder="..." />
-            <marker date="1466102462198" expanded="true" signature="12850:12885" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/add.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/add.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
+        <state vertical-scroll-proportion="0.0">
           <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#2;n#div#0;n#div#1;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#6;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#7;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#8;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#9;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#10;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#11;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#output#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#12;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#13;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
             <marker date="1466102954665" expanded="true" signature="1002:1018" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="2793:3127" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="2917:2936" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="2937:3127" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="2972:3037" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3193:3272" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3433:3512" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3685:4033" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="3720:4016" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="3791:3894" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="3900:4002" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="4069:4313" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4183:4313" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4216:4229" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4674:4898" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4795:4898" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="4828:4841" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5281:5860" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5419:5860" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5451:5464" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5659:5769" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5800:5832" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="5967:6080" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6124:6247" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6291:6432" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6476:6580" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6624:8614" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="6859:8595" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="7058:8310" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="7751:8014" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="8020:8284" placeholder="{...}" />
-            <marker date="1466102954665" expanded="true" signature="11612:11647" placeholder="..." />
-            <marker date="1466102954665" expanded="true" signature="11892:11927" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1110,17 +922,109 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="25.5">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1466116084546" expanded="true" signature="1607:1630" placeholder="SELECT * FRO... migration" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../PHP/sendMessage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6670747">
+        <state vertical-scroll-proportion="-21.692308">
           <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/models/instruments_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.461538">
+          <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/models/users_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.709091">
+          <caret line="194" column="14" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/system/libraries/Email.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.576923">
+          <caret line="759" column="22" selection-start-line="759" selection-start-column="22" selection-end-line="759" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_alertes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-39.346153">
+          <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_products.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34360188">
+          <caret line="235" column="78" selection-start-line="235" selection-start-column="20" selection-end-line="235" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/events/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="53" />
+          <folding>
+            <marker date="1466102462198" expanded="true" signature="12570:12605" placeholder="..." />
+            <marker date="1466102462198" expanded="true" signature="12850:12885" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.90566">
+          <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/controllers/admin_users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="136" column="51" selection-start-line="136" selection-start-column="51" selection-end-line="136" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/users/add.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.307692">
+          <caret line="77" column="141" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="141" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpho/application/views/admin/passwordreset_final.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8187204">
+          <caret line="64" column="84" selection-start-line="64" selection-start-column="84" selection-end-line="64" selection-end-column="84" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

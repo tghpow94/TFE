@@ -22,4 +22,18 @@
     <string name="reservation">Online booking</string>
     <string name="alerts">Alerts</string>
     <string name="noAlert">No alert available for this event</string>
+    <string name="profil">Profile</string>
+    <string name="name">Name</string>
+    <string name="firstName">First name</string>
+    <string name="newPassword">New password (8 char.)</string>
+    <string name="passwordConfirm">Password confirm</string>
+    <string name="phone">Phone</string>
+    <string name="currentPassword">Current password</string>
+    <string name="apply">Apply</string>
+    <string name="passwordDontMatch">New password fields don\'t match</string>
+    <string name="passwordTooShort">New password is too short (min. 8 characters)</string>
+    <string name="emptyCurrentPassword">The current password is required</string>
+    <string name="profilUpdated">Updated profile</string>
+    <string name="wrongCurrentPassword">Current password incorrect</string>
+    <string name="emailTaken">This E-mail is already taken</string>
 </resources>

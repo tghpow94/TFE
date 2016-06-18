@@ -71,7 +71,11 @@ public class SessionManager {
     }
 
     public void setTel(String tel) {
-        editor.putString("TEL", tel);
+        if (tel == "null") {
+            editor.putString("TEL", "");
+        } else {
+            editor.putString("TEL", tel);
+        }
         editor.commit();
     }
 

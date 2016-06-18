@@ -235,7 +235,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                 }
                 if (position == 2) {
                     Intent intent = new Intent(Agenda.this, Profil.class);
-                    intent.putExtra("id", Integer.valueOf(session.getId()));
+                    intent.putExtra("idUser", Integer.valueOf(session.getId()));
                     startActivity(intent);
                 }
                 if (position == 3) {

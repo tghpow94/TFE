@@ -3,6 +3,7 @@
     package="com.bpho.bpho_music">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppController"
@@ -25,7 +26,8 @@
         <activity android:name=".Agenda" />
         <activity android:name=".Profil" />
         <activity android:name=".AfficherEvent" />
-        <activity android:name=".Alerts"></activity>
+        <activity android:name=".Alerts" />
+        <activity android:name=".ModifProfil"></activity>
     </application>
 
 </manifest>
