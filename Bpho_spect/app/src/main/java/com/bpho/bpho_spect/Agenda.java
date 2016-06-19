@@ -108,12 +108,16 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                 }
             }
 
-            if (id.equals(eventList.get(0).getId()) && offSet < 60) {
-                onRefresh();
-            } else if (offSet >= 60) {
-                Snackbar.make(swipeRefreshLayout, getString(R.string.noMoreEvent), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            if(response.length() > 0 ) {
+                if (id.equals(eventList.get(0).getId()) && offSet < 60) {
+                    onRefresh();
+                } else if (offSet >= 60) {
+                    Snackbar.make(swipeRefreshLayout, getString(R.string.noMoreEvent), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
             } else {
-                adapter.notifyDataSetChanged();
+                Snackbar.make(swipeRefreshLayout, getString(R.string.noMoreEvent), Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         }
     }

@@ -191,7 +191,6 @@ public class Messagerie extends AppCompatActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
             }
         }
         return 0;
@@ -284,7 +283,6 @@ public class Messagerie extends AppCompatActivity {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
             }
         }
     }

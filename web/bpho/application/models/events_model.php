@@ -102,21 +102,25 @@ class Events_model extends CI_Model {
             $ids[] = $item['idEvent'];
         }
 
-        $this->db->where_in('id', $ids);
+        if(isset($ids[0])) {
 
-        $this->db->select('*');
-        $this->db->from('Events');
+            $this->db->where_in('id', $ids);
 
-        $this->db->order_by('startDate', 'Desc');
-        $query = $this->db->get();
-        $results = $query->result_array();
-        foreach ($results as &$row) {
-            $row['title'] = $lm->getLabelByID($row['title']);
-            $row['description'] = $lm->getLabelByID($row['description']);
-            $row['date'] = $row['startDate'];
+            $this->db->select('*');
+            $this->db->from('Events');
+
+            $this->db->order_by('startDate', 'Desc');
+            $query = $this->db->get();
+            $results = $query->result_array();
+            foreach ($results as &$row) {
+                $row['title'] = $lm->getLabelByID($row['title']);
+                $row['description'] = $lm->getLabelByID($row['description']);
+                $row['date'] = $row['startDate'];
+            }
+            return $results;
+        } else {
+            return null;
         }
-
-        return $results;
     }
 
     /**
