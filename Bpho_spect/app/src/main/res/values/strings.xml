@@ -17,5 +17,7 @@
     <string name="reservation">Online booking</string>
     <string name="mailSent">Your message was successfuly sent</string>
     <string name="incorrectDataMail">Your email address is invalid</string>
+    <string name="noInternet">No Internet connection</string>
+    <string name="internetRequest">Please turn on WiFi or mobile data</string>
 
 </resources>

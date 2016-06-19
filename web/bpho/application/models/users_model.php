@@ -222,6 +222,8 @@ class Users_model extends CI_Model {
 				}
 			}
 
+			copy("../images/no-image-user.png", "../images/u".$result[0]['id'].".jpg");
+
 			return $insert;
 		}
 

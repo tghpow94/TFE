@@ -31,6 +31,33 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/layoutModifProfil">
 
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/layoutImage"
+                        android:layout_centerHorizontal="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/image"
+                            android:id="@+id/imageTextView"
+                            android:textSize="13sp"
+                            android:gravity="center"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="10dp"/>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/chooseImage"
+                            android:id="@+id/uploadImage"
+                            android:textSize="12sp"
+                            android:layout_toEndOf="@id/imageTextView"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
                     <EditText
                         android:hint="@string/firstName"
                         android:gravity="center"
@@ -44,7 +71,8 @@
                         android:paddingRight="15dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:layout_below="@id/layoutImage"/>
 
                     <EditText
                         android:hint="@string/name"

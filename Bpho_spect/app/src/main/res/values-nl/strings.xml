@@ -17,4 +17,6 @@
     <string name="reservation">Online boeking</string>
     <string name="mailSent">Uw bericht is verzonden</string>
     <string name="incorrectDataMail">Uw e-mailadres is niet geldig</string>
+    <string name="noInternet">Geen internet verbinding</string>
+    <string name="internetRequest">Schakel WiFi of mobiele data</string>
 </resources>

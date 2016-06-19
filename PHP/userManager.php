@@ -9,6 +9,23 @@ class UserManager {
         $ini->execute(array());
     }
 
+    public function getUsers() {
+        $resultats = $this->db->prepare("SELECT id, name, firstName FROM Users ");
+        $resultats->execute(array(
+        ));
+
+        $tabUsers = $resultats->fetchAll(PDO::FETCH_ASSOC);
+
+        if (isset($tabUsers[0]['id'])) {
+            $tabUsers[0]['error'] = false;
+        } else {
+            return $tabUsers;
+            $tabUsers[0]['error'] = true;
+        }
+
+        return $tabUsers;
+    }
+
     public function getUser($id) {
         $resultats = $this->db->prepare("SELECT id, name, firstName, dateRegister, dateLastConnect, email, phone FROM Users where id = :id");
         $resultats->execute(array(

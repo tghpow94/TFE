@@ -1,7 +1,10 @@
 package com.bpho.bpho_spect;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -81,35 +84,67 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
-        String id = "-1";
-        if (offSet > 0) {
-            id = eventList.get(0).getId();
-        }
-        eventList.clear();
-        JSONArray response = null;
-        try {
-            response = new JSONArray(getEvents());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < response.length(); i++) {
+        if(checkInternet()) {
+            String id = "-1";
+            if (offSet > 0) {
+                id = eventList.get(0).getId();
+            }
+            eventList.clear();
+            JSONArray response = null;
             try {
-                JSONObject obj = response.getJSONObject(i);
-                Event event = new Event(obj);
-                eventList.add(event);
-
-            } catch (JSONException e) {
+                response = new JSONArray(getEvents());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
 
-        if (id.equals(eventList.get(0).getId()) && offSet < 60) {
-            onRefresh();
-        } else if (offSet >= 60) {
-            Snackbar.make(swipeRefreshLayout,getString(R.string.noMoreEvent), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-        } else {
-            adapter.notifyDataSetChanged();
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject obj = response.getJSONObject(i);
+                    Event event = new Event(obj);
+                    eventList.add(event);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (id.equals(eventList.get(0).getId()) && offSet < 60) {
+                onRefresh();
+            } else if (offSet >= 60) {
+                Snackbar.make(swipeRefreshLayout, getString(R.string.noMoreEvent), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            } else {
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private boolean checkInternet() {
+        ConnectivityManager con=(ConnectivityManager)getSystemService(Agenda.CONNECTIVITY_SERVICE);
+        boolean wifi=con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+        boolean internet=con.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+        //check Internet connection
+        if(internet||wifi)
+        {
+            return true;
+        }else{
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.logo)
+                    .setTitle(getString(R.string.noInternet))
+                    .setMessage(getString(R.string.internetRequest))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //code for exit
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+
+                    })
+                    .show();
+            return false;
         }
     }
 
@@ -143,26 +178,28 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     }
 
     public String getEvents() {
-        swipeRefreshLayout.setRefreshing(true);
-        try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-            nameValuePairs.add(new BasicNameValuePair("offset", String.valueOf(offSet)));
-            nameValuePairs.add(new BasicNameValuePair("lang", langue));
-            nameValuePairs.add(new BasicNameValuePair("type", "general"));
-            nameValuePairs.add(new BasicNameValuePair("idUser", "0"));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            final String response = httpclient.execute(httppost, responseHandler);
+        if(checkInternet()) {
+            swipeRefreshLayout.setRefreshing(true);
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("offset", String.valueOf(offSet)));
+                nameValuePairs.add(new BasicNameValuePair("lang", langue));
+                nameValuePairs.add(new BasicNameValuePair("type", "general"));
+                nameValuePairs.add(new BasicNameValuePair("idUser", "0"));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                final String response = httpclient.execute(httppost, responseHandler);
+                hidePDialog();
+                offSet = offSet + 6;
+                swipeRefreshLayout.setRefreshing(false);
+                return response;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             hidePDialog();
-            offSet = offSet + 6;
-            swipeRefreshLayout.setRefreshing(false);
-            return response;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        hidePDialog();
         return "rate";
     }
 

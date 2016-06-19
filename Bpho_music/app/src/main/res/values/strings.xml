@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Bpho_music</string>
+    <string name="app_name">BPHO musicians</string>
     <string name="mailHint">Email address</string>
     <string name="passwordHint">Password</string>
     <string name="connexion">Log in</string>
-    <string name="forgotPassword">Forgot account ?</string>
+    <string name="forgotPassword">Forgot your password ?</string>
     <string name="validateUser">Validating User...</string>
     <string name="wrongConnect">Wrong Email or password</string>
     <string name="connected">Successfully connected</string>
@@ -36,4 +36,22 @@
     <string name="profilUpdated">Updated profile</string>
     <string name="wrongCurrentPassword">Current password incorrect</string>
     <string name="emailTaken">This E-mail is already taken</string>
+    <string name="noMoreUser">No more users</string>
+    <string name="noUser">No user available</string>
+    <string name="wrongFile">Wrong file type (jpg, png and gif accepted)</string>
+    <string name="message">Your message</string>
+    <string name="noMessage">No message available</string>
+    <string name="emptyMessage">Your message is empty</string>
+    <string name="messageSend">Message sent</string>
+    <string name="noInternet">No Internet connection</string>
+    <string name="internetRequest">Please turn on WiFi or mobile data</string>
+    <string name="agenda">Agenda</string>
+    <string name="listUsers">Gebruikers Lijst</string>
+    <string name="welcome">Welcome !</string>
+    <string name="messagerie">Messaging</string>
+    <string name="image">Picture (jpg, png, gif) :</string>
+    <string name="chooseImage">Choose a picture</string>
+    <string name="grade">Right :</string>
+    <string name="instruments">Instrument(s) :</string>
+    <string name="logout">Log out</string>
 </resources>

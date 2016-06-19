@@ -1,8 +1,11 @@
 package com.bpho.bpho_spect;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -80,34 +83,66 @@ public class Contact extends AppCompatActivity {
         });
     }
 
-    public void sendMessage(View v) {
-        name = ETName.getText().toString().trim();
-        mail = ETMail.getText().toString().trim();
-        message = ETMessage.getText().toString().trim();
-        try {
-            if (name.equals("") || mail.equals("") || message.equals("")) {
-                Snackbar.make(v, getString(R.string.missingData), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            } else {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/sendMessage.php");
-                ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
-                nameValuePairs.add(new BasicNameValuePair("name", name));
-                nameValuePairs.add(new BasicNameValuePair("mail", mail));
-                nameValuePairs.add(new BasicNameValuePair("message", message));
-                nameValuePairs.add(new BasicNameValuePair("lang", Locale.getDefault().getLanguage()));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                final String response = httpclient.execute(httppost, responseHandler);
-                if(response.equals("false")) {
-                    Snackbar.make(v, getString(R.string.incorrectDataMail), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                } else {
-                    hideSoftKeyboard(Contact.this);
-                    Toast.makeText(this, getString(R.string.mailSent), Toast.LENGTH_SHORT).show();
-                }
-            }
+    private boolean checkInternet() {
+        ConnectivityManager con=(ConnectivityManager)getSystemService(Contact.CONNECTIVITY_SERVICE);
+        boolean wifi=con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+        boolean internet=con.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+        //check Internet connection
+        if(internet||wifi)
+        {
+            return true;
+        }else{
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.logo)
+                    .setTitle(getString(R.string.noInternet))
+                    .setMessage(getString(R.string.internetRequest))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //code for exit
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                    })
+                    .show();
+            return false;
+        }
+    }
+
+    public void sendMessage(View v) {
+        if(checkInternet()) {
+            name = ETName.getText().toString().trim();
+            mail = ETMail.getText().toString().trim();
+            message = ETMessage.getText().toString().trim();
+            try {
+                if (name.equals("") || mail.equals("") || message.equals("")) {
+                    Snackbar.make(v, getString(R.string.missingData), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else {
+                    HttpClient httpclient = new DefaultHttpClient();
+                    HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/sendMessage.php");
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
+                    nameValuePairs.add(new BasicNameValuePair("name", name));
+                    nameValuePairs.add(new BasicNameValuePair("mail", mail));
+                    nameValuePairs.add(new BasicNameValuePair("message", message));
+                    nameValuePairs.add(new BasicNameValuePair("lang", Locale.getDefault().getLanguage()));
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    final String response = httpclient.execute(httppost, responseHandler);
+                    if (response.equals("false")) {
+                        Snackbar.make(v, getString(R.string.incorrectDataMail), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    } else {
+                        hideSoftKeyboard(Contact.this);
+                        Toast.makeText(this, getString(R.string.mailSent), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -6,13 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
-import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.Html;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +22,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -37,55 +39,54 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Alerts extends AppCompatActivity {
+public class ListUsers extends AppCompatActivity {
 
     private SessionManager session;
 
     //menu
-    //private ListView mDrawerList;
-    //private DrawerLayout mDrawerLayout;
-    //private ArrayAdapter<String> mAdapter;
-    //private ActionBarDrawerToggle mDrawerToggle;
-    //private String mActivityTitle;
+    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
+    private ArrayAdapter<String> mAdapter;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private String mActivityTitle;
 
-    int id = 0;
-    ListView LValerts;
+    ListView LVusers;
     private ArrayList<String> list = new ArrayList<String>();
     private ArrayAdapter<String> activiteAdapter;
     LayoutInflater mInflater;
 
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_alerts);
-        getSupportActionBar().setTitle(getString(R.string.alerts));
+        setContentView(R.layout.content_list_users);
+        getSupportActionBar().setTitle(getString(R.string.listUsers));
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        mInflater = (LayoutInflater) Alerts.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) ListUsers.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         session = new SessionManager(getApplicationContext());
 
-        /*mDrawerList = (ListView)findViewById(R.id.menu);
+        mDrawerList = (ListView)findViewById(R.id.menu);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         addDrawerItems();
-        setupDrawer();*/
+        setupDrawer();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        Intent intent = getIntent();
-        id = intent.getIntExtra("idEvent", Integer.valueOf(session.getId()));
+        LVusers = (ListView) findViewById(R.id.LVusers);
 
-        LValerts = (ListView) findViewById(R.id.LValerts);
-        getAlerts(id);
-
+        getUsers();
+        addOptionOnClick(list);
     }
 
     private boolean checkInternet() {
-        ConnectivityManager con=(ConnectivityManager)getSystemService(Alerts.CONNECTIVITY_SERVICE);
+        ConnectivityManager con=(ConnectivityManager)getSystemService(ListUsers.CONNECTIVITY_SERVICE);
         boolean wifi=con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
         boolean internet=con.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
         //check Internet connection
@@ -114,64 +115,73 @@ public class Alerts extends AppCompatActivity {
         }
     }
 
-    public void getAlerts(int id) {
+    private void getUsers() {
         if(checkInternet()) {
             try {
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getEventAlerts.php");
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getUsers.php");
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
                 nameValuePairs.add(new BasicNameValuePair("idUser", session.getId()));
-                nameValuePairs.add(new BasicNameValuePair("idEvent", String.valueOf(id)));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 ResponseHandler<String> responseHandler = new BasicResponseHandler();
                 final String response = httpclient.execute(httppost, responseHandler);
 
                 final JSONArray jsonArray = new JSONArray(response);
+                JSONObject jObj1 = jsonArray.getJSONObject(0);
+                Boolean error = jObj1.getBoolean("error");
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jObj = jsonArray.getJSONObject(i);
-                    String date = jObj.getString("date");
-                    String message = jObj.getString("text");
-                    String[] tempTab = date.split(" ");
-                    String[] dateTemp = tempTab[0].split("-");
-                    String[] timeTemp = tempTab[1].split(":");
-                    date = dateTemp[2] + "/" + dateTemp[1] + "/" + dateTemp[0] + " - " + timeTemp[0] + ":" + timeTemp[1];
-                    String alerte = "<br><b>" + date + "</b><spanseparate>" + message;
-                    list.add(alerte);
-                }
-
-                if (jsonArray.length() == 0) {
-                    String alerte = getString(R.string.noAlert);
-                    list.add(alerte);
-                }
-
-                activiteAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_theme2, list) {
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        View row;
-
-                        if (null == convertView) {
-                            row = mInflater.inflate(R.layout.spinner_theme2, null);
-                        } else {
-                            row = convertView;
-                        }
-
-                        TextView tv1 = (TextView) row.findViewById(R.id.text1);
-                        TextView tv2 = (TextView) row.findViewById(R.id.text2);
-                        if (jsonArray.length() > 0) {
-                            String alerteTemp = getItem(position);
-                            String[] alerte = alerteTemp.split("<spanseparate>");
-                            tv1.setText(Html.fromHtml(alerte[0]));
-                            tv2.setText(Html.fromHtml(alerte[1]));
-                        } else {
-                            tv2.setText(Html.fromHtml(getItem(position)));
-                        }
-
-                        return row;
+                if (!error) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+                        String name = jObj.getString("name");
+                        String firstName = jObj.getString("firstName");
+                        String idUser = jObj.getString("id");
+                        String urlImage = "http://91.121.151.137/TFE/images/u" + idUser + ".jpg";
+                        String user = idUser + "<spanseparate>" + firstName + " " + name + "<spanseparate>" + urlImage;
+                        list.add(user);
                     }
-                };
 
-                LValerts.setAdapter(activiteAdapter);
+                    if (jsonArray.length() == 0) {
+                        String alerte = getString(R.string.noUser);
+                        list.add(alerte);
+                    }
+
+                    activiteAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.layout_listusers, list) {
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            View row;
+
+                            if (null == convertView) {
+                                row = mInflater.inflate(R.layout.layout_listusers, null);
+                            } else {
+                                row = convertView;
+                            }
+
+
+                            if (imageLoader == null)
+                                imageLoader = AppController.getInstance().getImageLoader();
+                            NetworkImageView thumbNail = (NetworkImageView) row.findViewById(R.id.imageUser);
+                            TextView tv1 = (TextView) row.findViewById(R.id.text1);
+                            if (jsonArray.length() > 0) {
+                                String alerteTemp = getItem(position);
+                                String[] alerte = alerteTemp.split("<spanseparate>");
+                                tv1.setText(alerte[1]);
+                                if (thumbNail != null) {
+                                    thumbNail.setImageUrl(alerte[2], imageLoader);
+                                }
+                            } else {
+                                tv1.setText(Html.fromHtml(getItem(position)));
+                            }
+
+                            return row;
+                        }
+                    };
+
+                    LVusers.setAdapter(activiteAdapter);
+
+                } else {
+                    Toast.makeText(this, getString(R.string.noMoreUser), Toast.LENGTH_SHORT).show();
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -180,24 +190,20 @@ public class Alerts extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_events, menu);
-        return true;
+    private void addOptionOnClick(final ArrayList<String> list) {
+        LVusers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                afficherProfil(position, list);
+            }
+        });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-        }
-
-        /*if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }*/
-        return super.onOptionsItemSelected(item);
+    public void afficherProfil(int position, ArrayList<String> list){
+        String[] userTab = list.get(position).split("<spanseparate>");
+        Intent intent = new Intent(ListUsers.this, Profil.class);
+        intent.putExtra("idUser", Integer.valueOf(userTab[0]));
+        startActivity(intent);
     }
 
     private void logoutUser() {
@@ -212,14 +218,14 @@ public class Alerts extends AppCompatActivity {
         session.setTel(null);
 
         // Launching the login activity
-        Intent intent = new Intent(Alerts.this, Login.class);
+        Intent intent = new Intent(ListUsers.this, Login.class);
         startActivity(intent);
         finish();
     }
 
-    /*private void addDrawerItems() {
+    private void addDrawerItems() {
         final String[] osArray;
-        osArray = new String[] {getString(R.string.event), "Liste des utilisateurs", "Messagerie", "Profil", "Se déconnecter"};
+        osArray = new String[] {getString(R.string.agenda), getString(R.string.messagerie), getString(R.string.profil), getString(R.string.logout)};
 
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -228,22 +234,19 @@ public class Alerts extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    onBackPressed();
-                }
-                if (position == 1) {
-                    //Intent intent = new Intent(AfficherEvent.this, ListeUsers.class);
-                    //startActivity(intent);
-                }
-                if (position == 2) {
-                    //Intent intent = new Intent(AfficherEvent.this, Messagerie.class);
-                    //startActivity(intent);
-                }
-                if (position == 3) {
-                    Intent intent = new Intent(Alerts.this, Profil.class);
-                    intent.putExtra("id", Integer.valueOf(session.getId()));
+                    Intent intent = new Intent(ListUsers.this, Agenda.class);
                     startActivity(intent);
                 }
-                if (position == 4) {
+                if (position == 1) {
+                    Intent intent = new Intent(ListUsers.this, Messagerie.class);
+                    startActivity(intent);
+                }
+                if (position == 2) {
+                    Intent intent = new Intent(ListUsers.this, Profil.class);
+                    intent.putExtra("idUser", Integer.valueOf(session.getId()));
+                    startActivity(intent);
+                }
+                if (position == 3) {
                     logoutUser();
                 }
             }
@@ -280,6 +283,20 @@ public class Alerts extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }*/
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_agenda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

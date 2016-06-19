@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/LValerts"
-        android:divider="#000000"
+        android:divider="#ce0b0b0b"
         android:dividerHeight="1dp"/>
 
 </android.support.v4.widget.DrawerLayout>

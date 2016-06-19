@@ -43,7 +43,7 @@ public class AfficherEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_event);
-        //getSupportActionBar().setTitle(getString(R.string.event));
+        getSupportActionBar().setTitle(getString(R.string.event));
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -128,7 +128,7 @@ public class AfficherEvent extends AppCompatActivity {
 
     private void addDrawerItems() {
         final String[] osArray;
-        osArray = new String[] {"Agenda", "Liste des utilisateurs", "Messagerie", "Profil", "Se déconnecter"};
+        osArray = new String[] {getString(R.string.agenda), getString(R.string.listUsers), getString(R.string.messagerie), getString(R.string.profil), getString(R.string.logout)};
 
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -140,12 +140,12 @@ public class AfficherEvent extends AppCompatActivity {
                     onBackPressed();
                 }
                 if (position == 1) {
-                    //Intent intent = new Intent(AfficherEvent.this, ListeUsers.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(AfficherEvent.this, ListUsers.class);
+                    startActivity(intent);
                 }
                 if (position == 2) {
-                    //Intent intent = new Intent(AfficherEvent.this, Messagerie.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(AfficherEvent.this, Messagerie.class);
+                    startActivity(intent);
                 }
                 if (position == 3) {
                     Intent intent = new Intent(AfficherEvent.this, Profil.class);

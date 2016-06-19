@@ -17,5 +17,7 @@
     <string name="send">Envoyer</string>
     <string name="mailSent">Votre message a été envoyé avec succès</string>
     <string name="incorrectDataMail">Votre adresse mail n\'est pas valide</string>
+    <string name="noInternet">Pas de connexion internet</string>
+    <string name="internetRequest">Veuillez activer le WiFi ou les données mobiles</string>
 
 </resources>

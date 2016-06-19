@@ -1,8 +1,11 @@
 package com.bpho.bpho_music;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v4.widget.DrawerLayout;
@@ -62,6 +65,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_agenda);
+        getSupportActionBar().setTitle(getString(R.string.agenda));
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -103,45 +107,77 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     public void onBackPressed() {
     }
 
+    private boolean checkInternet() {
+        ConnectivityManager con=(ConnectivityManager)getSystemService(Agenda.CONNECTIVITY_SERVICE);
+        boolean wifi=con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+        boolean internet=con.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+        //check Internet connection
+        if(internet||wifi)
+        {
+            return true;
+        }else{
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.logo)
+                    .setTitle(getString(R.string.noInternet))
+                    .setMessage(getString(R.string.internetRequest))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //code for exit
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+
+                    })
+                    .show();
+            return false;
+        }
+    }
+
     @Override
     public void onRefresh() {
-        String getEventsResponse = "";
-        String id = "-1";
-        if (offSet > 0 && eventList.size() > 0) {
-            id = eventList.get(0).getId();
-        }
-        eventList.clear();
-        JSONArray response = null;
-        try {
-            getEventsResponse = getEvents();
-            if(getEventsResponse.contains("{")) {
-                response = new JSONArray(getEventsResponse);
+        if(checkInternet()) {
+            String getEventsResponse = "";
+            String id = "-1";
+            if (offSet > 0 && eventList.size() > 0) {
+                id = eventList.get(0).getId();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            eventList.clear();
+            JSONArray response = null;
+            try {
+                getEventsResponse = getEvents();
+                if (getEventsResponse.contains("{")) {
+                    response = new JSONArray(getEventsResponse);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        if (response != null) {
-            for (int i = 0; i < response.length(); i++) {
-                try {
-                    JSONObject obj = response.getJSONObject(i);
-                    Event event = new Event(obj);
-                    eventList.add(event);
+            if (response != null) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Event event = new Event(obj);
+                        eventList.add(event);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
 
-        if ((!getEventsResponse.contains("{") || id.equals(eventList.get(0).getId())) && offSet < 60) {
-            onRefresh();
-        } else if (offSet >= 60 && getEventsResponse.contains("{")) {
-            Toast.makeText(Agenda.this, getString(R.string.noMoreEvent), Toast.LENGTH_LONG).show();
-        } else if (offSet >= 60 && !getEventsResponse.contains("{")){
-            Toast.makeText(Agenda.this, getString(R.string.noUserEvents), Toast.LENGTH_LONG).show();
-        } else {
-            adapter.notifyDataSetChanged();
+            if ((!getEventsResponse.contains("{") || id.equals(eventList.get(0).getId())) && offSet < 60) {
+                onRefresh();
+            } else if (offSet >= 60 && getEventsResponse.contains("{")) {
+                Toast.makeText(Agenda.this, getString(R.string.noMoreEvent), Toast.LENGTH_LONG).show();
+            } else if (offSet >= 60 && !getEventsResponse.contains("{")) {
+                Toast.makeText(Agenda.this, getString(R.string.noUserEvents), Toast.LENGTH_LONG).show();
+            } else {
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -175,26 +211,29 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     }
 
     public String getEvents() {
-        swipeRefreshLayout.setRefreshing(true);
-        try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-            nameValuePairs.add(new BasicNameValuePair("offset", String.valueOf(offSet)));
-            nameValuePairs.add(new BasicNameValuePair("lang", langue));
-            nameValuePairs.add(new BasicNameValuePair("type", type));
-            nameValuePairs.add(new BasicNameValuePair("idUser", session.getId()));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            final String response = httpclient.execute(httppost, responseHandler);
+        if(checkInternet()) {
+            swipeRefreshLayout.setRefreshing(true);
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://91.121.151.137/TFE/php/getAllEvents.php");
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("offset", String.valueOf(offSet)));
+                nameValuePairs.add(new BasicNameValuePair("lang", langue));
+                nameValuePairs.add(new BasicNameValuePair("type", type));
+                nameValuePairs.add(new BasicNameValuePair("idUser", session.getId()));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                final String response = httpclient.execute(httppost, responseHandler);
+                hidePDialog();
+                offSet = offSet + 6;
+                swipeRefreshLayout.setRefreshing(false);
+                return response;
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
+            }
             hidePDialog();
-            offSet = offSet + 6;
-            swipeRefreshLayout.setRefreshing(false);
-            return response;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        hidePDialog();
         return "rate";
     }
 
@@ -217,7 +256,7 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     private void addDrawerItems() {
         final String[] osArray;
-        osArray = new String[] {"Liste des utilisateurs", "Messagerie", "Profil", "Se déconnecter"};
+        osArray = new String[] {getString(R.string.listUsers), getString(R.string.messagerie), getString(R.string.profil), getString(R.string.logout)};
 
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
@@ -226,12 +265,12 @@ public class Agenda extends AppCompatActivity implements SwipeRefreshLayout.OnRe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    //Intent intent = new Intent(Agenda.this, ListeUsers.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(Agenda.this, ListUsers.class);
+                    startActivity(intent);
                 }
                 if (position == 1) {
-                    //Intent intent = new Intent(Agenda.this, Messagerie.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(Agenda.this, Messagerie.class);
+                    startActivity(intent);
                 }
                 if (position == 2) {
                     Intent intent = new Intent(Agenda.this, Profil.class);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bpho_music</string>
+    <string name="app_name">BPHO musiciens</string>
     <string name="mailHint">Adresse mail</string>
     <string name="passwordHint">Mot de passe</string>
     <string name="connexion">Connexion</string>
@@ -19,7 +19,7 @@
     <string name="navigation">Navigation</string>
     <string name="eventsGeneral">Tous les événements</string>
     <string name="noUserEvents">Vous n\'avez pas d\'événement</string>
-    <string name="event">Evénement</string>
+    <string name="event">Événement</string>
     <string name="reservation">Réservation en ligne</string>
     <string name="alerts">Alertes</string>
     <string name="noAlert">Aucune alerte disponible pour cet événement</string>
@@ -37,4 +37,22 @@
     <string name="profilUpdated">Profil mis à jour</string>
     <string name="wrongCurrentPassword">Mot de passe actuel incorrect</string>
     <string name="emailTaken">Cette adresse mail est déjà utilisée</string>
+    <string name="noMoreUser">Pas d\'utilisateur supplémentaire</string>
+    <string name="noUser">Aucun utilisateur disponible</string>
+    <string name="wrongFile">Mauvais format de fichier (jpg, png et gif acceptés)</string>
+    <string name="message">Votre message</string>
+    <string name="noMessage">Aucun message disponible</string>
+    <string name="emptyMessage">Votre message est vide</string>
+    <string name="messageSend">Message envoyé</string>
+    <string name="noInternet">Pas de connexion internet</string>
+    <string name="internetRequest">Veuillez activer le WiFi ou les données mobiles</string>
+    <string name="agenda">Agenda</string>
+    <string name="listUsers">Liste des utilisateurs</string>
+    <string name="welcome">Bienvenue ! </string>
+    <string name="messagerie">Messagerie</string>
+    <string name="image">Image (jpg, png, gif) : </string>
+    <string name="chooseImage">Choisissez une image</string>
+    <string name="grade">Droit : </string>
+    <string name="instruments">Instrument(s) :</string>
+    <string name="logout">Se déconnecter</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -54,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="grade : "
+                android:text="@string/grade"
                 android:id="@+id/droitTitle"
                 android:layout_marginTop="20dp" />
 
@@ -79,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/instruTitle"
-                android:text="instrument(s) : "
+                android:text="@string/instruments"
                 android:layout_marginTop="20dp"/>
 
             <TextView

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bpho_music</string>
+    <string name="app_name">BPHO musici</string>
     <string name="mailHint">mailadres</string>
     <string name="passwordHint">Wachtwoord</string>
     <string name="connexion">Aanmelden</string>
-    <string name="forgotPassword">Account vergeten ?</string>
+    <string name="forgotPassword">Wachtwoord vergeten ?</string>
     <string name="validateUser">Bevestiging gebruiker....</string>
     <string name="wrongConnect">Onjuist informaties</string>
     <string name="connected">Succes aangesloten</string>
@@ -37,4 +37,22 @@
     <string name="profilUpdated">Bijgewerkt Profile</string>
     <string name="wrongCurrentPassword">Onjuist huidige wachtwoord</string>
     <string name="emailTaken">Dit e-mailadres is al in gebruik</string>
+    <string name="noMoreUser">Geen gebruikers</string>
+    <string name="noUser"> Geen gebruiker beschikbaar</string>
+    <string name="wrongFile">Bad bestandsformaat ( jpg, png en gif geaccepteerd)</string>
+    <string name="message">Uw bericht</string>
+    <string name="noMessage">Geen bericht</string>
+    <string name="emptyMessage">Uw bericht is leeg</string>
+    <string name="messageSend">Bericht verzonden</string>
+    <string name="noInternet">Geen internet verbinding</string>
+    <string name="internetRequest">Schakel WiFi of mobiele data</string>
+    <string name="agenda">Agenda</string>
+    <string name="listUsers">Gebruikers Lijst</string>
+    <string name="welcome">Welkom !</string>
+    <string name="messagerie">Messaging</string>
+    <string name="image">Image (jpg, png, gif) : </string>
+    <string name="chooseImage">Kies een foto</string>
+    <string name="grade">Rang : </string>
+    <string name="instruments">Instrument(en) :</string>
+    <string name="logout">Afmelden</string>
 </resources>

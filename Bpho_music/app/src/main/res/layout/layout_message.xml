@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.android.volley.toolbox.NetworkImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/imageUser"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="#b3000000"
+        android:text="nom"
+        android:textStyle="bold"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:layout_toEndOf="@id/imageUser"
+        android:id="@+id/TVname"
+        android:textSize="14dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="#60000000"
+        android:text="date"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:layout_toEndOf="@id/TVname"
+        android:layout_alignBaseline="@id/TVname"
+        android:id="@+id/TVdate"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="#dd000000"
+        android:text="message"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:id="@+id/TVmessage"
+        android:layout_below="@id/TVname"
+        android:layout_toEndOf="@id/imageUser"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>
